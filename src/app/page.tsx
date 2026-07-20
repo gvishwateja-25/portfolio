@@ -19,11 +19,11 @@ const profile = {
   github: "https://github.com/search?q=Vishwateja%20Gorumanthula&type=users",
   resume: "/resume/vishwateja-gorumanthula-resume.pdf",
   summary:
-    "IT professional with 5+ years of experience across AWS DevOps, infrastructure support, CI/CD automation, monitoring, disaster recovery, and cloud-native operations.",
+    "AWS DevOps Engineer with 7+ years of experience across cloud infrastructure, IaC, CI/CD automation, production monitoring, and technical operations.",
 };
 
 const metrics = [
-  { value: "5+", label: "Years in DevOps, NOC, and cloud operations" },
+  { value: "7+", label: "Years in DevOps, NOC, and cloud operations" },
   { value: "95%", label: "Infrastructure automation achieved with IaC" },
   { value: "60%", label: "Deployment time reduction through reusable modules" },
   { value: "99.999%", label: "Uptime target delivered for multi-region design" },
@@ -125,16 +125,17 @@ const highlightedSkills = [
 
 const experience = [
   {
-    role: "Freelance Cloud and DR Engineer",
-    company: "Remote, US clients",
+    role: "AWS DevOps Engineer",
+    company: "Equicom Technologies, Bengaluru",
     journeyRange: "2025-current",
-    journeyStatus: "Cloud DR and Reliability",
-    period: "Aug 2025 - Present",
-    tags: ["Azure Site Recovery", "Terraform", "ARM", "Azure Automation", "Azure Monitor"],
+    journeyStatus: "Current AWS DevOps Role",
+    period: "Sep 2025 - Present",
+    tags: ["AWS", "Terraform", "GitHub Actions", "ECS", "ECR", "CloudWatch"],
     points: [
-      "Configured Azure-based disaster recovery environments with ASR and ARM templates for critical applications.",
-      "Automated DR setup and recovery with Terraform and Azure Automation, reducing manual configuration time by 30%.",
-      "Validated failover through DR testing with Azure Chaos Studio, Azure Monitor, Log Analytics, and Microsoft Defender for Cloud.",
+      "Provision and maintain AWS infrastructure with Terraform and reusable infrastructure-as-code patterns.",
+      "Build GitHub Actions workflows for validation, container image publishing to ECR, and deployments to ECS.",
+      "Operate secure cloud foundations across IAM, KMS, Secrets Manager, SSM Parameter Store, AppConfig, VPC, Route 53, ACM, CloudFront, and WAFv2.",
+      "Monitor infrastructure and applications through CloudWatch, CloudTrail, Datadog, and Better Stack.",
     ],
   },
   {
@@ -142,7 +143,7 @@ const experience = [
     company: "Remote, US clients",
     journeyRange: "2025",
     journeyStatus: "Automation Practice",
-    period: "Mar 2025 - Jun 2025",
+    period: "Mar 2025 - Jul 2025",
     tags: ["Hybrid cloud", "Terraform", "AWS CDK", "DR runbooks", "Linux"],
     points: [
       "Delivered repeatable infrastructure automation for hybrid cloud and on-premises environments.",
@@ -566,9 +567,7 @@ function HeroAwsProfile() {
         <span className="mt-5 max-w-[12rem] text-sm font-semibold leading-5 text-zinc-200">
           Profile image slot
         </span>
-        <span className="mt-2 text-xs text-zinc-400">
-          AWS DevOps Engineer
-        </span>
+        <span className="mt-2 text-xs text-zinc-400">AWS DevOps Engineer</span>
       </div>
     </div>
   );
@@ -1308,8 +1307,7 @@ export default function Home() {
                 href="#intro"
               >
                 <span className="text-zinc-500">&lt;/&gt;</span>
-                <span className="truncate">vg_portfolio</span>
-                <span className="text-lime-500">_</span>
+                <span className="truncate">DevOps engineer</span>
               </a>
             </div>
             <div className="hidden items-center gap-8 font-mono text-sm font-semibold text-zinc-700 lg:flex">

@@ -117,23 +117,41 @@ type ResumeDownloadLinkProps = Omit<
   "download" | "href" | "onClick"
 > & {
   children: ReactNode;
-  confirmMessage?: string;
   fileName?: string;
   href: string;
+  namePrompt?: string;
 };
 
 export function ResumeDownloadLink({
   children,
-  confirmMessage = "Download Vishwateja Gorumanthula's resume PDF?",
   fileName = "vishwateja-gorumanthula-resume.pdf",
   href,
+  namePrompt = "Please enter your name before downloading the resume:",
   ...props
 }: ResumeDownloadLinkProps) {
+  const [isNameDialogOpen, setIsNameDialogOpen] = useState(false);
+  const [nameError, setNameError] = useState("");
+  const [visitorName, setVisitorName] = useState("");
+
   function handleClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
+    setNameError("");
+    setIsNameDialogOpen(true);
+  }
 
-    if (!window.confirm(confirmMessage)) {
+  function handleNameSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const normalizedName = visitorName.trim();
+    if (!normalizedName) {
+      setNameError("Name is required to download the resume.");
       return;
+    }
+
+    try {
+      window.localStorage.setItem("resumeDownloaderName", normalizedName);
+    } catch {
+      // Local storage is best-effort only; it should not block the download.
     }
 
     const downloadLink = document.createElement("a");
@@ -142,12 +160,73 @@ export function ResumeDownloadLink({
     document.body.appendChild(downloadLink);
     downloadLink.click();
     downloadLink.remove();
+
+    setIsNameDialogOpen(false);
+    setVisitorName("");
+    setNameError("");
   }
 
   return (
-    <a {...props} href={href} onClick={handleClick}>
-      {children}
-    </a>
+    <>
+      <a {...props} href={href} onClick={handleClick}>
+        {children}
+      </a>
+
+      {isNameDialogOpen ? (
+        <div
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/75 px-4 backdrop-blur-sm"
+          role="dialog"
+        >
+          <form
+            className="w-full max-w-md rounded-lg border border-zinc-200 bg-white p-5 text-zinc-950 shadow-2xl shadow-black/40 dark:border-white/10 dark:bg-[#080b12] dark:text-white"
+            onSubmit={handleNameSubmit}
+          >
+            <h2 className="text-xl font-semibold">Resume download</h2>
+            <label className="mt-4 block text-sm font-semibold" htmlFor="resume-download-name">
+              {namePrompt}
+            </label>
+            <input
+              autoFocus
+              className="mt-2 w-full rounded-md border border-zinc-300 bg-white px-4 py-3 text-sm font-medium text-zinc-950 outline-none transition placeholder:text-zinc-400 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 dark:border-white/10 dark:bg-zinc-950 dark:text-white dark:focus:border-amber-300 dark:focus:ring-amber-300/20"
+              id="resume-download-name"
+              onChange={(event) => {
+                setVisitorName(event.target.value);
+                if (nameError) {
+                  setNameError("");
+                }
+              }}
+              placeholder="Your name"
+              type="text"
+              value={visitorName}
+            />
+            {nameError ? (
+              <p className="mt-2 text-sm font-semibold text-red-500 dark:text-red-300">
+                {nameError}
+              </p>
+            ) : null}
+            <div className="mt-5 flex justify-end gap-3">
+              <button
+                className="rounded-md border border-zinc-300 px-4 py-2 text-sm font-semibold text-zinc-700 transition hover:border-zinc-500 hover:text-zinc-950 focus:outline-none focus:ring-2 focus:ring-amber-400 dark:border-white/10 dark:text-zinc-200 dark:hover:border-white/30 dark:hover:text-white"
+                onClick={() => {
+                  setIsNameDialogOpen(false);
+                  setNameError("");
+                }}
+                type="button"
+              >
+                Cancel
+              </button>
+              <button
+                className="rounded-md bg-zinc-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-amber-400 dark:bg-amber-300 dark:text-zinc-950 dark:hover:bg-amber-200"
+                type="submit"
+              >
+                Download
+              </button>
+            </div>
+          </form>
+        </div>
+      ) : null}
+    </>
   );
 }
 
@@ -587,13 +666,10 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
               projectPresentation.Reliability;
 
             return (
-              <a
+              <article
                 className="selected-work-card flow-in-card group relative block min-h-[360px] overflow-hidden border-zinc-950 p-6 text-zinc-950 outline-none md:min-h-[420px] md:border-r md:border-t dark:border-white/20"
                 data-flow-reveal
-                href={project.githubUrl}
                 key={project.title}
-                rel="noreferrer"
-                target="_blank"
               >
                 <span
                   aria-hidden="true"
@@ -622,7 +698,7 @@ export function ProjectExplorer({ projects }: { projects: Project[] }) {
                     </span>
                   ))}
                 </div>
-              </a>
+              </article>
             );
           })}
         </div>
