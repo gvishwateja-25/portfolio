@@ -702,13 +702,15 @@ body {
 }
 
 .career-journey-terminal {
+  --career-terminal-height: clamp(420px, 78svh, 640px);
+  --career-terminal-max-height: 640px;
   contain: layout paint;
   display: flex;
   flex-direction: column;
-  height: clamp(460px, calc(100svh - 140px), 720px);
+  height: var(--career-terminal-height);
   max-width: 100%;
   overflow: hidden;
-  max-height: 720px;
+  max-height: var(--career-terminal-max-height);
 }
 
 .career-journey-body {
@@ -720,6 +722,7 @@ body {
   overflow-y: auto;
   overscroll-behavior: contain;
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
   touch-action: pan-y;
 }
 
@@ -741,7 +744,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  padding: 3.75rem 2rem 2.5rem;
+  padding: 2.75rem 1.75rem 2.25rem;
 }
 
 .career-journey-preview {
@@ -762,11 +765,11 @@ body {
 
 .career-pixel-title {
   --career-letter-gap: 0.62rem;
-  --career-line-gap: 2.35rem;
-  --career-pixel-gap: 0.18rem;
-  --career-pixel-size: 0.68rem;
-  --career-title-margin: 5rem;
-  --career-word-gap: 2.4rem;
+  --career-line-gap: 1.9rem;
+  --career-pixel-gap: 0.15rem;
+  --career-pixel-size: 0.56rem;
+  --career-title-margin: 3.4rem;
+  --career-word-gap: 2rem;
   display: block;
   margin-top: var(--career-title-margin);
   max-width: 100%;
@@ -921,6 +924,11 @@ body {
 }
 
 @media (max-width: 720px) {
+  .career-journey-terminal {
+    --career-terminal-height: min(72svh, 520px);
+    --career-terminal-max-height: 520px;
+  }
+
   .service-menu-grid {
     padding: 2rem 1.25rem;
   }
@@ -931,24 +939,31 @@ body {
 
   .career-journey-hero {
     min-height: 100%;
-    padding: 2.5rem 0.5rem 2rem;
+    padding: 1.75rem 0.25rem 1.5rem;
+  }
+
+  .career-journey-preview {
+    font-size: 0.72rem;
+    line-height: 1.45;
+    padding: 0.5rem 0.6rem;
   }
 
   .career-pixel-title {
     --career-letter-gap: 0.24rem;
-    --career-line-gap: 1.15rem;
+    --career-line-gap: 0.9rem;
     --career-pixel-gap: 0.08rem;
-    --career-pixel-size: 0.32rem;
-    --career-title-margin: 3.5rem;
+    --career-pixel-size: 0.28rem;
+    --career-title-margin: 2.1rem;
     --career-word-gap: 0.72rem;
   }
 
   .career-pixel-title-art {
-    gap: 1.15rem;
+    gap: 0.9rem;
   }
 
   .career-login-line {
-    font-size: 1rem;
+    font-size: 0.88rem;
+    line-height: 1.45;
   }
 
 }
@@ -979,12 +994,12 @@ body {
 
 @media (min-width: 1280px) and (min-height: 761px) {
   .career-pixel-title {
-    --career-letter-gap: 0.8rem;
-    --career-line-gap: 2.35rem;
-    --career-pixel-gap: 0.2rem;
-    --career-pixel-size: 0.78rem;
-    --career-title-margin: 5rem;
-    --career-word-gap: 3.2rem;
+    --career-letter-gap: 0.66rem;
+    --career-line-gap: 1.9rem;
+    --career-pixel-gap: 0.16rem;
+    --career-pixel-size: 0.62rem;
+    --career-title-margin: 3.4rem;
+    --career-word-gap: 2.45rem;
   }
 }
 

@@ -480,8 +480,8 @@ export function CareerJourneyTerminal({
       style={{
         display: "flex",
         flexDirection: "column",
-        height: "clamp(460px, calc(100svh - 140px), 720px)",
-        maxHeight: "720px",
+        height: "var(--career-terminal-height)",
+        maxHeight: "var(--career-terminal-max-height)",
         maxWidth: "100%",
         overflow: "hidden",
       }}
@@ -524,7 +524,7 @@ export function CareerJourneyTerminal({
             onClick={startJourney}
             type="button"
           >
-            &gt; Login successful. Press scroll to continue
+            &gt; Login successful. Click, then scroll inside to continue
           </button>
         </div>
 
@@ -543,7 +543,8 @@ export function CareerJourneyTerminal({
             <span className="text-zinc-600">OK.</span>
           </p>
           <p className="career-scroll-hint">
-            &gt; Swipe up to load career year ranges. Swipe down to hide them.
+            &gt; Scroll down or swipe up to load one role. Scroll up or swipe down
+            to hide one role.
           </p>
         </div>
 
