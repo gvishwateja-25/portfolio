@@ -1,16 +1,5 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
-
-const themeScript = `
-  try {
-    const storedTheme = localStorage.getItem("theme");
-    const isDark = storedTheme ? storedTheme === "dark" : true;
-    document.documentElement.classList.toggle("dark", isDark);
-    document.documentElement.dataset.theme = isDark ? "dark" : "light";
-    document.documentElement.style.colorScheme = isDark ? "dark" : "light";
-  } catch (_) {}
-`;
 
 export const metadata: Metadata = {
   title: "Vishwateja Gorumanthula | AWS DevOps Engineer",
@@ -24,18 +13,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className="h-full antialiased"
-      data-theme="dark"
-      suppressHydrationWarning
-    >
-      <body className="min-h-full flex flex-col">
-        <Script
-          dangerouslySetInnerHTML={{ __html: themeScript }}
-          id="theme-script"
-          strategy="beforeInteractive"
+    <html lang="en" className="dark antialiased" data-theme="dark">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
         />
+      </head>
+      <body className="min-h-screen" style={{ colorScheme: "dark" }}>
         {children}
       </body>
     </html>
