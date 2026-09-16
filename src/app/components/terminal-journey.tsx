@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface Milestone {
   id: string;
@@ -15,6 +15,10 @@ interface Milestone {
   highlights: string[];
   tags: string[];
   status: string;
+  orgInitials: string;
+  orgBadgeText: string;
+  cloudFocus: string;
+  tierTag: string;
 }
 
 const milestones: Milestone[] = [
@@ -37,6 +41,10 @@ const milestones: Milestone[] = [
     ],
     tags: ["AWS", "Terraform", "GitHub Actions", "ECS", "ECR", "CloudWatch", "WAFv2", "Datadog"],
     status: "Active Production Lead",
+    orgInitials: "EQ",
+    orgBadgeText: "EQUICOM TECH",
+    cloudFocus: "AWS ECS • Terraform • GitHub Actions",
+    tierTag: "PRODUCTION TIER 1",
   },
   {
     id: "freelance",
@@ -56,6 +64,10 @@ const milestones: Milestone[] = [
     ],
     tags: ["Hybrid Cloud", "Terraform", "AWS CDK", "Disaster Recovery", "Runbooks", "Linux"],
     status: "Contract Complete",
+    orgInitials: "US",
+    orgBadgeText: "US CLIENTS (REMOTE)",
+    cloudFocus: "AWS CDK • Hybrid Cloud • DR",
+    tierTag: "MULTI-ACCOUNT AUTOMATION",
   },
   {
     id: "sambav",
@@ -75,6 +87,10 @@ const milestones: Milestone[] = [
     ],
     tags: ["AWS", "Jenkins", "Terraform", "Docker", "CloudFormation", "SNS", "SQS"],
     status: "Production Milestone",
+    orgInitials: "SB",
+    orgBadgeText: "SAMBAV EHR TECH",
+    cloudFocus: "Docker • Jenkins • CloudFormation",
+    tierTag: "HEALTHCARE PLATFORM",
   },
   {
     id: "abhyudaya",
@@ -94,6 +110,10 @@ const milestones: Milestone[] = [
     ],
     tags: ["AWS S3", "EC2", "CloudWatch", "Active Directory", "Windows Server", "Tomcat"],
     status: "Foundation Verified",
+    orgInitials: "AB",
+    orgBadgeText: "ABHYUDAYA SOLUTIONS",
+    cloudFocus: "AWS S3 • EC2 • CloudWatch • AD",
+    tierTag: "24x7 ENTERPRISE NOC",
   },
 ];
 
@@ -101,7 +121,39 @@ export function TerminalJourney() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [typedInput, setTypedInput] = useState<string>("");
   const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [playbackIndex, setPlaybackIndex] = useState<number>(0);
   const terminalContentRef = useRef<HTMLDivElement>(null);
+
+  // Auto-play timeline execution
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const timer = setInterval(() => {
+      setPlaybackIndex((prev) => {
+        const next = prev + 1;
+        if (next >= milestones.length) {
+          setIsPlaying(false);
+          setActiveFilter("all");
+          return 0;
+        }
+        setActiveFilter(milestones[next].id);
+        return next;
+      });
+    }, 2800);
+
+    return () => clearInterval(timer);
+  }, [isPlaying]);
+
+  const toggleAutoPlay = () => {
+    if (isPlaying) {
+      setIsPlaying(false);
+    } else {
+      setIsPlaying(true);
+      setPlaybackIndex(0);
+      setActiveFilter(milestones[0].id);
+    }
+  };
 
   const filteredMilestones =
     activeFilter === "all"
@@ -109,6 +161,7 @@ export function TerminalJourney() {
       : milestones.filter((m) => m.id === activeFilter);
 
   const handleQuickCommand = (filterId: string) => {
+    setIsPlaying(false);
     setActiveFilter(filterId);
     if (terminalContentRef.current) {
       terminalContentRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -120,9 +173,13 @@ export function TerminalJourney() {
     const cmd = typedInput.trim().toLowerCase();
     if (!cmd) return;
 
+    setIsPlaying(false);
+
     if (cmd === "clear") {
       setTerminalLogs([]);
       setActiveFilter("all");
+    } else if (cmd === "play" || cmd === "run") {
+      toggleAutoPlay();
     } else if (cmd === "whoami") {
       setTerminalLogs((prev) => [
         ...prev,
@@ -141,7 +198,7 @@ export function TerminalJourney() {
       setTerminalLogs((prev) => [
         ...prev,
         "$ help",
-        "-> Available commands: all, 2025, 2021, 2019, whoami, skills, clear, help",
+        "-> Commands: all, 2025, 2021, 2019, play, whoami, skills, clear, help",
       ]);
     } else if (cmd === "all") {
       setActiveFilter("all");
@@ -165,7 +222,7 @@ export function TerminalJourney() {
   return (
     <div className="mx-auto w-full max-w-5xl">
       {/* Terminal Window Container */}
-      <div className="overflow-hidden rounded-2xl border border-amber-400/30 bg-[#08090c] shadow-[0_0_50px_rgba(212,168,67,0.12)]">
+      <div className="overflow-hidden rounded-2xl border border-amber-400/30 bg-[#08090c] shadow-[0_0_60px_rgba(212,168,67,0.12)]">
         {/* Terminal Header Bar */}
         <div className="flex flex-wrap items-center justify-between border-b border-white/10 bg-[#0e1117] px-4 py-3 sm:px-6">
           {/* Traffic Light Dots */}
@@ -186,10 +243,24 @@ export function TerminalJourney() {
             </span>
           </div>
 
-          {/* Right Status Indicator */}
-          <div className="hidden items-center gap-2 text-xs font-mono text-zinc-400 md:flex">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
-            <span>7+ YOE • Production Ready</span>
+          {/* Right Status Indicator & Auto-Play Button */}
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={toggleAutoPlay}
+              className={`flex items-center gap-1.5 rounded-md px-2.5 py-1 font-mono text-[11px] transition-all ${
+                isPlaying
+                  ? "bg-amber-400 text-black font-bold animate-pulse"
+                  : "border border-amber-400/40 bg-amber-400/10 text-amber-300 hover:bg-amber-400/20"
+              }`}
+            >
+              <span>{isPlaying ? "⏸ Pause Script" : "▶ Run Timeline Script"}</span>
+            </button>
+
+            <div className="hidden items-center gap-2 text-xs font-mono text-zinc-400 md:flex">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+              <span>7+ YOE • Production Ready</span>
+            </div>
           </div>
         </div>
 
@@ -200,7 +271,7 @@ export function TerminalJourney() {
             type="button"
             onClick={() => handleQuickCommand("all")}
             className={`rounded-md px-2.5 py-1 font-mono text-xs transition-all ${
-              activeFilter === "all"
+              activeFilter === "all" && !isPlaying
                 ? "bg-amber-400 text-black font-semibold shadow-md shadow-amber-400/20"
                 : "border border-white/10 bg-zinc-900/60 text-zinc-400 hover:border-amber-400/40 hover:text-white"
             }`}
@@ -256,7 +327,7 @@ export function TerminalJourney() {
         {/* Terminal Body Screen */}
         <div
           ref={terminalContentRef}
-          className="max-h-[720px] overflow-y-auto p-4 font-mono text-sm leading-relaxed sm:p-7"
+          className="max-h-[760px] overflow-y-auto p-4 font-mono text-sm leading-relaxed sm:p-7"
         >
           {/* Welcome Screen MOTD */}
           <div className="mb-8 rounded-xl border border-amber-400/20 bg-amber-400/[0.03] p-4 sm:p-5">
@@ -271,8 +342,8 @@ export function TerminalJourney() {
               <span className="text-zinc-500">&gt;</span> AWS DevOps &amp; Production Reliability
               Engineer • 7+ Years Enterprise Track Record.
               <br />
-              <span className="text-zinc-500">&gt;</span> Stack: Multi-Region AWS Architecture,
-              Terraform IaC, Docker, Kubernetes, CI/CD Pipelines.
+              <span className="text-zinc-500">&gt;</span> Architecture: Multi-Region AWS, Terraform IaC,
+              Docker, Kubernetes, Zero-Trust WAFv2, Continuous Delivery.
               <br />
               <span className="text-emerald-400">✔</span> System state verified. Initializing
               chronological career stages below:
@@ -293,12 +364,12 @@ export function TerminalJourney() {
             </div>
           )}
 
-          {/* Milestones Execution Output */}
+          {/* Milestones Execution Output (2-Column Layout like aishwarya.ai) */}
           <div className="space-y-8">
             {filteredMilestones.map((milestone) => (
               <div
                 key={milestone.id}
-                className="group relative rounded-xl border border-white/10 bg-[#0d1017]/80 p-5 transition-all duration-300 hover:border-amber-400/40 hover:bg-[#121620]"
+                className="group relative rounded-xl border border-white/10 bg-[#0d1017]/90 p-5 transition-all duration-300 hover:border-amber-400/40 hover:bg-[#121620]"
               >
                 {/* CLI Command Line */}
                 <div className="flex flex-wrap items-center gap-2 font-mono text-xs sm:text-sm">
@@ -311,58 +382,86 @@ export function TerminalJourney() {
                   </span>
                 </div>
 
-                {/* Milestone Details Card */}
-                <div className="mt-4 border-l-2 border-amber-400/60 pl-4 sm:pl-6">
-                  {/* Status & Period Badge */}
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className={`text-xs font-bold uppercase tracking-wider ${milestone.badgeColor}`}>
-                      {milestone.badge}
-                    </span>
-                    <span className="text-xs text-zinc-500">•</span>
-                    <span className="rounded bg-zinc-800/80 px-2 py-0.5 text-xs font-medium text-amber-300">
-                      {milestone.period}
-                    </span>
-                  </div>
-
-                  {/* Title & Company */}
-                  <h4 className="mt-2 text-base font-bold text-white sm:text-lg">
-                    {milestone.title}{" "}
-                    <span className="font-normal text-zinc-400">
-                      @ {milestone.company}
-                    </span>
-                  </h4>
-                  <p className="text-xs text-zinc-500">{milestone.location}</p>
-
-                  {/* Summary */}
-                  <p className="mt-3 text-xs leading-relaxed text-zinc-300 sm:text-sm">
-                    {milestone.summary}
-                  </p>
-
-                  {/* Highlights */}
-                  <ul className="mt-3 space-y-1.5 text-xs text-zinc-400 sm:text-sm">
-                    {milestone.highlights.map((h, hIdx) => (
-                      <li key={hIdx} className="flex items-start gap-2">
-                        <span className="text-amber-400 font-bold">&gt;</span>
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Tech Stack Chips */}
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {milestone.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded border border-amber-400/20 bg-amber-400/5 px-2 py-0.5 font-mono text-[11px] text-zinc-300"
-                      >
-                        {tag}
+                {/* 2-Column Milestone Details (Left: Specs, Right: Tech Emblem Card) */}
+                <div className="mt-4 grid gap-6 border-l-2 border-amber-400/60 pl-4 sm:pl-6 lg:grid-cols-12 lg:items-center">
+                  {/* Left Column: Role Details & Achievements (8 cols) */}
+                  <div className="lg:col-span-8">
+                    {/* Status & Period Badge */}
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className={`text-xs font-bold uppercase tracking-wider ${milestone.badgeColor}`}>
+                        {milestone.badge}
                       </span>
-                    ))}
+                      <span className="text-xs text-zinc-500">•</span>
+                      <span className="rounded bg-zinc-800/80 px-2 py-0.5 text-xs font-medium text-amber-300">
+                        {milestone.period}
+                      </span>
+                    </div>
+
+                    {/* Title & Company */}
+                    <h4 className="mt-2 text-base font-bold text-white sm:text-lg">
+                      {milestone.title}{" "}
+                      <span className="font-normal text-zinc-400">
+                        @ {milestone.company}
+                      </span>
+                    </h4>
+                    <p className="text-xs text-zinc-500">{milestone.location}</p>
+
+                    {/* Summary */}
+                    <p className="mt-3 text-xs leading-relaxed text-zinc-300 sm:text-sm">
+                      {milestone.summary}
+                    </p>
+
+                    {/* Highlights */}
+                    <ul className="mt-3 space-y-1.5 text-xs text-zinc-400 sm:text-sm">
+                      {milestone.highlights.map((h, hIdx) => (
+                        <li key={hIdx} className="flex items-start gap-2">
+                          <span className="text-amber-400 font-bold">&gt;</span>
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Tech Stack Chips */}
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {milestone.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded border border-amber-400/20 bg-amber-400/5 px-2 py-0.5 font-mono text-[11px] text-zinc-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Operational Status */}
+                    <div className="mt-3 text-xs font-semibold text-zinc-500">
+                      STATUS: <span className="text-zinc-300">{milestone.status}</span>
+                    </div>
                   </div>
 
-                  {/* Operational Status */}
-                  <div className="mt-3 text-xs font-semibold text-zinc-500">
-                    STATUS: <span className="text-zinc-300">{milestone.status}</span>
+                  {/* Right Column: Branded Tech & Company Emblem (4 cols, styled like aishwarya.ai logos) */}
+                  <div className="lg:col-span-4 flex flex-col items-center justify-center">
+                    <div className="w-full rounded-xl border border-white/10 bg-gradient-to-br from-zinc-900/90 to-zinc-950 p-4 text-center shadow-lg shadow-black/40 transition-transform duration-300 group-hover:border-amber-400/30">
+                      {/* Logo Icon Badge */}
+                      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl border border-amber-400/40 bg-zinc-950 font-mono text-lg font-bold text-amber-400 shadow-md shadow-amber-400/10">
+                        {milestone.orgInitials}
+                      </div>
+
+                      {/* Org Name */}
+                      <div className="mt-3 font-mono text-xs font-bold tracking-wider text-white">
+                        {milestone.orgBadgeText}
+                      </div>
+
+                      {/* Cloud Focus */}
+                      <div className="mt-1 text-[11px] font-mono text-amber-400/90">
+                        {milestone.cloudFocus}
+                      </div>
+
+                      {/* Tier Tag */}
+                      <div className="mt-3 inline-block rounded bg-zinc-800/80 px-2 py-0.5 font-mono text-[10px] tracking-wider text-zinc-400">
+                        {milestone.tierTag}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -381,7 +480,7 @@ export function TerminalJourney() {
               type="text"
               value={typedInput}
               onChange={(e) => setTypedInput(e.target.value)}
-              placeholder="type 'skills', 'whoami', 'help', or 'clear'..."
+              placeholder="type 'play', 'skills', 'whoami', 'help', or 'clear'..."
               className="flex-1 bg-transparent font-mono text-xs text-white placeholder-zinc-600 focus:outline-none sm:text-sm"
             />
             <span className="inline-block h-4 w-2 animate-pulse bg-amber-400" />
@@ -396,6 +495,16 @@ export function TerminalJourney() {
           {/* CLI Helper Hints */}
           <div className="mt-3 flex flex-wrap items-center gap-2 font-mono text-[11px] text-zinc-500">
             <span>Quick inputs:</span>
+            <button
+              type="button"
+              onClick={() => {
+                setTypedInput("play");
+              }}
+              className="hover:text-amber-400 underline decoration-zinc-700"
+            >
+              play
+            </button>
+            <span>•</span>
             <button
               type="button"
               onClick={() => {
