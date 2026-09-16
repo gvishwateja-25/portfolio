@@ -280,13 +280,26 @@ export default function Home() {
 
             {/* Right profile image area */}
             <div className="hero-profile-image flex items-center justify-center" data-flow-reveal>
-              <div className="relative flex h-[380px] w-[380px] items-center justify-center rounded-full border border-white/10 bg-gradient-to-br from-zinc-800/60 to-zinc-950/80 shadow-2xl shadow-black/50 sm:h-[440px] sm:w-[440px]">
-                <span className="flex h-32 w-32 items-center justify-center rounded-full border-2 border-amber-400/40 bg-zinc-950 text-5xl font-bold text-amber-400 shadow-xl shadow-amber-400/10">
-                  VG
-                </span>
-                <span className="absolute bottom-16 text-center text-sm font-semibold text-zinc-400">
-                  {profile.role}
-                </span>
+              <div className="relative group">
+                {/* Ambient glow effect */}
+                <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-amber-500/20 via-blue-500/10 to-amber-500/20 opacity-75 blur-2xl transition-all duration-700 group-hover:opacity-100" />
+
+                {/* Photo card frame */}
+                <div className="relative overflow-hidden rounded-3xl border border-amber-400/30 bg-zinc-950/90 shadow-2xl shadow-black/80">
+                  <Image
+                    src="/images/profile-hero-blazer.jpg"
+                    alt={`${profile.name} - ${profile.role}`}
+                    width={420}
+                    height={525}
+                    priority
+                    className="h-auto w-[320px] sm:w-[380px] lg:w-[420px] object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                  {/* Subtle dark bottom fade and role badge */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent p-5 pt-12">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-amber-400">AWS DevOps Engineer</p>
+                    <p className="text-lg font-bold text-white">{profile.name}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -299,14 +312,30 @@ export default function Home() {
               {/* Left: Photo + Skills */}
               <div data-flow-reveal>
                 <div className="overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50 p-6">
-                  {/* Avatar */}
+                  {/* About Section Developer Photo */}
+                  <div className="mb-6 overflow-hidden rounded-xl border border-white/10 bg-zinc-950">
+                    <Image
+                      src="/images/profile-about-laptop.jpg"
+                      alt={`${profile.name} at work`}
+                      width={400}
+                      height={480}
+                      className="h-64 w-full object-cover object-top"
+                    />
+                  </div>
+
+                  {/* Profile info */}
                   <div className="flex items-center gap-4">
-                    <span className="flex h-20 w-20 items-center justify-center rounded-lg border border-amber-400/30 bg-zinc-950 text-2xl font-bold text-amber-400">
-                      VG
-                    </span>
+                    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-amber-400/40">
+                      <Image
+                        src="/images/profile-hero-blazer.jpg"
+                        alt={profile.name}
+                        fill
+                        className="object-cover object-top"
+                      />
+                    </div>
                     <div>
-                      <p className="text-sm text-zinc-400">Name: {profile.name}</p>
-                      <p className="text-sm text-zinc-400">Job Role: {profile.role}</p>
+                      <p className="text-sm text-zinc-300 font-medium">Name: <span className="text-white">{profile.name}</span></p>
+                      <p className="text-sm text-zinc-300 font-medium">Job Role: <span className="text-amber-400">{profile.role}</span></p>
                       <p className="text-sm text-zinc-400">Experience: 7+ years</p>
                       <p className="text-sm text-zinc-400">Address: {profile.location}</p>
                     </div>
