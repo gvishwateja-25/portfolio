@@ -312,32 +312,37 @@ export default function Home() {
               {/* Left: Photo + Skills */}
               <div data-flow-reveal>
                 <div className="overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50 p-6">
-                  {/* About Section Developer Photo */}
-                  <div className="mb-6 overflow-hidden rounded-xl border border-white/10 bg-zinc-950">
-                    <Image
-                      src="/images/profile-about-laptop.jpg"
-                      alt={`${profile.name} at work`}
-                      width={400}
-                      height={480}
-                      className="h-64 w-full object-cover object-top"
-                    />
-                  </div>
-
-                  {/* Profile info */}
-                  <div className="flex items-center gap-4">
-                    <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-amber-400/40">
-                      <Image
-                        src="/images/profile-hero-blazer.jpg"
-                        alt={profile.name}
-                        fill
-                        className="object-cover object-top"
-                      />
+                  {/* Photo + Info side by side matching reference site */}
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-12 sm:items-center">
+                    <div className="sm:col-span-5">
+                      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl border border-amber-400/20 bg-zinc-950 shadow-xl shadow-black/40">
+                        <Image
+                          src="/images/profile-about-laptop.jpg"
+                          alt={`${profile.name} at work`}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 220px"
+                          className="object-cover object-center"
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm text-zinc-300 font-medium">Name: <span className="text-white">{profile.name}</span></p>
-                      <p className="text-sm text-zinc-300 font-medium">Job Role: <span className="text-amber-400">{profile.role}</span></p>
-                      <p className="text-sm text-zinc-400">Experience: 7+ years</p>
-                      <p className="text-sm text-zinc-400">Address: {profile.location}</p>
+
+                    <div className="flex flex-col justify-center space-y-3 sm:col-span-7">
+                      <p className="text-sm">
+                        <span className="font-semibold text-white">Name: </span>
+                        <span className="text-zinc-300">{profile.name}</span>
+                      </p>
+                      <p className="text-sm">
+                        <span className="font-semibold text-white">Job Role: </span>
+                        <span className="font-medium text-amber-400">{profile.role}</span>
+                      </p>
+                      <p className="text-sm">
+                        <span className="font-semibold text-white">Experience: </span>
+                        <span className="text-zinc-300">7+ years</span>
+                      </p>
+                      <p className="text-sm">
+                        <span className="font-semibold text-white">Address: </span>
+                        <span className="text-zinc-300">{profile.location}</span>
+                      </p>
                     </div>
                   </div>
 
