@@ -8,6 +8,7 @@ import {
   TypingSubtitle,
   VisitorCounter,
 } from "./components/portfolio-interactions";
+import { TerminalJourney } from "./components/terminal-journey";
 import { FlowMotion } from "./components/flow-motion";
 
 /* ============================================
@@ -48,40 +49,6 @@ const skillBars = [
   { label: "Scripting (Python, Bash, PowerShell)", percentage: 78 },
 ];
 
-const experience = [
-  {
-    period: "Sep 2025 - Present",
-    title: "AWS DevOps Engineer",
-    company: "Equicom Technologies, Bengaluru",
-    description:
-      "Provision and maintain AWS infrastructure with Terraform. Build GitHub Actions workflows for CI/CD to ECR and ECS. Operate secure cloud foundations across IAM, KMS, VPC, Route 53, CloudFront, and WAFv2. Monitor with CloudWatch, Datadog, and Better Stack.",
-    tags: ["AWS", "Terraform", "GitHub Actions", "ECS", "ECR", "CloudWatch"],
-  },
-  {
-    period: "Mar 2025 - Jul 2025",
-    title: "Freelance Infrastructure Automation Engineer",
-    company: "Remote, US Clients",
-    description:
-      "Delivered repeatable infrastructure automation for hybrid cloud and on-premises environments. Designed DR strategies, automated runbooks, and built AWS CDK constructs for common infrastructure patterns.",
-    tags: ["Hybrid Cloud", "Terraform", "AWS CDK", "DR Runbooks"],
-  },
-  {
-    period: "Mar 2021 - Jan 2025",
-    title: "AWS DevOps Engineer",
-    company: "Sambav EHR Pvt Ltd, Hyderabad",
-    description:
-      "Developed Terraform and CloudFormation automation that reduced deployment time by 60%. Containerized legacy applications with Docker, reducing environment issues by 70%. Built SNS and SQS notification flows for reliable event delivery.",
-    tags: ["AWS", "Jenkins", "Terraform", "Docker", "CloudFormation"],
-  },
-  {
-    period: "Apr 2019 - Oct 2020",
-    title: "AWS NOC Engineer",
-    company: "Abhyudaya HR Business Solutions, Hyderabad",
-    description:
-      "Provided 24x7 support, incident handling, and application access support. Improved Active Directory administration efficiency by 40%. Supported Windows Server, Apache Tomcat, and monitoring routines.",
-    tags: ["AWS S3", "EC2", "CloudWatch", "Windows Server"],
-  },
-];
 
 const projects = [
   {
@@ -120,7 +87,7 @@ const stats = [
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
-  { label: "Resume", href: "#resume" },
+  { label: "Journey", href: "#journey" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
@@ -400,42 +367,23 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ============ RESUME ============ */}
-        <section id="resume" className="resume-section px-5 py-20">
+        {/* ============ CAREER JOURNEY (TERMINAL CONSOLE) ============ */}
+        <section id="journey" className="resume-section px-5 py-20">
+          <span id="resume" className="sr-only" />
           <div className="mx-auto max-w-7xl">
-            <div className="section-watermark text-center" data-watermark="Resume" data-flow-reveal>
-              <h2 className="section-title">Resume</h2>
+            <div className="section-watermark text-center" data-watermark="Journey" data-flow-reveal>
+              <h2 className="section-title">Career Journey</h2>
               <div className="section-divider" />
             </div>
             <p className="mx-auto mt-6 max-w-3xl text-center text-base leading-8 text-zinc-400" data-flow-reveal>
-              Motivated and detail-oriented AWS DevOps Engineer. Proficient in CI/CD pipelines,
-              containerization, infrastructure as code, and cloud services. Experienced with
-              Terraform, Docker, Kubernetes, GitHub Actions, and AWS. Passionate about building
-              reliable and automated cloud infrastructure.
+              AWS DevOps &amp; Production Reliability Engineer with 7+ years of experience across cloud
+              infrastructure, IaC automation, containerization, and enterprise operations. Explore my
+              career progression and production milestones via the interactive console below.
             </p>
 
-            {/* Experience */}
-            <div className="mt-16" data-flow-reveal>
-              <h3 className="text-center text-2xl font-bold text-white">Experience</h3>
-              <div className="mx-auto mt-2 h-[3px] w-20 bg-amber-400" />
-            </div>
-
-            <div className="mt-10 grid gap-6 md:grid-cols-2">
-              {experience.map((job) => (
-                <article className="experience-card" data-flow-reveal key={`${job.title}-${job.period}`}>
-                  <p className="experience-date">{job.period}</p>
-                  <h4 className="experience-title">{job.title}</h4>
-                  <p className="experience-company">{job.company}</p>
-                  <p className="experience-description">{job.description}</p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {job.tags.map((tag) => (
-                      <span className="project-card-tag" key={tag}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </article>
-              ))}
+            {/* Terminal Console Component */}
+            <div className="mt-14" data-flow-reveal>
+              <TerminalJourney />
             </div>
 
             {/* Download CV */}
