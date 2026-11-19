@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Centralized Repository Security Assessment | Case Study</title>
+<style>
+  :root { color-scheme: dark; --bg:#0b1020; --panel:#121a2d; --panel2:#172239; --text:#edf2ff; --muted:#a9b6d0; --line:#293651; --accent:#7c9cff; --accent2:#65d6b5; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:radial-gradient(ellipse at 15% 0%,#182747 0,transparent 42%),var(--bg); color:var(--text); line-height:1.6; }
+  .wrap { max-width:1120px; margin:auto; padding:32px 22px 80px; }
+  .top { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:64px; color:var(--muted); font-size:.9rem; }
+  a { color:var(--accent2); }
+  a:focus-visible { outline:2px solid var(--accent2); outline-offset:4px; }
+  .top { flex-wrap:wrap; }
+  .pill { border:1px solid var(--line); border-radius:999px; padding:7px 12px; white-space:nowrap; }
+  .hero { max-width:850px; margin-bottom:52px; }
+  .eyebrow { color:var(--accent2); text-transform:uppercase; letter-spacing:.16em; font-size:.78rem; font-weight:700; }
+  h1 { font-size:clamp(2.2rem,6vw,4.6rem); line-height:1.05; letter-spacing:-.04em; margin:14px 0 20px; }
+  .lead { font-size:1.2rem; color:#c8d3e8; max-width:760px; }
+  .meta { display:flex; flex-wrap:wrap; gap:9px; margin-top:26px; }
+  .meta span { background:#111a2b; border:1px solid var(--line); padding:7px 11px; border-radius:8px; font-size:.86rem; color:#d9e3f7; }
+  .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:38px 0 64px; }
+  .metric,.card { background:linear-gradient(180deg,var(--panel),#101728); border:1px solid var(--line); border-radius:16px; padding:22px; }
+  .metric strong { display:block; font-size:2.3rem; letter-spacing:-.04em; }
+  .metric span { color:var(--muted); font-size:.92rem; }
+  section { margin:58px 0; }
+  h2 { font-size:1.75rem; letter-spacing:-.025em; margin:0 0 14px; }
+  h3 { font-size:1.08rem; margin:0 0 8px; }
+  p { color:#c3cee2; margin:0 0 14px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .card p:last-child { margin-bottom:0; }
+  .flow { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; align-items:stretch; margin-top:22px; }
+  .step { background:var(--panel2); border:1px solid var(--line); border-radius:12px; padding:16px; min-height:125px; position:relative; }
+  .step:not(:last-child):after { content:"→"; position:absolute; right:-15px; top:45%; color:var(--accent); font-size:1.2rem; z-index:2; }
+  .step small { color:var(--accent2); display:block; margin-bottom:7px; text-transform:uppercase; letter-spacing:.08em; font-size:.72rem; }
+  .step b { display:block; margin-bottom:6px; }
+  .step span { font-size:.84rem; color:var(--muted); }
+  ul { color:#c3cee2; padding-left:20px; margin:10px 0 0; }
+  li { margin:7px 0; }
+  .result { border-left:3px solid var(--accent2); padding:2px 0 2px 18px; }
+  .tech { display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
+  .tech span { background:#111a2b; border:1px solid var(--line); border-radius:8px; padding:8px 12px; font-size:.9rem; }
+  .note { font-size:.86rem; color:#92a2bf; border-top:1px solid var(--line); padding-top:16px; }
+  footer { margin-top:70px; padding-top:22px; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem; }
+  @media(max-width:800px){ .metrics{grid-template-columns:repeat(2,1fr)} .grid2,.grid3{grid-template-columns:1fr} .flow{grid-template-columns:1fr} .step:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-18px} .top{margin-bottom:40px} }
+  @media(max-width:460px){ .wrap{padding:24px 15px 60px} .metrics{grid-template-columns:1fr 1fr;gap:9px} .metric{padding:16px} .metric strong{font-size:1.8rem} }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><a href="/#projects">← Back to portfolio</a><span>ENGINEERING CASE STUDY</span><span class="pill">Sep – Nov 2026</span></div>
+  <header class="hero">
+    <div class="eyebrow">DevSecOps · Security Automation · Repository Scale</div>
+    <h1>Centralized Source-Code Security Assessment</h1>
+    <p class="lead">Building a repeatable SonarQube scanning workflow across hundreds of GitHub Enterprise repositories—automating discovery, inventory, cloning, scanning, and result tracking.</p>
+    <div class="meta"><span>Confidential client · Freelance engagement</span><span>Role: DevOps / Security Automation</span><span>SonarQube</span><span>GitHub Enterprise</span><span>Python · Bash · Linux</span></div>
+  </header>
+
+  <div class="metrics">
+    <div class="metric"><strong>445</strong><span>Repositories in reported scan scope</span></div>
+    <div class="metric"><strong>444</strong><span>Successful scans reported</span></div>
+    <div class="metric"><strong>427 / 620</strong><span>Active repositories identified in organizations</span></div>
+    <div class="metric"><strong>99.78%</strong><span>Reported scan execution success rate</span></div>
+  </div>
+
+  <section>
+    <h2>The problem</h2>
+    <p>Hundreds of repositories were hosted across GitHub Enterprise. Assessing them one at a time would create repetitive manual work, inconsistent project setup, and limited visibility into overall coverage. The challenge was to create a controlled, repeatable process that could scan repositories at scale while tracking exceptions.</p>
+    <div class="grid3">
+      <div class="card"><h3>Scale & discovery</h3><p>Find repositories, distinguish active from archived or inactive projects, and establish a reliable scope.</p></div>
+      <div class="card"><h3>Repeatable execution</h3><p>Standardize cloning, project identification, scanner configuration, and execution across repositories.</p></div>
+      <div class="card"><h3>Operational visibility</h3><p>Track outcomes centrally, identify failures, and make exceptions actionable rather than invisible.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>Workflow architecture</h2>
+    <p>A centralized workflow was built around repository inventory and controlled scan execution.</p>
+    <div class="flow">
+      <div class="step"><small>01 · Source</small><b>GitHub Enterprise</b><span>Repository discovery and source access</span></div>
+      <div class="step"><small>02 · Scope</small><b>Inventory & filtering</b><span>Activity, archive status, language, metadata</span></div>
+      <div class="step"><small>03 · Prepare</small><b>Linux scan host</b><span>Clone, validate, organize, and log</span></div>
+      <div class="step"><small>04 · Analyze</small><b>SonarQube scans</b><span>Standardized project identification and source analysis</span></div>
+      <div class="step"><small>05 · Report</small><b>Results & follow-up</b><span>Success, failure, pending, and rerun tracking</span></div>
+    </div>
+  </section>
+  <section>
+    <h2>Implementation</h2>
+    <div class="grid2">
+      <div class="card"><h3>Repository discovery & inventory</h3><ul><li>Collected repository metadata from GitHub Enterprise.</li><li>Identified archived and active repositories.</li><li>Created structured inventory data for tracking and filtering.</li><li>Catalogued languages and build files to inform scan handling.</li></ul></div>
+      <div class="card"><h3>Automation & scan orchestration</h3><ul><li>Automated repository cloning and local organization.</li><li>Standardized SonarQube project keys and names.</li><li>Used source-focused scanning to reduce build dependency for the broad initial assessment.</li><li>Designed controlled batch execution and status logging.</li></ul></div>
+      <div class="card"><h3>Execution environment</h3><ul><li>Prepared a centralized Linux-based scan workspace.</li><li>Separated scripts, configuration, repositories, reports, and logs.</li><li>Addressed SSH access and GitHub Enterprise connectivity.</li><li>Worked toward persistent execution independent of an interactive SSH session.</li></ul></div>
+      <div class="card"><h3>Failure handling</h3><ul><li>Recorded scan outcomes for follow-up.</li><li>Investigated repository-specific failures.</li><li>Identified unusually large repositories for special handling.</li><li>Planned retries for failed or incomplete scans.</li></ul></div>
+    </div>
+  </section>
+  <section>
+    <h2>Repository landscape</h2>
+    <div class="grid2">
+      <div class="card"><h3>Organizations</h3><p><strong>620</strong> repositories identified, with <strong>427</strong> classified as active and selected for cloning based on the reported activity criteria.</p></div>
+      <div class="card"><h3>Language inventory</h3><p>Inventory identified <strong>324 Java</strong> repositories and <strong>68 JavaScript</strong> repositories among the reported language categories. Additional languages/categories were also present.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>Challenges & engineering decisions</h2>
+    <div class="grid2">
+      <div class="card"><h3>GitHub Enterprise connectivity</h3><p>Resolved hostname/DNS connectivity problems and established SSH access between the scan environment and GitHub Enterprise to enable repository operations.</p></div>
+      <div class="card"><h3>Large repository exception</h3><p>A remaining documentation-heavy repository was reported at approximately 7.8 GB and 190,000 files. It required separate investigation due to its size and scan failure.</p></div>
+      <div class="card"><h3>Controlled concurrency</h3><p>Planned scan batches rather than launching all repositories concurrently, helping limit resource contention on the execution host and SonarQube.</p></div>
+      <div class="card"><h3>Source-focused scan scope</h3><p>Prioritized broad source analysis without requiring every repository to complete a full application build, while recognizing that build-aware analysis can provide deeper results for some codebases.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>Reported results</h2>
+    <div class="card result">
+      <p><strong>445 repositories</strong> were included in the reported combined scanning scope.</p>
+      <p><strong>444 scans succeeded</strong>, with one repository remaining as the reported exception.</p>
+      <p><strong>427 active repositories</strong> were identified from the 620 repositories in organizations and cloned for the assessment.</p>
+      <p>The resulting workflow provided a repeatable process for repository discovery, scanning, status tracking, and failure follow-up.</p>
+    </div>
+    <p class="note">Scan success indicates successful scanner execution; it does not mean the repositories were vulnerability-free, remediated, or passed a security quality gate. Security findings and remediation metrics are not included here because they have not been confirmed.</p>
+  </section>
+  <section>
+    <h2>Technology stack</h2>
+    <div class="tech"><span>SonarQube</span><span>GitHub Enterprise</span><span>Python</span><span>Bash</span><span>Linux / RHEL</span><span>Git</span><span>SSH</span><span>CSV</span><span>Repository automation</span><span>SAST</span></div>
+  </section>
+  <section>
+    <h2>What this demonstrates</h2>
+    <div class="grid3">
+      <div class="card"><h3>Automation at scale</h3><p>Turning a manual repository-by-repository activity into a repeatable workflow.</p></div>
+      <div class="card"><h3>DevSecOps implementation</h3><p>Integrating source-code security assessment into a centralized engineering process.</p></div>
+      <div class="card"><h3>Operational problem solving</h3><p>Handling access, connectivity, scale, execution management, and scan exceptions.</p></div>
+    </div>
+  </section>
+  <footer>
+    <p>Sanitized case study. Organization names, repository names, internal endpoints, credentials, source code, and confidential scan findings are intentionally omitted.</p>
+    <p>Metrics represent the project status reported during the stated period and should be updated if final dashboard results differ.</p>
+  </footer>
+</main>
+</body>
+</html>

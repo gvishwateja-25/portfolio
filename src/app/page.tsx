@@ -52,12 +52,20 @@ const skillBars = [
 
 const projects = [
   {
+    title: "Centralized Source-Code Security Assessment",
+    description:
+      "Freelance DevSecOps engagement automating GitHub Enterprise discovery, inventory, and SonarQube scanning with Python, Bash, and Linux. Reported 444 successful scan executions across 445 repositories, with exception tracking.",
+    tags: ["SonarQube", "GitHub Enterprise", "Python", "Bash", "SAST"],
+    image: "/images/devops-hero-background.png",
+    href: "/case-studies/centralized-security-assessment.html",
+  },
+  {
     title: "Multi-Region Self-Healing AWS Platform",
     description:
       "Architected a resilient multi-region design using AWS Global Accelerator and Route 53. Reduced global latency by 40% and targeted 99.999% uptime for high-availability e-commerce workloads.",
     tags: ["Global Accelerator", "Route 53", "CloudWatch", "IaC"],
     image: "/images/ci-cd-observability-roadmap-2026.png",
-    githubUrl: "https://github.com/search?q=multi-region+self-healing+aws+platform&type=repositories",
+    href: "https://github.com/search?q=multi-region+self-healing+aws+platform&type=repositories",
   },
   {
     title: "Reusable Infrastructure Automation",
@@ -65,7 +73,7 @@ const projects = [
       "Built Terraform modules and CloudFormation patterns for standardized, repeatable resource provisioning. Reached 95% infrastructure automation and cut deployment time by 60%.",
     tags: ["Terraform", "CloudFormation", "AWS CDK", "Git"],
     image: "/images/aws-operating-model-roadmap.png",
-    githubUrl: "https://github.com/search?q=terraform+aws+cloudformation+cdk+infrastructure+automation&type=repositories",
+    href: "https://github.com/search?q=terraform+aws+cloudformation+cdk+infrastructure+automation&type=repositories",
   },
   {
     title: "Containerized Legacy Application Delivery",
@@ -73,7 +81,7 @@ const projects = [
       "Created Docker build patterns and CI/CD pipelines for microservices through QA, UAT, and production. Reduced environment-related issues by 70% and deployment from hours to minutes.",
     tags: ["Docker", "Jenkins", "GitHub Actions", "Kubernetes"],
     image: "/images/devops-hero-background.png",
-    githubUrl: "https://github.com/search?q=docker+jenkins+github+actions+kubernetes+cicd&type=repositories",
+    href: "https://github.com/search?q=docker+jenkins+github+actions+kubernetes+cicd&type=repositories",
   },
 ];
 
@@ -245,24 +253,25 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right profile image area */}
-            <div className="hero-profile-image flex items-center justify-center" data-flow-reveal>
-              <div className="relative group">
+            {/* DevOps hero illustration */}
+            <div className="hero-profile-image flex min-w-0 items-center justify-center" data-flow-reveal>
+              <div className="relative z-10 group w-full max-w-[560px]">
                 {/* Ambient glow effect */}
                 <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-amber-500/20 via-blue-500/10 to-amber-500/20 opacity-75 blur-2xl transition-all duration-700 group-hover:opacity-100" />
 
-                {/* Photo card frame */}
+                {/* Keep the full illustration and its icon accents visible. */}
                 <div className="relative overflow-hidden rounded-3xl border border-amber-400/30 bg-zinc-950/90 shadow-2xl shadow-black/80">
                   <Image
-                    src="/images/profile-hero-blazer.jpg"
-                    alt={`${profile.name} - ${profile.role}`}
-                    width={420}
-                    height={525}
-                    priority
-                    className="h-auto w-[320px] sm:w-[380px] lg:w-[420px] object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                    src="/images/devops-hero-background.png"
+                    alt="DevOps infinity loop showing plan, code, build, test, deploy, operate, and monitor, with code, cloud, automation, and monitoring icons."
+                    width={1536}
+                    height={1024}
+                    sizes="(min-width: 1320px) 558px, (min-width: 1024px) calc(45vw - 36px), (min-width: 600px) 560px, calc(100vw - 40px)"
+                    preload
+                    className="h-auto w-full"
                   />
-                  {/* Subtle dark bottom fade and role badge */}
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent p-5 pt-12">
+                  {/* Separate caption keeps text from obscuring the artwork. */}
+                  <div className="border-t border-amber-400/20 bg-zinc-950 p-5">
                     <p className="text-xs font-semibold uppercase tracking-wider text-amber-400">AWS DevOps Engineer</p>
                     <p className="text-lg font-bold text-white">{profile.name}</p>
                   </div>
@@ -412,10 +421,10 @@ export default function Home() {
                 <a
                   className="project-card block"
                   data-flow-reveal
-                  href={project.githubUrl}
+                  href={project.href}
                   key={project.title}
-                  rel="noreferrer"
-                  target="_blank"
+                  rel={project.href.startsWith("https://") ? "noreferrer" : undefined}
+                  target={project.href.startsWith("https://") ? "_blank" : undefined}
                 >
                   <Image
                     alt={project.title}
@@ -428,6 +437,9 @@ export default function Home() {
                   <div className="project-card-body">
                     <h3 className="project-card-title">{project.title}</h3>
                     <p className="project-card-desc">{project.description}</p>
+                    {project.href.startsWith("/case-studies/") && (
+                      <p className="mb-4 text-sm font-semibold text-amber-400">Read case study →</p>
+                    )}
                     <div className="project-card-tags">
                       {project.tags.map((tag) => (
                         <span className="project-card-tag" key={tag}>

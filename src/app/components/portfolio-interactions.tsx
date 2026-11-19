@@ -33,13 +33,13 @@ export function TypingSubtitle() {
       return () => clearTimeout(pause);
     }
 
-    if (isDeleting && displayed === "") {
-      setIsDeleting(false);
-      setRoleIndex((prev) => (prev + 1) % typingRoles.length);
-      return;
-    }
-
     const timer = setTimeout(() => {
+      if (isDeleting && displayed === "") {
+        setIsDeleting(false);
+        setRoleIndex((prev) => (prev + 1) % typingRoles.length);
+        return;
+      }
+
       setDisplayed(
         isDeleting
           ? current.slice(0, displayed.length - 1)

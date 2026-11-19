@@ -19,6 +19,7 @@ interface Milestone {
   orgBadgeText: string;
   cloudFocus: string;
   tierTag: string;
+  caseStudyHref?: string;
 }
 
 const milestones: Milestone[] = [
@@ -45,6 +46,31 @@ const milestones: Milestone[] = [
     orgBadgeText: "EQUICOM TECH",
     cloudFocus: "AWS ECS • Terraform • GitHub Actions",
     tierTag: "PRODUCTION TIER 1",
+  },
+  {
+    id: "freelance-devsecops",
+    command: "load_milestone --period '2026' --mode 'freelance-devsecops'",
+    badge: "[!] DEVSECOPS & SECURITY AUTOMATION",
+    badgeColor: "text-cyan-400",
+    period: "Sep - Nov 2026",
+    title: "Freelance DevSecOps / Security Automation Engineer",
+    company: "Confidential Client",
+    location: "Freelance Engagement",
+    summary:
+      "Built a repeatable centralized source-code security assessment workflow across GitHub Enterprise repositories for an anonymous client.",
+    highlights: [
+      "Automated repository discovery, inventory, cloning, and SonarQube scan orchestration using Python, Bash, and Linux.",
+      "Reported 444 successful scan executions across 445 repositories; tracked the remaining exception for investigation.",
+      "Standardized project identifiers and status logging, with repository filtering and planned scan batches to manage resource contention.",
+      "Scan execution success represents completed scanner runs, not vulnerability clearance or security quality-gate approval.",
+    ],
+    tags: ["SonarQube", "GitHub Enterprise", "Python", "Bash", "Linux", "SAST"],
+    status: "Assessment Results Reported",
+    orgInitials: "DS",
+    orgBadgeText: "CONFIDENTIAL CLIENT",
+    cloudFocus: "SonarQube • Python • Repository Automation",
+    tierTag: "FREELANCE DEVSECOPS",
+    caseStudyHref: "/case-studies/centralized-security-assessment.html",
   },
   {
     id: "freelance",
@@ -122,7 +148,7 @@ export function TerminalJourney() {
   const [typedInput, setTypedInput] = useState<string>("");
   const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [playbackIndex, setPlaybackIndex] = useState<number>(0);
+  const playbackIndexRef = useRef(0);
   const terminalContentRef = useRef<HTMLDivElement>(null);
 
   // Auto-play timeline execution
@@ -130,16 +156,15 @@ export function TerminalJourney() {
     if (!isPlaying) return;
 
     const timer = setInterval(() => {
-      setPlaybackIndex((prev) => {
-        const next = prev + 1;
-        if (next >= milestones.length) {
-          setIsPlaying(false);
-          setActiveFilter("all");
-          return 0;
-        }
-        setActiveFilter(milestones[next].id);
-        return next;
-      });
+      const next = playbackIndexRef.current + 1;
+      if (next >= milestones.length) {
+        playbackIndexRef.current = 0;
+        setIsPlaying(false);
+        setActiveFilter("all");
+        return;
+      }
+      playbackIndexRef.current = next;
+      setActiveFilter(milestones[next].id);
     }, 2800);
 
     return () => clearInterval(timer);
@@ -150,7 +175,7 @@ export function TerminalJourney() {
       setIsPlaying(false);
     } else {
       setIsPlaying(true);
-      setPlaybackIndex(0);
+      playbackIndexRef.current = 0;
       setActiveFilter(milestones[0].id);
     }
   };
@@ -198,10 +223,12 @@ export function TerminalJourney() {
       setTerminalLogs((prev) => [
         ...prev,
         "$ help",
-        "-> Commands: all, 2025, 2021, 2019, play, whoami, skills, clear, help",
+        "-> Commands: all, 2026, 2025, 2021, 2019, play, whoami, skills, clear, help",
       ]);
     } else if (cmd === "all") {
       setActiveFilter("all");
+    } else if (cmd.includes("2026")) {
+      setActiveFilter("freelance-devsecops");
     } else if (cmd.includes("2025")) {
       setActiveFilter("equicom");
     } else if (cmd.includes("2021")) {
@@ -288,6 +315,17 @@ export function TerminalJourney() {
             }`}
           >
             --stage 2025-Present
+          </button>
+          <button
+            type="button"
+            onClick={() => handleQuickCommand("freelance-devsecops")}
+            className={`rounded-md px-2.5 py-1 font-mono text-xs transition-all ${
+              activeFilter === "freelance-devsecops"
+                ? "bg-amber-400 text-black font-semibold shadow-md shadow-amber-400/20"
+                : "border border-white/10 bg-zinc-900/60 text-zinc-400 hover:border-amber-400/40 hover:text-white"
+            }`}
+          >
+            --stage 2026-devsecops
           </button>
           <button
             type="button"
@@ -410,6 +448,11 @@ export function TerminalJourney() {
                     <p className="mt-3 text-xs leading-relaxed text-zinc-300 sm:text-sm">
                       {milestone.summary}
                     </p>
+                    {milestone.caseStudyHref && (
+                      <a className="mt-3 inline-block text-sm font-semibold text-amber-400 underline underline-offset-4" href={milestone.caseStudyHref}>
+                        Read the security assessment case study →
+                      </a>
+                    )}
 
                     {/* Highlights */}
                     <ul className="mt-3 space-y-1.5 text-xs text-zinc-400 sm:text-sm">
