@@ -4,7 +4,6 @@ import {
   ContactForm,
   MobileNavToggle,
   ResumeDownloadLink,
-  SkillProgressBar,
   TypingSubtitle,
   VisitorCounter,
 } from "./components/portfolio-interactions";
@@ -22,7 +21,7 @@ const profile = {
   location: "Hyderabad, Telangana, India",
   email: "gvishwateja25@gmail.com",
   linkedin: "https://www.linkedin.com/in/vishwateja-g-212b091b5/",
-  github: "https://github.com/search?q=Vishwateja%20Gorumanthula&type=users",
+  github: "https://github.com/gvishwateja-25",
   resume: "/resume/vishwateja-gorumanthula-resume.pdf",
   summary:
     "AWS DevOps Engineer with 7+ years of experience across cloud infrastructure, IaC, CI/CD automation, production monitoring, and technical operations. Passionate about building reliable, automated, and observable cloud platforms.",
@@ -30,23 +29,31 @@ const profile = {
 
 const aboutInfo = [
   { label: "Profile:", value: "AWS DevOps Engineer & Cloud Automation" },
-  { label: "Domain:", value: "Cloud Computing & AWS DevOps" },
-  { label: "Education:", value: "MCA, Avanthi PG College (2020-2022)" },
+  { label: "Domain:", value: "Financial & Healthcare" },
   { label: "Language:", value: "English, Hindi, Telugu" },
   {
-    label: "Other Skills:",
+    label: "Other Tools:",
     value: "Python, Bash, Docker, Kubernetes, Terraform, Git",
   },
   { label: "Interest:", value: "Cloud Architecture, Open Source, Automation" },
 ];
 
-const skillBars = [
-  { label: "AWS Cloud Services (EC2, S3, VPC, IAM, Lambda)", percentage: 90 },
-  { label: "Infrastructure as Code (Terraform, CDK, CloudFormation)", percentage: 88 },
-  { label: "CI/CD Pipelines (GitHub Actions, Jenkins)", percentage: 85 },
-  { label: "Containerization (Docker, Kubernetes, ECS)", percentage: 82 },
-  { label: "Monitoring & Observability (CloudWatch, Datadog, Grafana)", percentage: 80 },
-  { label: "Scripting (Python, Bash, PowerShell)", percentage: 78 },
+const heroTools = [
+  { name: "AWS", icon: "amazonwebservices", expertise: "Cloud infrastructure" },
+  { name: "Terraform", icon: "terraform", expertise: "Infrastructure as code" },
+  { name: "Docker", icon: "docker", expertise: "Container delivery" },
+  { name: "Kubernetes", icon: "kubernetes", expertise: "Container orchestration" },
+  { name: "GitHub Actions", icon: "githubactions", expertise: "CI/CD automation" },
+  { name: "SonarQube", icon: "sonarqube", expertise: "Source-code assessment" },
+];
+
+const toolGroups = [
+  { category: "Cloud infrastructure", tools: ["AWS", "EC2", "S3", "VPC", "IAM", "Lambda"] },
+  { category: "Infrastructure as code", tools: ["Terraform", "AWS CDK", "CloudFormation"] },
+  { category: "CI/CD automation", tools: ["GitHub Actions", "Jenkins", "Git"] },
+  { category: "Containers & orchestration", tools: ["Docker", "Kubernetes", "ECS"] },
+  { category: "Monitoring & observability", tools: ["CloudWatch", "Datadog", "BetterStack"] },
+  { category: "Scripting & security", tools: ["Python", "Bash", "PowerShell", "SonarQube"] },
 ];
 
 
@@ -56,7 +63,8 @@ const projects = [
     description:
       "Freelance DevSecOps engagement automating GitHub Enterprise discovery, inventory, and SonarQube scanning with Python, Bash, and Linux. Reported 444 successful scan executions across 445 repositories, with exception tracking.",
     tags: ["SonarQube", "GitHub Enterprise", "Python", "Bash", "SAST"],
-    image: "/images/devops-hero-background.png",
+    image: "/images/projects/security-assessment.svg",
+    imageAlt: "Repository discovery flowing into a SAST scan and tracked results.",
     href: "/case-studies/centralized-security-assessment.html",
   },
   {
@@ -64,24 +72,24 @@ const projects = [
     description:
       "Architected a resilient multi-region design using AWS Global Accelerator and Route 53. Reduced global latency by 40% and targeted 99.999% uptime for high-availability e-commerce workloads.",
     tags: ["Global Accelerator", "Route 53", "CloudWatch", "IaC"],
-    image: "/images/ci-cd-observability-roadmap-2026.png",
-    href: "https://github.com/search?q=multi-region+self-healing+aws+platform&type=repositories",
+    image: "/images/projects/multi-region-aws.svg",
+    imageAlt: "Routing branching into two AWS regions with failover.",
   },
   {
     title: "Reusable Infrastructure Automation",
     description:
       "Built Terraform modules and CloudFormation patterns for standardized, repeatable resource provisioning. Reached 95% infrastructure automation and cut deployment time by 60%.",
     tags: ["Terraform", "CloudFormation", "AWS CDK", "Git"],
-    image: "/images/aws-operating-model-roadmap.png",
-    href: "https://github.com/search?q=terraform+aws+cloudformation+cdk+infrastructure+automation&type=repositories",
+    image: "/images/projects/infrastructure-automation.svg",
+    imageAlt: "Reusable infrastructure modules provisioning development, staging, and production environments.",
   },
   {
     title: "Containerized Legacy Application Delivery",
     description:
       "Created Docker build patterns and CI/CD pipelines for microservices through QA, UAT, and production. Reduced environment-related issues by 70% and deployment from hours to minutes.",
     tags: ["Docker", "Jenkins", "GitHub Actions", "Kubernetes"],
-    image: "/images/devops-hero-background.png",
-    href: "https://github.com/search?q=docker+jenkins+github+actions+kubernetes+cicd&type=repositories",
+    image: "/images/projects/container-delivery.svg",
+    imageAlt: "A container delivery pipeline from source through build, validation, and deployment.",
   },
 ];
 
@@ -139,9 +147,9 @@ function ContactIcon({ type }: { type: "location" | "phone" | "email" | "resume"
   );
 }
 
-function SocialIcon({ type }: { type: "linkedin" | "github" | "email" }) {
+function SocialIcon({ type, className = "h-5 w-5" }: { type: "linkedin" | "github" | "email"; className?: string }) {
   return (
-    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <svg className={`shrink-0 ${className}`} viewBox="0 0 24 24" fill="none" aria-hidden="true">
       {type === "linkedin" && (
         <g stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <rect x="4" y="4" width="16" height="16" rx="2" />
@@ -231,49 +239,63 @@ export default function Home() {
 
               {/* CTA Buttons */}
               <div className="mt-8 flex flex-wrap gap-3">
-                <a className="hero-cta-btn is-filled" href="#projects">
+                <a className="hero-cta-btn is-filled inline-flex items-center gap-2" href="#projects">
+                  <svg className="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                    <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                    <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                    <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                  </svg>
                   My Works
                 </a>
                 <a
-                  className="hero-cta-btn"
+                  className="hero-cta-btn inline-flex items-center gap-2"
                   href={profile.linkedin}
                   target="_blank"
                   rel="noreferrer"
                 >
+                  <SocialIcon type="linkedin" className="h-6 w-6" />
                   LinkedIn
                 </a>
                 <a
-                  className="hero-cta-btn"
+                  className="hero-cta-btn inline-flex items-center gap-2"
                   href={profile.github}
                   target="_blank"
                   rel="noreferrer"
                 >
+                  <SocialIcon type="github" className="h-6 w-6" />
                   GitHub
                 </a>
               </div>
             </div>
 
-            {/* DevOps hero illustration */}
+            {/* Tools and engineering expertise */}
             <div className="hero-profile-image flex min-w-0 items-center justify-center" data-flow-reveal>
               <div className="relative z-10 group w-full max-w-[560px]">
                 {/* Ambient glow effect */}
                 <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-amber-500/20 via-blue-500/10 to-amber-500/20 opacity-75 blur-2xl transition-all duration-700 group-hover:opacity-100" />
 
-                {/* Keep the full illustration and its icon accents visible. */}
-                <div className="relative overflow-hidden rounded-3xl border border-amber-400/30 bg-zinc-950/90 shadow-2xl shadow-black/80">
-                  <Image
-                    src="/images/devops-hero-background.png"
-                    alt="DevOps infinity loop showing plan, code, build, test, deploy, operate, and monitor, with code, cloud, automation, and monitoring icons."
-                    width={1536}
-                    height={1024}
-                    sizes="(min-width: 1320px) 558px, (min-width: 1024px) calc(45vw - 36px), (min-width: 600px) 560px, calc(100vw - 40px)"
-                    preload
-                    className="h-auto w-full"
-                  />
-                  {/* Separate caption keeps text from obscuring the artwork. */}
-                  <div className="border-t border-amber-400/20 bg-zinc-950 p-5">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-amber-400">AWS DevOps Engineer</p>
-                    <p className="text-lg font-bold text-white">{profile.name}</p>
+                <div className="relative overflow-hidden rounded-3xl border border-amber-400/30 bg-zinc-950/95 shadow-2xl shadow-black/80" role="region" aria-labelledby="hero-toolkit-title">
+                  <div className="border-b border-amber-400/15 p-5 sm:p-6">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Tools &amp; expertise</p>
+                    <h2 id="hero-toolkit-title" className="mt-3 text-2xl font-bold tracking-tight text-white">My engineering toolkit</h2>
+                    <p className="mt-2 text-sm leading-6 text-zinc-400">Building, delivering, and securing cloud platforms.</p>
+                  </div>
+                  <ul className="grid grid-cols-1 gap-3 p-5 min-[360px]:grid-cols-2 sm:p-6">
+                    {heroTools.map((tool) => (
+                      <li key={tool.name} className="min-w-0 rounded-xl border border-white/10 bg-white/[0.025] p-4">
+                        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-white p-2">
+                          <Image src={`/icons/tools/${tool.icon}.svg`} alt="" width={32} height={32} className="h-8 w-8 object-contain" />
+                        </span>
+                        <p className="mt-3 text-sm font-semibold text-white">{tool.name}</p>
+                        <p className="mt-1 text-xs leading-5 text-zinc-400">{tool.expertise}</p>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="border-t border-amber-400/15 px-5 py-4 sm:px-6">
+                    <a href="#projects" className="inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-amber-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
+                      See these tools in my work <span aria-hidden="true">↗</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -285,63 +307,37 @@ export default function Home() {
         <section id="about" className="about-section px-5 py-20">
           <div className="mx-auto max-w-7xl">
             <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-              {/* Left: Photo + Skills */}
-              <div data-flow-reveal>
-                <div className="overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50 p-6">
-                  {/* Photo + Info side by side matching reference site */}
-                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-12 sm:items-center">
-                    <div className="sm:col-span-5">
-                      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl border border-amber-400/20 bg-zinc-950 shadow-xl shadow-black/40">
-                        <Image
-                          src="/images/profile-about-laptop.jpg"
-                          alt={`${profile.name} at work`}
-                          fill
-                          sizes="(max-width: 640px) 100vw, 220px"
-                          className="object-cover object-center"
-                        />
+              {/* Tools used across engineering work */}
+              <div className="order-2 lg:order-1" data-flow-reveal>
+                <div className="rounded-xl border border-white/10 bg-zinc-900/50 p-6">
+                  <h3 className="text-xl font-semibold text-white">Tools I’ve Used</h3>
+                  <p className="mt-2 text-sm leading-6 text-zinc-400">Across cloud infrastructure, delivery automation, and production operations.</p>
+                  <div className="mt-6 space-y-5">
+                    {toolGroups.map((group) => (
+                      <div key={group.category}>
+                        <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-amber-400">{group.category}</h4>
+                        <ul className="flex flex-wrap gap-2">
+                          {group.tools.map((tool) => (
+                            <li className="rounded-md border border-white/10 bg-zinc-950/70 px-3 py-1.5 text-sm text-zinc-300" key={tool}>{tool}</li>
+                          ))}
+                        </ul>
                       </div>
-                    </div>
-
-                    <div className="flex flex-col justify-center space-y-3 sm:col-span-7">
-                      <p className="text-sm">
-                        <span className="font-semibold text-white">Name: </span>
-                        <span className="text-zinc-300">{profile.name}</span>
-                      </p>
-                      <p className="text-sm">
-                        <span className="font-semibold text-white">Job Role: </span>
-                        <span className="font-medium text-amber-400">{profile.role}</span>
-                      </p>
-                      <p className="text-sm">
-                        <span className="font-semibold text-white">Experience: </span>
-                        <span className="text-zinc-300">7+ years</span>
-                      </p>
-                      <p className="text-sm">
-                        <span className="font-semibold text-white">Address: </span>
-                        <span className="text-zinc-300">{profile.location}</span>
-                      </p>
-                    </div>
+                    ))}
                   </div>
-
-                  {/* Skill bars */}
-                  <h3 className="mb-4 mt-8 text-lg font-semibold text-white">Skills</h3>
-                  {skillBars.map((skill) => (
-                    <SkillProgressBar
-                      key={skill.label}
-                      label={skill.label}
-                      percentage={skill.percentage}
-                    />
-                  ))}
                 </div>
               </div>
 
-              {/* Right: About text + info */}
-              <div data-flow-reveal>
+              {/* About experience and background */}
+              <div className="order-1 lg:order-2" data-flow-reveal>
                 <div className="section-watermark" data-watermark="About">
                   <h2 className="section-title">About Me</h2>
                 </div>
 
                 <p className="mt-6 text-base leading-8 text-zinc-300">
-                  {profile.summary}
+                  I’m an AWS DevOps Engineer with <strong className="font-semibold text-amber-400">7+ years of experience across cloud infrastructure, delivery automation, and technical operations.</strong> My work spans infrastructure as code, containerized applications, CI/CD pipelines, and production monitoring.
+                </p>
+                <p className="mt-4 text-base leading-8 text-zinc-300">
+                  I build repeatable cloud infrastructure with <strong className="font-semibold text-white">AWS and Terraform</strong>, automate releases, and support reliable production platforms. My freelance DevSecOps work also includes <strong className="font-semibold text-white">centralized SonarQube scanning across GitHub Enterprise repositories</strong>, with inventory automation, scan tracking, and exception handling.
                 </p>
 
                 <div className="mt-8">
@@ -384,11 +380,6 @@ export default function Home() {
               <h2 className="section-title">Career Journey</h2>
               <div className="section-divider" />
             </div>
-            <p className="mx-auto mt-6 max-w-3xl text-center text-base leading-8 text-zinc-400" data-flow-reveal>
-              AWS DevOps &amp; Production Reliability Engineer with 7+ years of experience across cloud
-              infrastructure, IaC automation, containerization, and enterprise operations. Explore my
-              career progression and production milestones in the terminal below. Select Explore experience to see the details of each role.
-            </p>
 
             <div className="mt-14" data-flow-reveal>
               <TerminalJourney />
@@ -416,39 +407,40 @@ export default function Home() {
             </p>
 
             <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {projects.map((project) => (
-                <a
-                  className="project-card block"
-                  data-flow-reveal
-                  href={project.href}
-                  key={project.title}
-                  rel={project.href.startsWith("https://") ? "noreferrer" : undefined}
-                  target={project.href.startsWith("https://") ? "_blank" : undefined}
-                >
-                  <Image
-                    alt={project.title}
-                    className="project-card-image"
-                    height={400}
-                    src={project.image}
-                    unoptimized
-                    width={640}
-                  />
-                  <div className="project-card-body">
-                    <h3 className="project-card-title">{project.title}</h3>
-                    <p className="project-card-desc">{project.description}</p>
-                    {project.href.startsWith("/case-studies/") && (
-                      <p className="mb-4 text-sm font-semibold text-amber-400">Read case study →</p>
-                    )}
-                    <div className="project-card-tags">
-                      {project.tags.map((tag) => (
-                        <span className="project-card-tag" key={tag}>
-                          {tag}
-                        </span>
-                      ))}
+              {projects.map((project) => {
+                const Card = project.href ? "a" : "article";
+                return (
+                  <Card
+                    className="project-card block"
+                    data-flow-reveal
+                    href={project.href}
+                    key={project.title}
+                  >
+                    <Image
+                      alt={project.imageAlt}
+                      className="project-card-image"
+                      height={400}
+                      src={project.image}
+                      sizes="(min-width: 1280px) 405px, (min-width: 1024px) 31vw, (min-width: 768px) 46vw, calc(100vw - 40px)"
+                      width={640}
+                    />
+                    <div className="project-card-body">
+                      <h3 className="project-card-title">{project.title}</h3>
+                      <p className="project-card-desc">{project.description}</p>
+                      {project.href?.startsWith("/case-studies/") && (
+                        <p className="mb-4 text-sm font-semibold text-amber-400">Read case study →</p>
+                      )}
+                      <div className="project-card-tags">
+                        {project.tags.map((tag) => (
+                          <span className="project-card-tag" key={tag}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </a>
-              ))}
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </section>

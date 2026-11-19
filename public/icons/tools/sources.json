@@ -1,0 +1,12 @@
+{
+  "project": "https://github.com/devicons/devicon",
+  "commit": "32fe1d3b3f36ad11f90ab94f7db59738139c2bf6",
+  "assets": {
+    "amazonwebservices": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/amazonwebservices/amazonwebservices-original.svg",
+    "terraform": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/terraform/terraform-original.svg",
+    "docker": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/docker/docker-original.svg",
+    "kubernetes": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/kubernetes/kubernetes-original.svg",
+    "githubactions": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/githubactions/githubactions-original.svg",
+    "sonarqube": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/sonarqube/sonarqube-original.svg"
+  }
+}
