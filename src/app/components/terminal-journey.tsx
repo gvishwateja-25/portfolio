@@ -101,7 +101,7 @@ const milestones: Milestone[] = [
     badge: "[!] CI/CD AUTOMATION & CONTAINERIZATION",
     badgeColor: "text-emerald-400",
     period: "Mar 2021 - Jan 2025",
-    title: "AWS DevOps Engineer",
+    title: "Jr. AWS DevOps Engineer",
     company: "Sambav EHR Private Limited",
     location: "Hyderabad, India",
     summary:

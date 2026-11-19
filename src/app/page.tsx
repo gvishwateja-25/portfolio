@@ -22,6 +22,7 @@ const profile = {
   email: "gvishwateja25@gmail.com",
   linkedin: "https://www.linkedin.com/in/vishwateja-g-212b091b5/",
   github: "https://github.com/gvishwateja-25",
+  whatsapp: "https://wa.me/917661889542",
   resume: "/resume/vishwateja-gorumanthula-resume.pdf",
   summary:
     "AWS DevOps Engineer with 7+ years of experience across cloud infrastructure, IaC, CI/CD automation, production monitoring, and technical operations. Passionate about building reliable, automated, and observable cloud platforms.",
@@ -95,7 +96,7 @@ const projects = [
 
 const stats = [
   { target: 7, suffix: "+", label: "Years Experience" },
-  { target: 15, suffix: "+", label: "Projects Delivered" },
+  { target: 4, suffix: "", label: "Featured Projects" },
   { target: 95, suffix: "%", label: "Infrastructure Automated" },
   { target: 60, suffix: "%", label: "Deployment Time Reduced" },
 ];
@@ -233,39 +234,49 @@ export default function Home() {
                 <TypingSubtitle />
               </div>
 
-              <p className="mt-6 max-w-lg text-base leading-7 text-zinc-400">
-                A Passionate {profile.role}
+              <p className="mt-6 max-w-lg text-lg font-medium leading-8 text-zinc-300">
+                Building automated AWS infrastructure, reliable delivery pipelines, and secure cloud platforms.
               </p>
 
               {/* CTA Buttons */}
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a className="hero-cta-btn is-filled inline-flex items-center gap-2" href="#projects">
-                  <svg className="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <rect x="3" y="3" width="7" height="7" rx="1.5" />
-                    <rect x="14" y="3" width="7" height="7" rx="1.5" />
-                    <rect x="3" y="14" width="7" height="7" rx="1.5" />
-                    <rect x="14" y="14" width="7" height="7" rx="1.5" />
-                  </svg>
-                  My Works
-                </a>
-                <a
-                  className="hero-cta-btn inline-flex items-center gap-2"
-                  href={profile.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <SocialIcon type="linkedin" className="h-6 w-6" />
-                  LinkedIn
-                </a>
-                <a
-                  className="hero-cta-btn inline-flex items-center gap-2"
-                  href={profile.github}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <SocialIcon type="github" className="h-6 w-6" />
-                  GitHub
-                </a>
+              <div className="mt-8 space-y-3">
+                <div className="flex flex-wrap gap-3">
+                  <a className="hero-cta-btn is-filled inline-flex items-center gap-2" href="#projects">
+                    <svg className="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                      <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                      <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                      <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                    </svg>
+                    My Works
+                  </a>
+                  <ResumeDownloadLink className="hero-cta-btn inline-flex items-center gap-2" href={profile.resume}>
+                    <svg className="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5" />
+                    </svg>
+                    Resume
+                  </ResumeDownloadLink>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    className="hero-cta-btn inline-flex items-center gap-2"
+                    href={profile.linkedin}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <SocialIcon type="linkedin" className="h-6 w-6" />
+                    LinkedIn
+                  </a>
+                  <a
+                    className="hero-cta-btn inline-flex items-center gap-2"
+                    href={profile.github}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <SocialIcon type="github" className="h-6 w-6" />
+                    GitHub
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -292,11 +303,6 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <div className="border-t border-amber-400/15 px-5 py-4 sm:px-6">
-                    <a href="#projects" className="inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-amber-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
-                      See these tools in my work <span aria-hidden="true">↗</span>
-                    </a>
-                  </div>
                 </div>
               </div>
             </div>
@@ -306,9 +312,9 @@ export default function Home() {
         {/* ============ ABOUT ============ */}
         <section id="about" className="about-section px-5 py-20">
           <div className="mx-auto max-w-7xl">
-            <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
               {/* Tools used across engineering work */}
-              <div className="order-2 lg:order-1" data-flow-reveal>
+              <div className="order-2" data-flow-reveal>
                 <div className="rounded-xl border border-white/10 bg-zinc-900/50 p-6">
                   <h3 className="text-xl font-semibold text-white">Tools I’ve Used</h3>
                   <p className="mt-2 text-sm leading-6 text-zinc-400">Across cloud infrastructure, delivery automation, and production operations.</p>
@@ -328,7 +334,7 @@ export default function Home() {
               </div>
 
               {/* About experience and background */}
-              <div className="order-1 lg:order-2" data-flow-reveal>
+              <div className="order-1" data-flow-reveal>
                 <div className="section-watermark" data-watermark="About">
                   <h2 className="section-title">About Me</h2>
                 </div>
@@ -349,24 +355,12 @@ export default function Home() {
                   ))}
                 </div>
 
-                <p className="mt-6 text-sm text-zinc-500">
-                  <span className="text-amber-400 font-bold text-xl">15+</span>{" "}
-                  Projects completed
-                </p>
+                <a href="#projects" className="mt-6 inline-flex min-h-11 items-center gap-1 rounded text-sm text-zinc-400 underline-offset-4 hover:text-amber-400 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
+                  <span className="text-amber-400 font-bold text-xl">4</span>{" "}
+                  Featured Projects
+                </a>
 
-                <div className="mt-6 flex gap-3">
-                  <a
-                    className="hero-cta-btn"
-                    href={profile.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    LinkedIn
-                  </a>
-                  <ResumeDownloadLink className="download-cv-btn" href={profile.resume}>
-                    Download CV
-                  </ResumeDownloadLink>
-                </div>
+
               </div>
             </div>
           </div>
@@ -385,12 +379,7 @@ export default function Home() {
               <TerminalJourney />
             </div>
 
-            {/* Download CV */}
-            <div className="mt-12 text-center" data-flow-reveal>
-              <ResumeDownloadLink className="download-cv-btn" href={profile.resume}>
-                Download CV
-              </ResumeDownloadLink>
-            </div>
+
           </div>
         </section>
 
@@ -516,15 +505,18 @@ export default function Home() {
                 <p className="contact-label">LinkedIn</p>
                 <p className="contact-value">Connect with me</p>
               </a>
-              <div className="text-center">
-                <ResumeDownloadLink href={profile.resume} className="inline-block">
-                  <div className="contact-icon-circle">
-                    <ContactIcon type="resume" />
-                  </div>
-                </ResumeDownloadLink>
-                <p className="contact-label">Download Resume</p>
-                <p className="contact-value">PDF format</p>
-              </div>
+              <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp chat" className="group min-w-0 rounded-lg text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
+                <Image
+                  src="/images/whatsapp-chat-qr.png"
+                  alt="Scan this QR code to open a WhatsApp chat with Vishwateja"
+                  width={140}
+                  height={140}
+                  unoptimized
+                  className="mx-auto h-auto max-w-full rounded-lg ring-1 ring-amber-400/30"
+                />
+                <p className="contact-label">WhatsApp</p>
+                <p className="contact-value">Scan or tap to chat</p>
+              </a>
             </div>
 
             {/* Contact form */}
