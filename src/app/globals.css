@@ -217,6 +217,16 @@ body::after {
   position: absolute;
 }
 
+/* Terminal experience disclosure */
+.terminal-experience .experience-close-label,
+.terminal-experience[open] .experience-open-label {
+  display: none;
+}
+
+.terminal-experience[open] .experience-close-label {
+  display: inline;
+}
+
 /* Typing cursor */
 .typing-cursor {
   animation: cursor-blink 1s steps(1) infinite;

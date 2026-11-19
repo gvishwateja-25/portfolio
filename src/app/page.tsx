@@ -376,7 +376,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ============ CAREER JOURNEY (TERMINAL CONSOLE) ============ */}
+        {/* ============ CAREER JOURNEY ============ */}
         <section id="journey" className="resume-section px-5 py-20">
           <span id="resume" className="sr-only" />
           <div className="mx-auto max-w-7xl">
@@ -387,10 +387,9 @@ export default function Home() {
             <p className="mx-auto mt-6 max-w-3xl text-center text-base leading-8 text-zinc-400" data-flow-reveal>
               AWS DevOps &amp; Production Reliability Engineer with 7+ years of experience across cloud
               infrastructure, IaC automation, containerization, and enterprise operations. Explore my
-              career progression and production milestones via the interactive console below.
+              career progression and production milestones in the terminal below. Select Explore experience to see the details of each role.
             </p>
 
-            {/* Terminal Console Component */}
             <div className="mt-14" data-flow-reveal>
               <TerminalJourney />
             </div>

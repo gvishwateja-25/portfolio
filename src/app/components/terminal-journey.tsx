@@ -414,7 +414,7 @@ export function TerminalJourney() {
                   <span className="text-emerald-400 font-semibold">
                     vishwateja@aws-prod:~/journey$
                   </span>
-                  <span className="text-white font-bold">{milestone.command}</span>
+                  <span className="min-w-0 break-words text-white font-bold">{milestone.command}</span>
                   <span className="ml-auto rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-400">
                     EXIT 0
                   </span>
@@ -423,7 +423,7 @@ export function TerminalJourney() {
                 {/* 2-Column Milestone Details (Left: Specs, Right: Tech Emblem Card) */}
                 <div className="mt-4 grid gap-6 border-l-2 border-amber-400/60 pl-4 sm:pl-6 lg:grid-cols-12 lg:items-center">
                   {/* Left Column: Role Details & Achievements (8 cols) */}
-                  <div className="lg:col-span-8">
+                  <div className="min-w-0 lg:col-span-8">
                     {/* Status & Period Badge */}
                     <div className="flex flex-wrap items-center gap-2">
                       <span className={`text-xs font-bold uppercase tracking-wider ${milestone.badgeColor}`}>
@@ -444,6 +444,12 @@ export function TerminalJourney() {
                     </h4>
                     <p className="text-xs text-zinc-500">{milestone.location}</p>
 
+                    <details className="terminal-experience mt-4">
+                      <summary className="w-fit cursor-pointer rounded-md border border-amber-400/30 bg-amber-400/5 px-3 py-2.5 text-xs font-semibold text-amber-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
+                        <span className="experience-open-label">Explore experience</span>
+                        <span className="experience-close-label">Hide experience</span>
+                        <span className="sr-only"> at {milestone.company}</span>
+                      </summary>
                     {/* Summary */}
                     <p className="mt-3 text-xs leading-relaxed text-zinc-300 sm:text-sm">
                       {milestone.summary}
@@ -480,6 +486,7 @@ export function TerminalJourney() {
                     <div className="mt-3 text-xs font-semibold text-zinc-500">
                       STATUS: <span className="text-zinc-300">{milestone.status}</span>
                     </div>
+                    </details>
                   </div>
 
                   {/* Right Column: Branded Tech & Company Emblem (4 cols, styled like aishwarya.ai logos) */}
