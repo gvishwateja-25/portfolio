@@ -431,9 +431,27 @@ a.project-card:hover {
   padding: 1.5rem;
 }
 
+.project-category {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  border: 1px solid rgba(212, 168, 67, 0.3);
+  border-radius: 999px;
+  background: rgba(212, 168, 67, 0.1);
+  padding: 0.3rem 0.75rem;
+  color: var(--accent-gold-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+a.project-card:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 4px;
+}
+
 .project-card-title {
   color: #fff;
-  font-size: 1.1rem;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
   font-weight: 700;
   line-height: 1.4;
 }

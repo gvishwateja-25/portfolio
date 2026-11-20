@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Centralized Repository Security Assessment | Case Study</title>
 <style>
-  :root { color-scheme: dark; --bg:#0b1020; --panel:#121a2d; --panel2:#172239; --text:#edf2ff; --muted:#a9b6d0; --line:#293651; --accent:#7c9cff; --accent2:#65d6b5; }
+  :root { color-scheme: dark; --bg:#050505; --panel:#111118; --panel2:#191811; --text:#f0f0f0; --muted:#a1a1aa; --line:#2f2b20; --accent:#d4a843; --accent2:#e8b945; }
   * { box-sizing:border-box; }
-  body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:radial-gradient(ellipse at 15% 0%,#182747 0,transparent 42%),var(--bg); color:var(--text); line-height:1.6; }
+  body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:radial-gradient(ellipse at 15% 0%,rgba(212,168,67,.12) 0,transparent 42%),var(--bg); color:var(--text); line-height:1.6; }
   .wrap { max-width:1120px; margin:auto; padding:32px 22px 80px; }
   .top { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:64px; color:var(--muted); font-size:.9rem; }
   a { color:var(--accent2); }
@@ -17,17 +17,17 @@
   .hero { max-width:850px; margin-bottom:52px; }
   .eyebrow { color:var(--accent2); text-transform:uppercase; letter-spacing:.16em; font-size:.78rem; font-weight:700; }
   h1 { font-size:clamp(2.2rem,6vw,4.6rem); line-height:1.05; letter-spacing:-.04em; margin:14px 0 20px; }
-  .lead { font-size:1.2rem; color:#c8d3e8; max-width:760px; }
+  .lead { font-size:1.2rem; color:#d4d4d8; max-width:760px; }
   .meta { display:flex; flex-wrap:wrap; gap:9px; margin-top:26px; }
-  .meta span { background:#111a2b; border:1px solid var(--line); padding:7px 11px; border-radius:8px; font-size:.86rem; color:#d9e3f7; }
+  .meta span { background:#131310; border:1px solid var(--line); padding:7px 11px; border-radius:8px; font-size:.86rem; color:#d4d4d8; }
   .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:38px 0 64px; }
-  .metric,.card { background:linear-gradient(180deg,var(--panel),#101728); border:1px solid var(--line); border-radius:16px; padding:22px; }
-  .metric strong { display:block; font-size:2.3rem; letter-spacing:-.04em; }
+  .metric,.card { background:linear-gradient(180deg,var(--panel),#0b0b0d); border:1px solid var(--line); border-radius:16px; padding:22px; }
+  .metric strong { color:var(--accent); display:block; font-size:2.3rem; letter-spacing:-.04em; }
   .metric span { color:var(--muted); font-size:.92rem; }
   section { margin:58px 0; }
   h2 { font-size:1.75rem; letter-spacing:-.025em; margin:0 0 14px; }
   h3 { font-size:1.08rem; margin:0 0 8px; }
-  p { color:#c3cee2; margin:0 0 14px; }
+  p { color:#d4d4d8; margin:0 0 14px; }
   .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
   .card p:last-child { margin-bottom:0; }
@@ -37,12 +37,12 @@
   .step small { color:var(--accent2); display:block; margin-bottom:7px; text-transform:uppercase; letter-spacing:.08em; font-size:.72rem; }
   .step b { display:block; margin-bottom:6px; }
   .step span { font-size:.84rem; color:var(--muted); }
-  ul { color:#c3cee2; padding-left:20px; margin:10px 0 0; }
+  ul { color:#d4d4d8; padding-left:20px; margin:10px 0 0; }
   li { margin:7px 0; }
   .result { border-left:3px solid var(--accent2); padding:2px 0 2px 18px; }
   .tech { display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
-  .tech span { background:#111a2b; border:1px solid var(--line); border-radius:8px; padding:8px 12px; font-size:.9rem; }
-  .note { font-size:.86rem; color:#92a2bf; border-top:1px solid var(--line); padding-top:16px; }
+  .tech span { background:#131310; border:1px solid var(--line); border-radius:8px; padding:8px 12px; font-size:.9rem; }
+  .note { font-size:.86rem; color:#a1a1aa; border-top:1px solid var(--line); padding-top:16px; }
   footer { margin-top:70px; padding-top:22px; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem; }
   @media(max-width:800px){ .metrics{grid-template-columns:repeat(2,1fr)} .grid2,.grid3{grid-template-columns:1fr} .flow{grid-template-columns:1fr} .step:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-18px} .top{margin-bottom:40px} }
   @media(max-width:460px){ .wrap{padding:24px 15px 60px} .metrics{grid-template-columns:1fr 1fr;gap:9px} .metric{padding:16px} .metric strong{font-size:1.8rem} }

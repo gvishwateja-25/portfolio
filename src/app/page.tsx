@@ -60,34 +60,38 @@ const toolGroups = [
 
 const projects = [
   {
-    title: "Centralized Source-Code Security Assessment",
+    category: "DevSecOps",
+    title: "Centralized SAST Assessment",
     description:
-      "Freelance DevSecOps engagement automating GitHub Enterprise discovery, inventory, and SonarQube scanning with Python, Bash, and Linux. Reported 444 successful scan executions across 445 repositories, with exception tracking.",
+      "Automated SonarQube scanning across 445 GitHub Enterprise repositories, with inventory and exception tracking.",
     tags: ["SonarQube", "GitHub Enterprise", "Python", "Bash", "SAST"],
     image: "/images/projects/security-assessment.svg",
     imageAlt: "Repository discovery flowing into a SAST scan and tracked results.",
     href: "/case-studies/centralized-security-assessment.html",
   },
   {
-    title: "Multi-Region Self-Healing AWS Platform",
+    category: "Cloud Architecture",
+    title: "Multi-Region AWS Platform",
     description:
-      "Architected a resilient multi-region design using AWS Global Accelerator and Route 53. Reduced global latency by 40% and targeted 99.999% uptime for high-availability e-commerce workloads.",
+      "Designed multi-region AWS infrastructure around high availability, intelligent routing, recovery, and resilience.",
     tags: ["Global Accelerator", "Route 53", "CloudWatch", "IaC"],
     image: "/images/projects/multi-region-aws.svg",
     imageAlt: "Routing branching into two AWS regions with failover.",
   },
   {
+    category: "Infrastructure as Code",
     title: "Reusable Infrastructure Automation",
     description:
-      "Built Terraform modules and CloudFormation patterns for standardized, repeatable resource provisioning. Reached 95% infrastructure automation and cut deployment time by 60%.",
+      "Built reusable Terraform modules and CloudFormation patterns for consistent, repeatable infrastructure provisioning.",
     tags: ["Terraform", "CloudFormation", "AWS CDK", "Git"],
     image: "/images/projects/infrastructure-automation.svg",
     imageAlt: "Reusable infrastructure modules provisioning development, staging, and production environments.",
   },
   {
-    title: "Containerized Legacy Application Delivery",
+    category: "CI/CD",
+    title: "Containerized Application Delivery",
     description:
-      "Created Docker build patterns and CI/CD pipelines for microservices through QA, UAT, and production. Reduced environment-related issues by 70% and deployment from hours to minutes.",
+      "Containerized legacy applications and automated microservice delivery through QA, UAT, and production.",
     tags: ["Docker", "Jenkins", "GitHub Actions", "Kubernetes"],
     image: "/images/projects/container-delivery.svg",
     imageAlt: "A container delivery pipeline from source through build, validation, and deployment.",
@@ -391,16 +395,16 @@ export default function Home() {
               <div className="section-divider" />
             </div>
             <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-7 text-zinc-400" data-flow-reveal>
-              Below are sample projects demonstrating DevOps principles, including
-              automation, CI/CD, cloud architecture, and infrastructure as code.
+              Featured work across DevSecOps, cloud architecture, infrastructure as code,
+              and automated application delivery.
             </p>
 
-            <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
               {projects.map((project) => {
                 const Card = project.href ? "a" : "article";
                 return (
                   <Card
-                    className="project-card block"
+                    className="project-card flex min-w-0 flex-col"
                     data-flow-reveal
                     href={project.href}
                     key={project.title}
@@ -410,10 +414,11 @@ export default function Home() {
                       className="project-card-image"
                       height={400}
                       src={project.image}
-                      sizes="(min-width: 1280px) 405px, (min-width: 1024px) 31vw, (min-width: 768px) 46vw, calc(100vw - 40px)"
+                      sizes="(min-width: 1320px) 624px, (min-width: 768px) calc(50vw - 36px), calc(100vw - 40px)"
                       width={640}
                     />
                     <div className="project-card-body">
+                      <span className="project-category">{project.category}</span>
                       <h3 className="project-card-title">{project.title}</h3>
                       <p className="project-card-desc">{project.description}</p>
                       {project.href?.startsWith("/case-studies/") && (

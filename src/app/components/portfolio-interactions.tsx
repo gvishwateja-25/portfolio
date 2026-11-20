@@ -5,7 +5,7 @@ import type {
   FormEvent,
   ReactNode,
 } from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 /* ============================================
    TYPING SUBTITLE
@@ -252,6 +252,7 @@ type ContactStatus = {
 };
 
 export function ContactForm({ email }: { email: string }) {
+  const formId = useId();
   const [status, setStatus] = useState<ContactStatus>({
     message: "",
     type: "idle",
@@ -302,7 +303,7 @@ export function ContactForm({ email }: { email: string }) {
     );
 
     setStatus({
-      message: "Email draft opened. Send it from your email client.",
+      message: "Email draft requested. Review and send it in your email app. If nothing opens, use Copy Email.",
       type: "success",
     });
 
@@ -315,29 +316,44 @@ export function ContactForm({ email }: { email: string }) {
       data-flow-reveal
       noValidate
       onSubmit={handleSubmit}
+      aria-describedby={`${formId}-draft-help`}
     >
-      <input
-        className="contact-form-input"
-        name="name"
-        placeholder="Your Name"
-        required
-        type="text"
-      />
-      <input
-        className="contact-form-input"
-        name="email"
-        placeholder="Your Email"
-        required
-        type="email"
-      />
-      <textarea
-        className="contact-form-input sm:col-span-2 min-h-32 resize-y"
-        name="message"
-        placeholder="Your Message..."
-        required
-      />
+      <p id={`${formId}-draft-help`} className="text-sm leading-6 text-zinc-400 sm:col-span-2">
+        Send Message opens a draft in your email app with the details below. Review and send it there; this form does not send the email automatically. If you don’t have an email app configured, use Copy Email.
+      </p>
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-zinc-200" htmlFor={`${formId}-name`}>Your name (required)</label>
+        <input
+          id={`${formId}-name`}
+          className="contact-form-input"
+          name="name"
+          autoComplete="name"
+          required
+          type="text"
+        />
+      </div>
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-zinc-200" htmlFor={`${formId}-email`}>Your email (required)</label>
+        <input
+          id={`${formId}-email`}
+          className="contact-form-input"
+          name="email"
+          autoComplete="email"
+          required
+          type="email"
+        />
+      </div>
+      <div className="space-y-2 sm:col-span-2">
+        <label className="block text-sm font-medium text-zinc-200" htmlFor={`${formId}-message`}>Your message (required)</label>
+        <textarea
+          id={`${formId}-message`}
+          className="contact-form-input min-h-32 resize-y"
+          name="message"
+          required
+        />
+      </div>
       <div className="sm:col-span-2 flex flex-wrap items-center gap-4">
-        <button className="contact-form-btn" type="submit">
+        <button className="contact-form-btn" type="submit" aria-describedby={`${formId}-draft-help`}>
           Send Message
         </button>
         <button
