@@ -1,14 +1,13 @@
 import Image from "next/image";
 import {
   AnimatedCounter,
-  MobileNavToggle,
   ResumeDownloadLink,
   TypingSubtitle,
   VisitorCounter,
 } from "./components/portfolio-interactions";
 import { TerminalJourney } from "./components/terminal-journey";
 import { FlowMotion } from "./components/flow-motion";
-import { ThemeToggle } from "./components/theme-toggle";
+import { SiteHeader } from "./components/site-header";
 
 /* ============================================
    DATA
@@ -130,13 +129,7 @@ const stats = [
   { target: 60, suffix: "%", label: "Deployment Time Reduced" },
 ];
 
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Journey", href: "#journey" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
-];
+
 
 /* ============================================
    SVG ICONS
@@ -218,35 +211,7 @@ export default function Home() {
         Skip to content
       </a>
 
-      {/* ============ NAVIGATION ============ */}
-      <header className="nav-bar sticky top-0 z-40">
-        <div className="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-          <a className="min-w-0 text-sm font-bold italic text-white sm:text-lg" href="#home">
-            {profile.firstName} {profile.lastName}
-          </a>
-
-          {/* Desktop nav */}
-          <nav className="ml-auto hidden items-center gap-8 lg:flex" aria-label="Main navigation">
-            {navLinks.map((link) => (
-              <a className="nav-link" href={link.href} key={link.label}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Mobile nav */}
-          <div className="ml-3 flex shrink-0 items-center gap-2">
-            <MobileNavToggle>
-              {navLinks.map((link) => (
-                <a className="nav-link text-lg" href={link.href} key={link.label}>
-                  {link.label}
-                </a>
-              ))}
-            </MobileNavToggle>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main>
         {/* ============ HERO ============ */}
@@ -536,65 +501,46 @@ export default function Home() {
               <h2 className="section-title">Contact Me</h2>
               <div className="section-divider" />
             </div>
-            <p className="mx-auto mt-4 max-w-lg text-center text-base text-zinc-400" data-flow-reveal>
-              Below are the details to reach out to me!
-            </p>
-
-            {/* Contact info icons */}
-            <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-4" data-flow-reveal>
-              <div className="text-center">
-                <div className="contact-icon-circle">
-                  <ContactIcon type="location" />
-                </div>
-                <p className="contact-label">Address</p>
-                <p className="contact-value">{profile.location}</p>
-              </div>
-              <a href={`mailto:${profile.email}`} className="text-center group">
-                <div className="contact-icon-circle">
-                  <ContactIcon type="email" />
-                </div>
-                <p className="contact-label">Email</p>
-                <p className="contact-value">{profile.email}</p>
-              </a>
-              <a href={profile.linkedin} target="_blank" rel="noreferrer" className="text-center group">
-                <div className="contact-icon-circle">
-                  <SocialIcon type="linkedin" />
-                </div>
-                <p className="contact-label">LinkedIn</p>
-                <p className="contact-value">Connect with me</p>
-              </a>
-              <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp chat" className="group min-w-0 rounded-lg text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
-                <Image
-                  src="/images/whatsapp-chat-qr.png"
-                  alt="Scan to open WhatsApp with a prefilled greeting to Vishwateja"
-                  width={140}
-                  height={140}
-                  unoptimized
-                  className="mx-auto h-auto max-w-full rounded-lg ring-1 ring-amber-400/30"
-                />
-                <p className="contact-label">WhatsApp</p>
-                <p className="contact-value">Scan or tap to chat</p>
-              </a>
-            </div>
-
-            <div className="contact-hiring mt-20 border-t border-white/10 pt-12" data-flow-reveal>
+            <div className="contact-hiring mt-12" data-flow-reveal>
               <h3 className="contact-hiring-title">
                 Hiring someone to build <span>reliable cloud platforms?</span>
               </h3>
               <div className="mt-8 grid min-w-0 gap-8 lg:mt-10 lg:grid-cols-2 lg:gap-12">
-                <p className="max-w-xl text-base leading-8 text-zinc-400 sm:text-lg">
-                  Let’s talk about AWS DevOps, cloud infrastructure, and delivery automation
-                  for your team. Email is the easiest way to reach me.
-                </p>
+                <div>
+                  <p className="max-w-xl text-base leading-8 text-zinc-400 sm:text-lg">
+                    Let’s talk about AWS DevOps, cloud infrastructure, and delivery automation
+                    for your team. Email is the easiest way to reach me.
+                  </p>
+                  <p className="mt-6 flex items-center gap-3 text-sm text-zinc-400">
+                    <span className="shrink-0 text-amber-400 [&>svg]:h-10 [&>svg]:w-10" aria-hidden="true"><ContactIcon type="location" /></span>
+                    <span>
+                      <span className="block">{profile.location}</span>
+                      <span className="mt-1 block">Bangalore, Karnataka, India</span>
+                    </span>
+                  </p>
+                </div>
                 <div className="min-w-0">
                   <a className="contact-hiring-email" href={`mailto:${profile.email}`}>
                     {profile.email}
                   </a>
                   <div className="mt-6 flex flex-wrap gap-x-7 gap-y-4 text-sm font-semibold sm:text-base">
                     <a className="contact-hiring-link" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    <a className="contact-hiring-link" href={profile.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
                     <ResumeDownloadLink className="contact-hiring-link" href={profile.resume}>Download Resume (PDF)</ResumeDownloadLink>
                   </div>
+                  <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp chat with a prefilled greeting" className="mt-8 inline-flex max-w-full items-center gap-4 rounded-lg">
+                    <Image
+                      src="/images/whatsapp-chat-qr.png"
+                      alt="WhatsApp QR code"
+                      width={140}
+                      height={140}
+                      unoptimized
+                      className="h-auto w-[140px] shrink-0 rounded-lg ring-1 ring-amber-400/30"
+                    />
+                    <span className="min-w-0">
+                      <span className="block text-sm font-semibold text-amber-400">WhatsApp</span>
+                      <span className="mt-1 block text-sm leading-6 text-zinc-400">Scan or tap to chat</span>
+                    </span>
+                  </a>
                 </div>
               </div>
             </div>
