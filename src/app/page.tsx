@@ -1,7 +1,6 @@
 import Image from "next/image";
 import {
   AnimatedCounter,
-  ContactForm,
   MobileNavToggle,
   ResumeDownloadLink,
   TypingSubtitle,
@@ -9,6 +8,7 @@ import {
 } from "./components/portfolio-interactions";
 import { TerminalJourney } from "./components/terminal-journey";
 import { FlowMotion } from "./components/flow-motion";
+import { ThemeToggle } from "./components/theme-toggle";
 
 /* ============================================
    DATA
@@ -22,7 +22,7 @@ const profile = {
   email: "gvishwateja25@gmail.com",
   linkedin: "https://www.linkedin.com/in/vishwateja-g-212b091b5/",
   github: "https://github.com/gvishwateja-25",
-  whatsapp: "https://wa.me/917661889542",
+  whatsapp: "https://wa.me/917661889542?text=Hi%20Vishwateja%2C%20I%27d%20like%20to%20discuss%20a%20DevOps%20opportunity%20with%20you.",
   resume: "/resume/vishwateja-gorumanthula-resume.pdf",
   summary:
     "AWS DevOps Engineer with 7+ years of experience across cloud infrastructure, IaC, CI/CD automation, production monitoring, and technical operations. Passionate about building reliable, automated, and observable cloud platforms.",
@@ -41,6 +41,7 @@ const aboutInfo = [
 
 const heroTools = [
   { name: "AWS", icon: "amazonwebservices", expertise: "Cloud infrastructure" },
+  { name: "Azure", icon: "azure", expertise: "Cloud services" },
   { name: "Terraform", icon: "terraform", expertise: "Infrastructure as code" },
   { name: "Docker", icon: "docker", expertise: "Container delivery" },
   { name: "Kubernetes", icon: "kubernetes", expertise: "Container orchestration" },
@@ -55,6 +56,30 @@ const toolGroups = [
   { category: "Containers & orchestration", tools: ["Docker", "Kubernetes", "ECS"] },
   { category: "Monitoring & observability", tools: ["CloudWatch", "Datadog", "BetterStack"] },
   { category: "Scripting & security", tools: ["Python", "Bash", "PowerShell", "SonarQube"] },
+];
+
+const responsibilities = [
+  {
+    title: "Cloud Infrastructure",
+    description:
+      "I provision and maintain AWS infrastructure using reusable Terraform modules, with IAM access controls, VPC segmentation, and standardized resource provisioning.",
+    focus: "Repeatable cloud foundations",
+    icon: "M7 18a5 5 0 0 1-1-9.9A6 6 0 0 1 17.7 7 5.5 5.5 0 0 1 18 18H7Z M8 14h8 M12 10v8",
+  },
+  {
+    title: "Delivery Automation",
+    description:
+      "I build CI/CD workflows with GitHub Actions and Jenkins, connecting Docker builds, container registries, and deployments across application environments.",
+    focus: "Consistent application releases",
+    icon: "M3 5h5v5H3z M16 14h5v5h-5z M8 7.5h6a4 4 0 0 1 4 4V14 M12 4l3 3.5-3 3.5 M3 16.5h10 M10 13.5l3 3-3 3",
+  },
+  {
+    title: "Reliability & Security",
+    description:
+      "I implement monitoring and alerting with CloudWatch, Datadog, and BetterStack, and automate SonarQube assessments with scan tracking and exception handling.",
+    focus: "Visibility and actionable follow-up",
+    icon: "M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z M8 12l3 3 5-6",
+  },
 ];
 
 
@@ -196,12 +221,12 @@ export default function Home() {
       {/* ============ NAVIGATION ============ */}
       <header className="nav-bar sticky top-0 z-40">
         <div className="relative mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
-          <a className="text-lg font-bold italic text-white" href="#home">
+          <a className="min-w-0 text-sm font-bold italic text-white sm:text-lg" href="#home">
             {profile.firstName} {profile.lastName}
           </a>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
+          <nav className="ml-auto hidden items-center gap-8 lg:flex" aria-label="Main navigation">
             {navLinks.map((link) => (
               <a className="nav-link" href={link.href} key={link.label}>
                 {link.label}
@@ -210,13 +235,16 @@ export default function Home() {
           </nav>
 
           {/* Mobile nav */}
-          <MobileNavToggle>
-            {navLinks.map((link) => (
-              <a className="nav-link text-lg" href={link.href} key={link.label}>
-                {link.label}
-              </a>
-            ))}
-          </MobileNavToggle>
+          <div className="ml-3 flex shrink-0 items-center gap-2">
+            <MobileNavToggle>
+              {navLinks.map((link) => (
+                <a className="nav-link text-lg" href={link.href} key={link.label}>
+                  {link.label}
+                </a>
+              ))}
+            </MobileNavToggle>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
@@ -296,19 +324,44 @@ export default function Home() {
                     <h2 id="hero-toolkit-title" className="mt-3 text-2xl font-bold tracking-tight text-white">My engineering toolkit</h2>
                     <p className="mt-2 text-sm leading-6 text-zinc-400">Building, delivering, and securing cloud platforms.</p>
                   </div>
-                  <ul className="grid grid-cols-1 gap-3 p-5 min-[360px]:grid-cols-2 sm:p-6">
+                  <ul className="grid grid-cols-1 gap-2.5 p-4 min-[360px]:grid-cols-2 sm:p-5">
                     {heroTools.map((tool) => (
-                      <li key={tool.name} className="min-w-0 rounded-xl border border-white/10 bg-white/[0.025] p-4">
-                        <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-white p-2">
-                          <Image src={`/icons/tools/${tool.icon}.svg`} alt="" width={32} height={32} className="h-8 w-8 object-contain" />
+                      <li key={tool.name} className="min-w-0 rounded-xl border border-white/10 bg-white/[0.025] p-3">
+                        <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white p-2">
+                          <Image src={`/icons/tools/${tool.icon}.svg`} alt="" width={24} height={24} className="h-6 w-6 object-contain" />
                         </span>
-                        <p className="mt-3 text-sm font-semibold text-white">{tool.name}</p>
+                        <p className="mt-2 text-sm font-semibold text-white">{tool.name}</p>
                         <p className="mt-1 text-xs leading-5 text-zinc-400">{tool.expertise}</p>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============ RESPONSIBILITIES ============ */}
+        <section id="responsibilities" className="responsibilities-section px-5 py-16" aria-labelledby="responsibilities-title">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl" data-flow-reveal>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Engineering ownership</p>
+              <h2 id="responsibilities-title" className="section-title mt-3">What I’m responsible for</h2>
+              <p className="mt-4 text-base leading-7 text-zinc-400">From cloud foundations to application delivery and production operations.</p>
+            </div>
+            <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
+              {responsibilities.map((responsibility) => (
+                <article key={responsibility.title} className="responsibility-card" data-flow-reveal>
+                  <span className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-amber-400/30 text-amber-400">
+                    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d={responsibility.icon} />
+                    </svg>
+                  </span>
+                  <h3 className="text-xl font-semibold">{responsibility.title}</h3>
+                  <p className="mt-3 flex-1 text-sm leading-7 text-zinc-400">{responsibility.description}</p>
+                  <p className="mt-6 border-t border-amber-400/15 pt-4 text-xs font-medium text-amber-400">{responsibility.focus}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -513,7 +566,7 @@ export default function Home() {
               <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp chat" className="group min-w-0 rounded-lg text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
                 <Image
                   src="/images/whatsapp-chat-qr.png"
-                  alt="Scan this QR code to open a WhatsApp chat with Vishwateja"
+                  alt="Scan to open WhatsApp with a prefilled greeting to Vishwateja"
                   width={140}
                   height={140}
                   unoptimized
@@ -524,12 +577,26 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Contact form */}
-            <div className="mx-auto mt-16 max-w-2xl">
-              <h3 className="text-center text-xl font-bold text-white" data-flow-reveal>
-                Have a Question?
+            <div className="contact-hiring mt-20 border-t border-white/10 pt-12" data-flow-reveal>
+              <h3 className="contact-hiring-title">
+                Hiring someone to build <span>reliable cloud platforms?</span>
               </h3>
-              <ContactForm email={profile.email} />
+              <div className="mt-8 grid min-w-0 gap-8 lg:mt-10 lg:grid-cols-2 lg:gap-12">
+                <p className="max-w-xl text-base leading-8 text-zinc-400 sm:text-lg">
+                  Let’s talk about AWS DevOps, cloud infrastructure, and delivery automation
+                  for your team. Email is the easiest way to reach me.
+                </p>
+                <div className="min-w-0">
+                  <a className="contact-hiring-email" href={`mailto:${profile.email}`}>
+                    {profile.email}
+                  </a>
+                  <div className="mt-6 flex flex-wrap gap-x-7 gap-y-4 text-sm font-semibold sm:text-base">
+                    <a className="contact-hiring-link" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a className="contact-hiring-link" href={profile.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                    <ResumeDownloadLink className="contact-hiring-link" href={profile.resume}>Download Resume (PDF)</ResumeDownloadLink>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>

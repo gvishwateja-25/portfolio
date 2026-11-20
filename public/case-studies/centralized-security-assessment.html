@@ -4,8 +4,10 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Centralized Repository Security Assessment | Case Study</title>
+<script src="/theme-init.js"></script>
 <style>
   :root { color-scheme: dark; --bg:#050505; --panel:#111118; --panel2:#191811; --text:#f0f0f0; --muted:#a1a1aa; --line:#2f2b20; --accent:#d4a843; --accent2:#e8b945; }
+  :root[data-theme="light"] { color-scheme:light; --bg:#faf9f6; --panel:#ffffff; --panel2:#f2f0eb; --text:#202124; --muted:#545964; --line:#ddd9cf; --accent:#896008; --accent2:#785200; }
   * { box-sizing:border-box; }
   body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:radial-gradient(ellipse at 15% 0%,rgba(212,168,67,.12) 0,transparent 42%),var(--bg); color:var(--text); line-height:1.6; }
   .wrap { max-width:1120px; margin:auto; padding:32px 22px 80px; }
@@ -46,6 +48,9 @@
   footer { margin-top:70px; padding-top:22px; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem; }
   @media(max-width:800px){ .metrics{grid-template-columns:repeat(2,1fr)} .grid2,.grid3{grid-template-columns:1fr} .flow{grid-template-columns:1fr} .step:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-18px} .top{margin-bottom:40px} }
   @media(max-width:460px){ .wrap{padding:24px 15px 60px} .metrics{grid-template-columns:1fr 1fr;gap:9px} .metric{padding:16px} .metric strong{font-size:1.8rem} }
+  [data-theme="light"] :is(.lead,p,ul,.meta span) { color:var(--text); }
+  [data-theme="light"] :is(.meta span,.tech span) { background:var(--panel); }
+  [data-theme="light"] :is(.metric,.card) { background:var(--panel); }
 </style>
 </head>
 <body>

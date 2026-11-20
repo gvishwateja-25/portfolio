@@ -20,6 +20,19 @@ You can start editing the page by modifying `src/app/page.tsx`. The page auto-up
 
 This project uses Tailwind CSS and a local system font stack so it can build without fetching font files during compilation.
 
+## Contact links
+
+The contact section uses direct email, LinkedIn, WhatsApp, and resume links.
+There is no contact form or email-service credential requirement.
+
+The WhatsApp QR and tap link include the same prefilled greeting. To regenerate
+and decode-check the QR after changing `profile.whatsapp` in `src/app/page.tsx`,
+run this command from the repository root on macOS:
+
+```bash
+swift -module-cache-path /tmp/portfolio-swift-cache scripts/generate-whatsapp-qr.swift
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

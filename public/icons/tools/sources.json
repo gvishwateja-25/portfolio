@@ -7,6 +7,7 @@
     "docker": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/docker/docker-original.svg",
     "kubernetes": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/kubernetes/kubernetes-original.svg",
     "githubactions": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/githubactions/githubactions-original.svg",
-    "sonarqube": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/sonarqube/sonarqube-original.svg"
+    "sonarqube": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/sonarqube/sonarqube-original.svg",
+    "azure": "https://raw.githubusercontent.com/devicons/devicon/32fe1d3b3f36ad11f90ab94f7db59738139c2bf6/icons/azure/azure-original.svg"
   }
 }

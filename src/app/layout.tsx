@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -20,8 +21,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark antialiased ${inter.variable}`} data-theme="dark">
-      <body className="min-h-screen" style={{ colorScheme: "dark" }}>
+    <html lang="en" className={`dark antialiased ${inter.variable}`} data-theme="dark" suppressHydrationWarning>
+      <body className="min-h-screen">
+        <Script src="/theme-init.js" strategy="beforeInteractive" />
         {children}
       </body>
     </html>

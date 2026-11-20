@@ -11,6 +11,8 @@
   --card-bg: #111118;
   --card-border: #222230;
   --section-line: #d4a843;
+  --on-accent: #000;
+  --nav-bg: rgba(5, 5, 5, 0.92);
 }
 
 @theme inline {
@@ -21,6 +23,7 @@
 }
 
 html {
+  color-scheme: dark;
   scroll-padding-top: 80px;
   scroll-behavior: smooth;
 }
@@ -39,7 +42,7 @@ body {
 
 ::selection {
   background: var(--accent-gold);
-  color: #000;
+  color: var(--on-accent);
 }
 
 /* ============================================
@@ -80,7 +83,7 @@ body::after {
    STICKY NAVIGATION
    ============================================ */
 .nav-bar {
-  background: rgba(5, 5, 5, 0.92);
+  background: var(--nav-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -192,13 +195,13 @@ body::after {
 .hero-cta-btn.is-filled {
   background: var(--accent-gold);
   border-color: var(--accent-gold);
-  color: #000;
+  color: var(--on-accent);
 }
 
 .hero-cta-btn.is-filled:hover {
   background: var(--accent-gold-light);
   border-color: var(--accent-gold-light);
-  color: #000;
+  color: var(--on-accent);
 }
 
 .hero-profile-image {
@@ -215,6 +218,22 @@ body::after {
   inset: -20%;
   pointer-events: none;
   position: absolute;
+}
+
+.responsibilities-section {
+  background: var(--background);
+  border-block: 1px solid var(--card-border);
+}
+
+.responsibility-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  background: var(--card-bg);
+  padding: 1.5rem;
+  color: var(--foreground);
 }
 
 /* Terminal experience disclosure */
@@ -583,48 +602,6 @@ a.project-card:focus-visible {
   word-break: break-all;
 }
 
-/* Contact form */
-.contact-form-input {
-  background: #0e0e18;
-  border: 1px solid #222230;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 0.9rem;
-  outline: none;
-  padding: 0.85rem 1rem;
-  transition: all 300ms ease;
-  width: 100%;
-}
-
-.contact-form-input::placeholder {
-  color: #555;
-}
-
-.contact-form-input:focus {
-  border-color: var(--accent-gold);
-  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.1);
-}
-
-.contact-form-btn {
-  background: var(--accent-gold);
-  border: none;
-  border-radius: 999px;
-  color: #000;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  padding: 0.85rem 2.5rem;
-  text-transform: uppercase;
-  transition: all 350ms ease;
-}
-
-.contact-form-btn:hover {
-  background: var(--accent-gold-light);
-  box-shadow: 0 8px 24px rgba(212, 168, 67, 0.25);
-  transform: translateY(-2px);
-}
-
 /* ============================================
    FOOTER
    ============================================ */
@@ -670,7 +647,7 @@ a.project-card:focus-visible {
   background: var(--accent-gold);
   border: none;
   border-radius: 999px;
-  color: #000;
+  color: var(--on-accent);
   cursor: pointer;
   display: inline-flex;
   font-size: 0.85rem;
@@ -761,3 +738,141 @@ a.project-card:focus-visible {
     transform: scaleX(1) !important;
   }
 }
+
+.contact-hiring-title {
+  max-width: 1000px;
+  color: var(--foreground);
+  font-size: clamp(2rem, 5.5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.contact-hiring-title span { color: var(--accent-gold); }
+
+.contact-hiring-email {
+  color: var(--foreground);
+  font-size: clamp(1.125rem, 2.5vw, 2rem);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-color: var(--accent-gold);
+  text-underline-offset: 0.25em;
+}
+
+.contact-hiring-link {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.contact-hiring-email:hover,
+.contact-hiring-link:hover { color: var(--accent-gold); }
+
+.contact-hiring a:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+/* Theme control and light palette */
+.theme-toggle {
+  background: var(--card-bg);
+  color: var(--accent-gold);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 16px rgba(212, 168, 67, 0.16);
+}
+
+.theme-core {
+  transition: transform 320ms ease;
+}
+
+[data-theme="light"] .theme-core {
+  transform: rotate(180deg);
+}
+
+.mobile-nav-panel {
+  background: var(--nav-bg);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --background: #faf9f6;
+  --foreground: #202124;
+  --accent-gold: #896008;
+  --accent-gold-light: #785200;
+  --accent-gold-dim: #896008;
+  --card-bg: #ffffff;
+  --card-border: #ddd9cf;
+  --section-line: #896008;
+  --on-accent: #ffffff;
+  --nav-bg: rgba(250, 249, 246, 0.96);
+}
+
+[data-theme="light"] :is(.hero-section, .about-section, .resume-section, .projects-section, .contact-section) {
+  background: linear-gradient(180deg, #faf9f6, #f2f0eb);
+}
+
+[data-theme="light"] .github-cta {
+  background: radial-gradient(ellipse at 50% 100%, rgba(212,168,67,.15), transparent 65%), #faf9f6;
+}
+
+[data-theme="light"] :is(.stats-section, .footer) {
+  background: var(--background);
+}
+
+[data-theme="light"] :is(.hero-name, .hero-role, .section-title, .about-info-label, .experience-title, .project-card-title) {
+  color: var(--foreground);
+}
+
+[data-theme="light"] :is(.nav-link, .hero-subtitle, .about-info-value, .section-subtitle, .project-card-desc, .experience-description, .experience-company, .contact-value, .contact-label, .stat-label) {
+  color: #545964;
+}
+
+[data-theme="light"] :is(.nav-link:hover, .nav-link.is-active) {
+  color: var(--accent-gold);
+}
+
+[data-theme="light"] .hero-cta-btn:not(.is-filled) {
+  border-color: #c8c3b8;
+  color: var(--foreground);
+}
+
+[data-theme="light"] .hero-cta-btn:hover {
+  border-color: var(--accent-gold);
+}
+
+[data-theme="light"] :is(.nav-bar, .footer, .about-info-row) {
+  border-color: var(--card-border);
+}
+
+[data-theme="light"] .section-watermark::before {
+  color: rgba(50, 40, 20, 0.05);
+}
+
+[data-theme="light"] .contact-icon-circle {
+  background: #ffffff;
+  border-color: var(--card-border);
+}
+
+/* Match existing utility-styled panels to the light palette. */
+[data-theme="light"] :is(.text-white, .text-zinc-200, .text-zinc-300) { color: var(--foreground); }
+[data-theme="light"] :is(.text-zinc-400, .text-zinc-500) { color: #545964; }
+[data-theme="light"] :is(.text-amber-300, .text-amber-400, [class~="text-amber-400/90"]) { color: var(--accent-gold); }
+[data-theme="light"] :is(.text-emerald-300, .text-emerald-400) { color: #047857; }
+[data-theme="light"] .text-blue-400 { color: #1d4ed8; }
+[data-theme="light"] .text-cyan-400 { color: #0e7490; }
+[data-theme="light"] .text-purple-400 { color: #7e22ce; }
+[data-theme="light"] .text-red-300 { color: #991b1b; }
+[data-theme="light"] :is([class~="border-white/5"], [class~="border-white/10"]) { border-color: var(--card-border); }
+[data-theme="light"] :is([class~="bg-zinc-950/95"], [class~="bg-zinc-950/70"], .bg-zinc-950, [class~="bg-zinc-900/50"], [class~="bg-zinc-900/60"], .bg-zinc-900, [class~="bg-zinc-800/80"]) { background: #ffffff; }
+[data-theme="light"] :is([class~="bg-[#08090c]"], [class~="bg-[#0d1017]/90"], [class~="bg-black/50"], [class~="bg-black/60"]) { background: #ffffff; }
+[data-theme="light"] :is([class~="bg-[#0a0c10]"], [class~="bg-[#0e1117]"]) { background: #f2f0eb; }
+[data-theme="light"] [class~="from-zinc-900/90"] { background: linear-gradient(135deg, #ffffff, #f2f0eb); }
+[data-theme="light"] [class~="hover:bg-[#121620]"]:hover { background: #f5f3ee; }
+[data-theme="light"] [class~="shadow-black/80"] { box-shadow: 0 16px 40px rgba(50,40,20,.1); }
+[data-theme="light"] [class~="shadow-black/40"] { box-shadow: 0 8px 20px rgba(50,40,20,.08); }

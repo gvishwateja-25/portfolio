@@ -8,11 +8,20 @@ function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle("dark", theme === "dark");
   document.documentElement.dataset.theme = theme;
   document.documentElement.style.colorScheme = theme;
-  localStorage.setItem("theme", theme);
+  try {
+    localStorage.setItem("theme", theme);
+  } catch {
+    // The selection still applies when browser storage is unavailable.
+  }
 }
 
 function getActiveTheme(): Theme {
-  const storedTheme = localStorage.getItem("theme");
+  let storedTheme: string | null = null;
+  try {
+    storedTheme = localStorage.getItem("theme");
+  } catch {
+    // Fall back to the current document theme.
+  }
 
   if (storedTheme === "light" || storedTheme === "dark") {
     return storedTheme;
@@ -42,26 +51,24 @@ export function ThemeToggle() {
 
   return (
     <button
-      aria-pressed={isDark}
-      aria-label="Toggle light and dark theme"
-      className="theme-bulb-toggle group relative inline-flex h-10 w-10 items-start justify-center rounded-md border border-zinc-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 dark:border-white/10 dark:bg-white/10 dark:focus:ring-offset-zinc-950"
+      aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
+      className="theme-toggle inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-amber-400/40 text-amber-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400"
       onClick={() => {
         const nextTheme: Theme = getActiveTheme() === "dark" ? "light" : "dark";
-
         applyTheme(nextTheme);
         setTheme(nextTheme);
       }}
       title={`Switch to ${isDark ? "light" : "dark"} theme`}
       type="button"
     >
-      <span className="absolute left-1/2 top-1.5 h-4 w-0.5 -translate-x-1/2 rounded-full bg-zinc-500 dark:bg-zinc-400" />
-      <span className="absolute left-1/2 top-[22px] h-1.5 w-4 -translate-x-1/2 rounded-t-full bg-amber-200 dark:bg-amber-300" />
-      <span
-        className="theme-bulb-glow absolute left-1/2 top-[26px] h-5 w-5 -translate-x-1/2 rounded-full bg-amber-300 shadow-[0_0_14px_rgba(251,191,36,0.5)] dark:bg-amber-200 dark:shadow-[0_0_22px_rgba(251,191,36,0.8)]"
-        aria-hidden="true"
-      >
-        <span className="absolute bottom-1 right-1 h-1.5 w-1.5 rounded-full border-b-2 border-r-2 border-white/75" />
-      </span>
+      <svg className="theme-core h-5 w-5" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="m16 3 11.25 6.5v13L16 29 4.75 22.5v-13Z" strokeOpacity="0.6" />
+        <circle cx="16" cy="16" r="6.5" strokeWidth="1.5" />
+        <path d="M16 9.5a6.5 6.5 0 0 0 0 13Z" fill="currentColor" stroke="none" />
+        <path d="M16 9.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor" fillOpacity="0.12" stroke="none" />
+        <path d="M16 3v3m0 20v3M4.75 22.5l2.6-1.5m17.3-10 2.6-1.5" />
+        <circle cx="27.25" cy="9.5" r="2" fill="currentColor" stroke="none" />
+      </svg>
     </button>
   );
 }

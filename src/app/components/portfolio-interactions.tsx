@@ -2,10 +2,9 @@
 
 import type {
   AnchorHTMLAttributes,
-  FormEvent,
   ReactNode,
 } from "react";
-import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /* ============================================
    TYPING SUBTITLE
@@ -243,145 +242,6 @@ export function ResumeDownloadLink({
 }
 
 /* ============================================
-   CONTACT FORM
-   Opens mailto: with pre-filled content
-   ============================================ */
-type ContactStatus = {
-  message: string;
-  type: "idle" | "success" | "error";
-};
-
-export function ContactForm({ email }: { email: string }) {
-  const formId = useId();
-  const [status, setStatus] = useState<ContactStatus>({
-    message: "",
-    type: "idle",
-  });
-
-  const handleCopyEmail = useCallback(async () => {
-    try {
-      await navigator.clipboard.writeText(email);
-      setStatus({
-        message: "Email address copied to clipboard!",
-        type: "success",
-      });
-    } catch {
-      setStatus({
-        message: "Copy failed. Email: " + email,
-        type: "error",
-      });
-    }
-  }, [email]);
-
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-    if (!form.checkValidity()) {
-      setStatus({
-        message: "Please complete the required fields.",
-        type: "error",
-      });
-      form.reportValidity();
-      return;
-    }
-
-    const formData = new FormData(form);
-    const name = String(formData.get("name") ?? "").trim();
-    const visitorEmail = String(formData.get("email") ?? "").trim();
-    const message = String(formData.get("message") ?? "").trim();
-
-    const subject = encodeURIComponent(`Portfolio contact from ${name}`);
-    const body = encodeURIComponent(
-      [
-        `Name: ${name}`,
-        `Email: ${visitorEmail}`,
-        "",
-        "Message:",
-        message,
-      ].join("\n"),
-    );
-
-    setStatus({
-      message: "Email draft requested. Review and send it in your email app. If nothing opens, use Copy Email.",
-      type: "success",
-    });
-
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-  }
-
-  return (
-    <form
-      className="mt-10 grid gap-4 sm:grid-cols-2"
-      data-flow-reveal
-      noValidate
-      onSubmit={handleSubmit}
-      aria-describedby={`${formId}-draft-help`}
-    >
-      <p id={`${formId}-draft-help`} className="text-sm leading-6 text-zinc-400 sm:col-span-2">
-        Send Message opens a draft in your email app with the details below. Review and send it there; this form does not send the email automatically. If you don’t have an email app configured, use Copy Email.
-      </p>
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-zinc-200" htmlFor={`${formId}-name`}>Your name (required)</label>
-        <input
-          id={`${formId}-name`}
-          className="contact-form-input"
-          name="name"
-          autoComplete="name"
-          required
-          type="text"
-        />
-      </div>
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-zinc-200" htmlFor={`${formId}-email`}>Your email (required)</label>
-        <input
-          id={`${formId}-email`}
-          className="contact-form-input"
-          name="email"
-          autoComplete="email"
-          required
-          type="email"
-        />
-      </div>
-      <div className="space-y-2 sm:col-span-2">
-        <label className="block text-sm font-medium text-zinc-200" htmlFor={`${formId}-message`}>Your message (required)</label>
-        <textarea
-          id={`${formId}-message`}
-          className="contact-form-input min-h-32 resize-y"
-          name="message"
-          required
-        />
-      </div>
-      <div className="sm:col-span-2 flex flex-wrap items-center gap-4">
-        <button className="contact-form-btn" type="submit" aria-describedby={`${formId}-draft-help`}>
-          Send Message
-        </button>
-        <button
-          className="contact-form-btn"
-          onClick={handleCopyEmail}
-          style={{ background: "transparent", border: "2px solid rgba(255,255,255,0.2)", color: "#fff" }}
-          type="button"
-        >
-          Copy Email
-        </button>
-      </div>
-      {status.message ? (
-        <p
-          className={`sm:col-span-2 rounded-lg border px-4 py-3 text-sm font-semibold ${
-            status.type === "success"
-              ? "border-emerald-800 bg-emerald-900/30 text-emerald-300"
-              : "border-red-800 bg-red-900/30 text-red-300"
-          }`}
-          role="status"
-        >
-          {status.message}
-        </p>
-      ) : null}
-    </form>
-  );
-}
-
-/* ============================================
    MOBILE NAV TOGGLE
    ============================================ */
 export function MobileNavToggle({
@@ -408,7 +268,7 @@ export function MobileNavToggle({
         </svg>
       </button>
       {isOpen ? (
-        <div className="absolute left-0 right-0 top-full border-b border-white/10 bg-[#050505]/98 backdrop-blur-xl p-5 lg:hidden">
+        <div className="mobile-nav-panel absolute left-0 right-0 top-full border-b border-white/10 backdrop-blur-xl p-5 lg:hidden">
           <nav className="flex flex-col gap-4" onClick={() => setIsOpen(false)}>
             {children}
           </nav>
