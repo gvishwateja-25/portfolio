@@ -1,0 +1,35 @@
+/* Theme-aware light travels only along the workflow connectors. */
+.workflow-neon {
+  --workflow-neon-color: #00d9ff;
+}
+
+[data-theme="light"] .workflow-neon {
+  --workflow-neon-color: #ff163c;
+}
+
+.workflow-neon-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.workflow-neon-overlay path {
+  fill: none;
+  stroke: var(--workflow-neon-color);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 12 96;
+  filter: drop-shadow(0 0 2px var(--workflow-neon-color)) drop-shadow(0 0 4px var(--workflow-neon-color));
+  animation: workflow-neon-flow 3s linear infinite;
+}
+
+@keyframes workflow-neon-flow {
+  to { stroke-dashoffset: -216; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workflow-neon-overlay { display: none; }
+}

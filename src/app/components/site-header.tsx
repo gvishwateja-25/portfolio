@@ -23,7 +23,11 @@ export function SiteHeader({ certificates = false }: { certificates?: boolean })
           <span className="portfolio-brand-name"><span>Vishwateja</span><span>Gorumanthula</span></span>
         </a>
         <nav className="ml-auto hidden items-center gap-6 lg:flex" aria-label="Main navigation">
-          {links.map((link) => (
+          {links.map((link) => link.label === "Contact" ? (
+            <a key={link.label} className="nav-link inline-flex h-11 w-11 items-center justify-center" href={link.href} aria-label="Contact">
+              <Image src="/icons/contact-badge.svg" alt="" width={36} height={36} unoptimized />
+            </a>
+          ) : (
             <a className={`nav-link${certificates && link.label === "Certificates" ? " is-active" : ""}`} href={link.href} key={link.label} aria-current={certificates && link.label === "Certificates" ? "page" : undefined}>
               {link.label}
             </a>

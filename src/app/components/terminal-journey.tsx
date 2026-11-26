@@ -37,7 +37,7 @@ const milestones: Milestone[] = [
     period: "Sep 2025 - Present",
     title: "AWS DevOps Engineer",
     company: "Equicom Technologies",
-    domainLabel: "Current company · FinTech Domain",
+    domainLabel: "Current Domain · FinTech",
     location: "Bengaluru, India",
     summary:
       "Leading core AWS cloud infrastructure provisioning and continuous delivery pipelines across mission-critical production environments.",
@@ -261,9 +261,9 @@ export function TerminalJourney() {
   return (
     <div className="mx-auto w-full max-w-5xl">
       {/* Terminal Window Container */}
-      <div className="terminal-window overflow-hidden rounded-2xl border border-amber-400/30 bg-[#08090c] shadow-[0_0_60px_rgba(212,168,67,0.12)]">
+      <div className="terminal-window overflow-hidden rounded-2xl border border-amber-400/30 shadow-[0_0_60px_rgba(212,168,67,0.12)]">
         {/* Terminal Header Bar */}
-        <div className="terminal-header flex flex-wrap items-center justify-between border-b border-white/10 bg-[#0e1117] px-4 py-3 sm:px-6">
+        <div className="terminal-header flex flex-wrap items-center justify-between border-b border-white/10 px-4 py-3 sm:px-6">
           {/* Traffic Light Dots */}
           <div className="flex items-center gap-2">
             <span className="h-3 w-3 rounded-full bg-[#ff5f56] shadow-sm shadow-[#ff5f56]/40" />
@@ -304,7 +304,7 @@ export function TerminalJourney() {
         </div>
 
         {/* Quick Filter Navigation Bar */}
-        <div className="flex flex-wrap items-center gap-2 border-b border-white/5 bg-[#0a0c10] px-4 py-2.5 sm:px-6">
+        <div className="flex flex-wrap items-center gap-2 border-b border-white/5 bg-[#111e36] px-4 py-2.5 sm:px-6">
           <span className="font-mono text-xs text-zinc-400">filter:</span>
           <button
             type="button"
@@ -402,7 +402,7 @@ export function TerminalJourney() {
 
           {/* Interactive Logs Output */}
           {terminalLogs.length > 0 && (
-            <div className="mb-6 space-y-1 rounded-lg border border-white/10 bg-black/50 p-3 text-xs text-zinc-300">
+            <div className="mb-6 space-y-1 rounded-lg border border-white/10 bg-[#10203a] p-3 text-xs text-zinc-300">
               {terminalLogs.map((log, index) => (
                 <div
                   key={index}
@@ -419,7 +419,7 @@ export function TerminalJourney() {
             {filteredMilestones.map((milestone) => (
               <div
                 key={milestone.id}
-                className="group relative rounded-xl border border-white/10 bg-[#0d1017]/90 p-5 transition-all duration-300 hover:border-amber-400/40 hover:bg-[#121620]"
+                className="group relative rounded-xl border border-white/10 bg-[#14233d] p-5 transition-all duration-300 hover:border-amber-400/40 hover:bg-[#192c49]"
               >
                 {/* CLI Command Line */}
                 <div className="flex flex-wrap items-center gap-2 font-mono text-xs sm:text-sm">
@@ -464,6 +464,7 @@ export function TerminalJourney() {
                             </svg>
                           </span>
                         )}
+                        {milestone.id === "equicom" && <span className="rounded-full bg-emerald-400/15 px-2 font-bold text-emerald-300" aria-hidden="true">$</span>}
                         <span>{milestone.domainLabel}</span>
                       </p>
                     )}
@@ -517,7 +518,7 @@ export function TerminalJourney() {
                   <div className="lg:col-span-4 flex flex-col items-center justify-center">
                     <div className="w-full rounded-xl border border-white/10 bg-gradient-to-br from-zinc-900/90 to-zinc-950 p-4 text-center shadow-lg shadow-black/40 transition-transform duration-300 group-hover:border-amber-400/30">
                       {/* Logo Icon Badge */}
-                      <div className={`mx-auto flex items-center justify-center rounded-xl border border-amber-400/40 bg-zinc-950 font-mono text-lg font-bold text-amber-400 shadow-md shadow-amber-400/10 ${milestone.logo ? "min-h-14 w-fit px-3 py-2" : "h-14 w-14"}`}>
+                      <div className={`mx-auto flex items-center justify-center rounded-xl border border-amber-400/40 bg-[#10203a] font-mono text-lg font-bold text-amber-400 shadow-md shadow-amber-400/10 ${milestone.logo ? "min-h-14 w-fit px-3 py-2" : "h-14 w-14"}`}>
                         {milestone.logo ? (
                           <Image src={milestone.logo} alt={`${milestone.company} logo`} width={milestone.logoWidth ?? 125} height={milestone.logoHeight ?? 37} unoptimized className="h-auto max-w-full" />
                         ) : milestone.id === "freelance" ? <USFlag /> : milestone.orgInitials}
@@ -551,7 +552,7 @@ export function TerminalJourney() {
           {/* Terminal Command Input Prompt (Interactive) */}
           <form
             onSubmit={handleCommandSubmit}
-            className="mt-8 flex items-center gap-2 rounded-lg border border-white/10 bg-black/60 px-3 py-2.5"
+            className="mt-8 flex items-center gap-2 rounded-lg border border-white/10 bg-[#101e35] px-3 py-2.5"
           >
             <span className="text-emerald-400 font-semibold text-xs sm:text-sm">
               vishwateja@aws-prod:~/journey$

@@ -3,6 +3,7 @@ import Script from "next/script";
 import "../../public/fonts/archivo.css";
 import "../../public/theme-palette.css";
 import "./globals.css";
+import "../../public/workflow-neon.css";
 
 export const metadata: Metadata = {
   title: "Vishwateja Gorumanthula | Remote AWS DevOps Freelancer",

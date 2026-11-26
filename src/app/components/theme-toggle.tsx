@@ -52,7 +52,8 @@ export function ThemeToggle() {
   return (
     <button
       aria-label={`Switch to ${isDark ? "light" : "dark"} theme`}
-      className="theme-toggle inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-amber-400/40 text-amber-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400"
+      className="theme-toggle theme-mode-switch shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4"
+      data-mode={theme}
       onClick={() => {
         const nextTheme: Theme = getActiveTheme() === "dark" ? "light" : "dark";
         applyTheme(nextTheme);
@@ -61,14 +62,19 @@ export function ThemeToggle() {
       title={`Switch to ${isDark ? "light" : "dark"} theme`}
       type="button"
     >
-      <svg className="theme-core h-5 w-5" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="m16 3 11.25 6.5v13L16 29 4.75 22.5v-13Z" strokeOpacity="0.6" />
-        <circle cx="16" cy="16" r="6.5" strokeWidth="1.5" />
-        <path d="M16 9.5a6.5 6.5 0 0 0 0 13Z" fill="currentColor" stroke="none" />
-        <path d="M16 9.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor" fillOpacity="0.12" stroke="none" />
-        <path d="M16 3v3m0 20v3M4.75 22.5l2.6-1.5m17.3-10 2.6-1.5" />
-        <circle cx="27.25" cy="9.5" r="2" fill="currentColor" stroke="none" />
-      </svg>
+      <span className="theme-mode-label" aria-hidden="true">{isDark ? "Dark mode" : "Light mode"}</span>
+      <span className="theme-mode-thumb" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+          {isDark ? (
+            <path d="M20.8 15.3A9 9 0 0 1 8.7 3.2a9 9 0 1 0 12.1 12.1Z" />
+          ) : (
+            <>
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5" />
+            </>
+          )}
+        </svg>
+      </span>
     </button>
   );
 }

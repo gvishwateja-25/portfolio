@@ -23,19 +23,22 @@ export function ToolIcon({ name }: { name: string }) {
     return <Image src={`/icons/tools/${logo}.svg`} width={24} height={24} alt="" unoptimized className="tool-icon" />;
   }
 
-  const storage = /S3|registry/i.test(name);
-  const security = /IAM|security|validate/i.test(name);
-  const network = /VPC|Hybrid|Repository|AD/.test(name);
+  const storage = /S3|ECR|registry/i.test(name);
+  const security = /IAM|security|validate|SAST/i.test(name);
+  const network = /VPC|Hybrid|Repository|AD|Route 53/.test(name);
   const monitoring = /CloudWatch|BetterStack|Monitor/i.test(name);
+  const accelerator = name === "Global Accelerator";
   const recovery = /DR|recovery/i.test(name);
   const server = /EC2|ECS|Deploy/i.test(name);
 
   return (
-    <svg className="tool-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      {storage ? <><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0" /></> :
+    <svg className="tool-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {name === "Request" ? <><path d="M5 3h9l5 5v13H5zM14 3v5h5M8 12h8M12 14v5m-2-2h4" /></> :
+      storage ? <><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0" /></> :
       security ? <><path d="m12 2 8 4v6c0 5-8 10-8 10S4 17 4 12V6Z" /><path d="m8 12 3 3 5-6" /></> :
       network ? <><rect x="9" y="2" width="6" height="5" rx="1" /><rect x="2" y="17" width="6" height="5" rx="1" /><rect x="16" y="17" width="6" height="5" rx="1" /><path d="M12 7v5H5v5m7-5h7v5" /></> :
       monitoring ? <><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 22h8m-4-5v5M5 11h3l2-4 3 7 2-4h4" /></> :
+      accelerator ? <path d="m13 2-9 12h7l-1 8 10-12h-7Z" /> :
       recovery ? <><path d="M3 11a9 9 0 1 1 2 7M3 4v7h7M12 7v5l3 2" /></> :
       server ? <><rect x="3" y="2" width="18" height="8" rx="2" /><rect x="3" y="14" width="18" height="8" rx="2" /><path d="M7 6h.01M7 18h.01M12 6h5m-5 12h5" /></> :
       name === "Lambda" ? <path d="m5 21 7-14m-5-4h4l7 18h3" /> :

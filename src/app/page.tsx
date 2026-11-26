@@ -17,7 +17,7 @@ const profile = {
   email: "gvishwateja25@gmail.com",
   linkedin: "https://www.linkedin.com/in/vishwateja-g-212b091b5/",
   github: "https://github.com/gvishwateja-25",
-  whatsapp: `https://wa.me/917661889542?text=${encodeURIComponent("Hi Vishwateja, I'd like to discuss a DevOps automation project with you.")}`,
+  whatsapp: `https://wa.me/917661889542?text=${encodeURIComponent("Hi Vishwateja, I'm interested in your AWS and DevOps work. I'd like to discuss my project requirements and potential next steps.")}`,
   resume: "/resume/vishwateja-gorumanthula-resume.pdf",
   summary:
     "AWS DevOps Engineer with 7+ years of experience across cloud infrastructure, IaC, CI/CD automation, production monitoring, and technical operations. Passionate about building reliable, automated, and observable cloud platforms.",
@@ -46,15 +46,6 @@ const toolGroups = [
   { category: "Scripting & security", tools: ["Python", "Bash", "PowerShell", "SonarQube"] },
 ];
 
-const deploymentFlow = [
-  { title: "Plan & version", detail: "Define changes and commit code to Git.", icon: "Git" },
-  { title: "Provision infrastructure", detail: "Prepare cloud resources with infrastructure as code.", icon: "Terraform" },
-  { title: "Build containers", detail: "CI runs the build and creates a Docker image.", icon: "Docker" },
-  { title: "Run checks", detail: "Run tests and code scans before release.", icon: "SonarQube" },
-  { title: "Publish & deploy", detail: "Push the image to a registry, then deploy to QA, UAT, or production.", icon: "Deploy" },
-  { title: "Monitor & improve", detail: "Track health, investigate alerts, and feed changes back into Git.", icon: "CloudWatch" },
-];
-
 const services = [
   {
     title: "AWS & Azure cloud infrastructure",
@@ -66,7 +57,7 @@ const services = [
     title: "CI/CD & container delivery",
     description: "Build or troubleshoot GitHub Actions and Jenkins workflows for Docker builds and deployments across application environments.",
     deliverables: "Pipeline configuration, deployment steps, and handover notes.",
-    evidence: "Experience with GitHub Actions, Jenkins, Docker, ECR, and ECS.",
+    tools: ["GitHub Actions", "Jenkins", "Docker", "Amazon ECR", "Amazon ECS"],
   },
   {
     title: "DevOps troubleshooting & monitoring",
@@ -101,7 +92,7 @@ const projects = [
     tags: ["Global Accelerator", "Route 53", "CloudWatch", "IaC"],
     image: "/images/projects/multi-region-aws.svg",
     href: "/case-studies/multi-region-aws-platform.html",
-    imageAlt: "Requests flow through AWS routing to Region A or a recovery route to Region B.",
+    imageAlt: "Requests flow through AWS routing to the US region or through the recovery route to Europe.",
   },
   {
     category: "Infrastructure as Code",
@@ -210,11 +201,11 @@ export default function Home() {
       <main>
         {/* ============ HERO ============ */}
         <section id="home" className="hero-section px-5 py-10 lg:py-12">
-          <div className="hero-content mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+          <div className="hero-content mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
             <div data-flow-reveal>
-              <p className="hero-greeting">Remote freelance · AWS DevOps</p>
+              <p className="hero-greeting">AWS DevOps Engineer · Remote Freelance</p>
               <h1 className="hero-name mt-4">
-                DevOps automation for <span className="hero-name-accent">cloud infrastructure and deployments.</span>
+                I build AWS infrastructure and automate deployments.
               </h1>
               <p className="mt-6 text-base leading-7 text-zinc-400">
                 I’m {profile.name}, an AWS DevOps Engineer with{" "}
@@ -222,8 +213,7 @@ export default function Home() {
                 across cloud infrastructure, automation, and technical operations.
               </p>
               <p className="mt-4 max-w-xl text-lg leading-8 text-zinc-300">
-                I help engineering teams automate AWS infrastructure, build CI/CD pipelines,
-                and troubleshoot production delivery problems.
+                I help engineering teams provision AWS environments with Terraform, automate container releases with GitHub Actions or Jenkins, and troubleshoot production deployments.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a className="hero-cta-btn is-filled inline-flex items-center" href={profile.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
@@ -231,29 +221,23 @@ export default function Home() {
               </div>
             </div>
             <aside className="hero-services-panel relative z-10" aria-labelledby="hero-services-title" data-flow-reveal>
-              <div className="p-5 sm:p-6">
-                <p className="text-sm font-semibold uppercase tracking-wider text-amber-400">The deployment workflow</p>
-                <h2 id="hero-services-title" className="mt-2 text-2xl font-bold text-white">From source code to production</h2>
-                <ol className="deployment-flow mt-5">
-                  {deploymentFlow.map((step, index) => (
-                    <li key={step.title}>
-                      <span className="deployment-step-icon" aria-hidden="true"><ToolIcon name={step.icon} /></span>
-                      <div><h3 className="font-semibold text-white"><span className="sr-only">Step {index + 1}: </span>{step.title}</h3><p className="mt-1 text-sm leading-5 text-zinc-400">{step.detail}</p></div>
-                    </li>
-                  ))}
-                </ol>
-                <a className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-amber-400 underline underline-offset-4" href="#services">Explore services and deliverables</a>
+              <div className="px-3 py-5 sm:px-4 sm:py-6">
+                <h2 id="hero-services-title" className="text-sm font-semibold uppercase tracking-wider text-amber-400">DevOps workflow</h2>
+                <p className="mt-2 text-base font-semibold text-zinc-300">From Dev to Deployment &amp; Monitoring</p>
+                <div className="workflow-neon relative mx-auto mt-4 max-w-[580px]">
+                <Image
+                  src="/images/devops-ci-cd-flow-fixed.gif"
+                  alt="DevOps CI/CD flow from change request through Terraform, GitHub Actions or Jenkins, SonarQube, Docker, AWS IAM, Amazon ECR, Amazon EC2, and CloudWatch."
+                  width={700}
+                  height={408}
+                  unoptimized
+                  className="block h-auto w-full rounded-lg border border-white/10"
+                />
+                  <svg className="workflow-neon-overlay" viewBox="0 0 700 408" aria-hidden="true">
+                    <path d="M55 76 V132 H105 M161 132 H232 M288 132 H359 M415 132 H486 M542 132 H613 M641 160 V216 M641 272 V328 M613 356 H509" />
+                  </svg>
+                </div>
               </div>
-              <a className="hero-whatsapp flex items-center gap-4 p-5 sm:p-6" href={profile.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp about your DevOps project">
-                <svg className="h-12 w-12 shrink-0" viewBox="0 0 32 32" aria-hidden="true">
-                  <circle cx="16" cy="16" r="16" fill="#25D366" />
-                  <path fill="#fff" d="M16 5a10.8 10.8 0 0 0-9.3 16.3L5.2 27l5.8-1.5A10.8 10.8 0 1 0 16 5Zm0 19.7a8.8 8.8 0 0 1-4.5-1.2l-.3-.2-3.4.9.9-3.3-.2-.3A8.8 8.8 0 1 1 16 24.7Zm4.8-6.6c-.3-.1-1.6-.8-1.8-.9-.3-.1-.4-.1-.6.2-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1a7.2 7.2 0 0 1-2.2-1.4 8.2 8.2 0 0 1-1.5-1.9c-.2-.3 0-.4.1-.5l.4-.5.3-.4c.1-.2 0-.3 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6a12 12 0 0 0 4.6 4.1c.7.3 1.2.5 1.5.6.7.2 1.3.2 1.8.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z" />
-                </svg>
-                <span className="min-w-0">
-                  <span className="block text-sm font-semibold uppercase tracking-wider text-emerald-400">Let’s discuss in WhatsApp</span>
-                  <span className="mt-2 block text-sm leading-6 text-zinc-300">Click to chat about your project.</span>
-                </span>
-              </a>
             </aside>
           </div>
         </section>
@@ -273,7 +257,16 @@ export default function Home() {
                   <h3 className="text-xl font-semibold">{service.title}</h3>
                   <p className="mt-3 text-base leading-7 text-zinc-400">{service.description}</p>
                   <p className="mt-4 text-base leading-7 text-zinc-300"><strong className="text-white">Typical deliverables: </strong>{service.deliverables}</p>
-                  <p className="mt-4 flex-1 text-sm leading-6 text-zinc-400">{service.evidence}</p>
+                  {service.tools ? (
+                    <ul className="mt-4 flex flex-1 flex-wrap items-start gap-2" aria-label="Tools used">
+                      {service.tools.map((tool) => (
+                        <li key={tool} className="tool-icon-surface" title={tool}>
+                          <ToolIcon name={tool} />
+                          <span className="sr-only">{tool}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : <p className="mt-4 flex-1 text-sm leading-6 text-zinc-400">{service.evidence}</p>}
                   <a className="mt-6 inline-flex min-h-11 items-center self-start font-semibold text-amber-400 underline underline-offset-4" href="#contact">Discuss this service<span className="sr-only">: {service.title}</span></a>
                 </article>
               ))}
@@ -318,8 +311,8 @@ export default function Home() {
                       <p className="mb-4 text-sm font-semibold text-amber-400">Read case study</p>
                       <div className="project-card-tags">
                         {project.tags.map((tag) => (
-                          <span className="project-card-tag" key={tag}>
-                            {tag}
+                          <span className="tool-icon-surface" key={tag} title={tag} role="img" aria-label={tag}>
+                            <ToolIcon name={tag} />
                           </span>
                         ))}
                       </div>
@@ -423,6 +416,7 @@ export default function Home() {
                     <span className="shrink-0 text-amber-400 [&>svg]:h-10 [&>svg]:w-10" aria-hidden="true"><ContactIcon type="location" /></span>
                     <span>
                       <span className="block">{profile.location}</span>
+                      <span className="mt-1 block">Bengaluru, Karnataka, India</span>
                       <span className="mt-1 block">India Standard Time (UTC+5:30)</span>
                     </span>
                   </p>
