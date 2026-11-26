@@ -1,10 +1,5 @@
 import Image from "next/image";
-import {
-  AnimatedCounter,
-  ResumeDownloadLink,
-  TypingSubtitle,
-  VisitorCounter,
-} from "./components/portfolio-interactions";
+import { ResumeDownloadLink } from "./components/portfolio-interactions";
 import { TerminalJourney } from "./components/terminal-journey";
 import { FlowMotion } from "./components/flow-motion";
 import { SiteHeader } from "./components/site-header";
@@ -27,10 +22,13 @@ const profile = {
     "AWS DevOps Engineer with 7+ years of experience across cloud infrastructure, IaC, CI/CD automation, production monitoring, and technical operations. Passionate about building reliable, automated, and observable cloud platforms.",
 };
 
+const projectInquirySubject = "Remote DevOps project inquiry";
+const projectInquiryBody = "Hi Vishwateja,\n\nI’d like to discuss:\n\nProject or problem:\nCurrent stack:\nTarget timeline:\nTimezone and preferred overlap:\nProject or ongoing support:\n";
+const projectInquiryHref = `mailto:${profile.email}?subject=${encodeURIComponent(projectInquirySubject)}&body=${encodeURIComponent(projectInquiryBody)}`;
+
 const aboutInfo = [
   { label: "Profile:", value: "AWS DevOps Engineer & Cloud Automation" },
   { label: "Domain:", value: "Financial & Healthcare" },
-  { label: "Language:", value: "English, Hindi, Telugu" },
   {
     label: "Other Tools:",
     value: "Python, Bash, Docker, Kubernetes, Terraform, Git",
@@ -38,18 +36,8 @@ const aboutInfo = [
   { label: "Interest:", value: "Cloud Architecture, Open Source, Automation" },
 ];
 
-const heroTools = [
-  { name: "AWS", icon: "amazonwebservices", expertise: "Cloud infrastructure" },
-  { name: "Azure", icon: "azure", expertise: "Cloud services" },
-  { name: "Terraform", icon: "terraform", expertise: "Infrastructure as code" },
-  { name: "Docker", icon: "docker", expertise: "Container delivery" },
-  { name: "Kubernetes", icon: "kubernetes", expertise: "Container orchestration" },
-  { name: "GitHub Actions", icon: "githubactions", expertise: "CI/CD automation" },
-  { name: "SonarQube", icon: "sonarqube", expertise: "Source-code assessment" },
-];
-
 const toolGroups = [
-  { category: "Cloud infrastructure", tools: ["AWS", "EC2", "S3", "VPC", "IAM", "Lambda"] },
+  { category: "Cloud infrastructure", tools: ["AWS", "Azure", "EC2", "S3", "VPC", "IAM", "Lambda"] },
   { category: "Infrastructure as code", tools: ["Terraform", "AWS CDK", "CloudFormation"] },
   { category: "CI/CD automation", tools: ["GitHub Actions", "Jenkins", "Git"] },
   { category: "Containers & orchestration", tools: ["Docker", "Kubernetes", "ECS"] },
@@ -57,30 +45,32 @@ const toolGroups = [
   { category: "Scripting & security", tools: ["Python", "Bash", "PowerShell", "SonarQube"] },
 ];
 
-const responsibilities = [
+const services = [
   {
-    title: "Cloud Infrastructure",
-    description:
-      "I provision and maintain AWS infrastructure using reusable Terraform modules, with IAM access controls, VPC segmentation, and standardized resource provisioning.",
-    focus: "Repeatable cloud foundations",
-    icon: "M7 18a5 5 0 0 1-1-9.9A6 6 0 0 1 17.7 7 5.5 5.5 0 0 1 18 18H7Z M8 14h8 M12 10v8",
+    title: "AWS & Azure cloud infrastructure",
+    description: "Cloud infrastructure support for AWS and Azure, with scope agreed around your environment. My AWS work includes reusable Terraform modules, IAM access controls, and VPC segmentation.",
+    deliverables: "Infrastructure code, reusable modules, and provisioning documentation.",
+    evidence: "Based on my AWS infrastructure and remote automation engagements.",
   },
   {
-    title: "Delivery Automation",
-    description:
-      "I build CI/CD workflows with GitHub Actions and Jenkins, connecting Docker builds, container registries, and deployments across application environments.",
-    focus: "Consistent application releases",
-    icon: "M3 5h5v5H3z M16 14h5v5h-5z M8 7.5h6a4 4 0 0 1 4 4V14 M12 4l3 3.5-3 3.5 M3 16.5h10 M10 13.5l3 3-3 3",
+    title: "CI/CD & container delivery",
+    description: "Build or troubleshoot GitHub Actions and Jenkins workflows for Docker builds and deployments across application environments.",
+    deliverables: "Pipeline configuration, deployment steps, and handover notes.",
+    evidence: "Experience with GitHub Actions, Jenkins, Docker, ECR, and ECS.",
   },
   {
-    title: "Reliability & Security",
-    description:
-      "I implement monitoring and alerting with CloudWatch, Datadog, and BetterStack, and automate SonarQube assessments with scan tracking and exception handling.",
-    focus: "Visibility and actionable follow-up",
-    icon: "M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6l-8-3Z M8 12l3 3 5-6",
+    title: "DevOps troubleshooting & monitoring",
+    description: "Investigate infrastructure and deployment issues, and configure monitoring and alerting with CloudWatch, Datadog, or BetterStack.",
+    deliverables: "An agreed troubleshooting scope, documented changes, and operational guidance.",
+    evidence: "Based on my production operations and monitoring experience.",
+  },
+  {
+    title: "SonarQube assessment automation",
+    description: "Automate repository discovery, inventory, and source-code scan execution with Python, Bash, and SonarQube.",
+    deliverables: "Inventory workflow, scan automation, status reports, and exception tracking.",
+    evidence: "Documented in my confidential freelance DevSecOps case study.",
   },
 ];
-
 
 const projects = [
   {
@@ -90,7 +80,7 @@ const projects = [
       "Automated SonarQube scanning across 445 GitHub Enterprise repositories, with inventory and exception tracking.",
     tags: ["SonarQube", "GitHub Enterprise", "Python", "Bash", "SAST"],
     image: "/images/projects/security-assessment.svg",
-    imageAlt: "Repository discovery flowing into a SAST scan and tracked results.",
+    imageAlt: "Scan server, repositories cloned on the server, scan command, Sonar scan, and results visible in the SonarQube dashboard.",
     href: "/case-studies/centralized-security-assessment.html",
   },
   {
@@ -100,7 +90,8 @@ const projects = [
       "Designed multi-region AWS infrastructure around high availability, intelligent routing, recovery, and resilience.",
     tags: ["Global Accelerator", "Route 53", "CloudWatch", "IaC"],
     image: "/images/projects/multi-region-aws.svg",
-    imageAlt: "Routing branching into two AWS regions with failover.",
+    href: "/case-studies/multi-region-aws-platform.html",
+    imageAlt: "Requests flow through AWS routing to Region A or a recovery route to Region B.",
   },
   {
     category: "Infrastructure as Code",
@@ -109,7 +100,8 @@ const projects = [
       "Built reusable Terraform modules and CloudFormation patterns for consistent, repeatable infrastructure provisioning.",
     tags: ["Terraform", "CloudFormation", "AWS CDK", "Git"],
     image: "/images/projects/infrastructure-automation.svg",
-    imageAlt: "Reusable infrastructure modules provisioning development, staging, and production environments.",
+    href: "/case-studies/reusable-infrastructure-automation.html",
+    imageAlt: "Reusable infrastructure modules flow through resource provisioning to development, staging, and production environments.",
   },
   {
     category: "CI/CD",
@@ -118,18 +110,10 @@ const projects = [
       "Containerized legacy applications and automated microservice delivery through QA, UAT, and production.",
     tags: ["Docker", "Jenkins", "GitHub Actions", "Kubernetes"],
     image: "/images/projects/container-delivery.svg",
-    imageAlt: "A container delivery pipeline from source through build, validation, and deployment.",
+    href: "/case-studies/containerized-application-delivery.html",
+    imageAlt: "Source flows through a Docker build, validation, and deployment to QA, UAT, or production.",
   },
 ];
-
-const stats = [
-  { target: 7, suffix: "+", label: "Years Experience" },
-  { target: 4, suffix: "", label: "Featured Projects" },
-  { target: 95, suffix: "%", label: "Infrastructure Automated" },
-  { target: 60, suffix: "%", label: "Deployment Time Reduced" },
-];
-
-
 
 /* ============================================
    SVG ICONS
@@ -215,118 +199,127 @@ export default function Home() {
 
       <main>
         {/* ============ HERO ============ */}
-        <section id="home" className="hero-section flex items-center px-5 py-16 lg:py-0">
-          <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:min-h-[calc(100svh-72px)]">
-            {/* Left text */}
+        <section id="home" className="hero-section px-5 py-10 lg:py-12">
+          <div className="hero-content mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
             <div data-flow-reveal>
-              <p className="hero-greeting">Hello!</p>
+              <p className="hero-greeting">Remote freelance · AWS DevOps</p>
               <h1 className="hero-name mt-4">
-                I&apos;m{" "}
-                <span className="hero-name-accent">{profile.firstName}</span>
-                <br />
-                <span className="hero-name-accent">{profile.lastName}</span>
+                Reliable cloud infrastructure. <span className="hero-name-accent">Repeatable deployments.</span>
               </h1>
-
-              <div className="mt-6">
-                <TypingSubtitle />
-              </div>
-
-              <p className="mt-6 max-w-lg text-lg font-medium leading-8 text-zinc-300">
-                Building automated AWS infrastructure, reliable delivery pipelines, and secure cloud platforms.
+              <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-300">
+                I help engineering teams automate AWS infrastructure, build CI/CD pipelines,
+                and troubleshoot production delivery problems.
               </p>
-
-              {/* CTA Buttons */}
-              <div className="mt-8 space-y-3">
-                <div className="flex flex-wrap gap-3">
-                  <a className="hero-cta-btn is-filled inline-flex items-center gap-2" href="#projects">
-                    <svg className="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <rect x="3" y="3" width="7" height="7" rx="1.5" />
-                      <rect x="14" y="3" width="7" height="7" rx="1.5" />
-                      <rect x="3" y="14" width="7" height="7" rx="1.5" />
-                      <rect x="14" y="14" width="7" height="7" rx="1.5" />
-                    </svg>
-                    My Works
-                  </a>
-                  <ResumeDownloadLink className="hero-cta-btn inline-flex items-center gap-2" href={profile.resume}>
-                    <svg className="h-6 w-6 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5" />
-                    </svg>
-                    Resume
-                  </ResumeDownloadLink>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    className="hero-cta-btn inline-flex items-center gap-2"
-                    href={profile.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <SocialIcon type="linkedin" className="h-6 w-6" />
-                    LinkedIn
-                  </a>
-                  <a
-                    className="hero-cta-btn inline-flex items-center gap-2"
-                    href={profile.github}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <SocialIcon type="github" className="h-6 w-6" />
-                    GitHub
-                  </a>
-                </div>
+              <p className="mt-4 text-base leading-7 text-zinc-400">
+                I’m {profile.name}, an AWS DevOps Engineer with{" "}
+                <strong className="font-bold">7+ years of experience</strong>{" "}
+                across cloud infrastructure, automation, and technical operations.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a className="hero-cta-btn is-filled inline-flex items-center" href="#contact">Discuss your project</a>
+                <a className="hero-cta-btn inline-flex items-center" href="/case-studies/centralized-security-assessment.html">View case study</a>
               </div>
+              <p className="mt-5 text-sm leading-6 text-zinc-400">
+                Remote project and technical support inquiries welcome.
+                Scope, working hours, and availability agreed before starting.
+              </p>
             </div>
-
-            {/* Tools and engineering expertise */}
-            <div className="hero-profile-image flex min-w-0 items-center justify-center" data-flow-reveal>
-              <div className="relative z-10 group w-full max-w-[560px]">
-                {/* Ambient glow effect */}
-                <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-amber-500/20 via-blue-500/10 to-amber-500/20 opacity-75 blur-2xl transition-all duration-700 group-hover:opacity-100" />
-
-                <div className="relative overflow-hidden rounded-3xl border border-amber-400/30 bg-zinc-950/95 shadow-2xl shadow-black/80" role="region" aria-labelledby="hero-toolkit-title">
-                  <div className="border-b border-amber-400/15 p-5 sm:p-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Tools &amp; expertise</p>
-                    <h2 id="hero-toolkit-title" className="mt-3 text-2xl font-bold tracking-tight text-white">My engineering toolkit</h2>
-                    <p className="mt-2 text-sm leading-6 text-zinc-400">Building, delivering, and securing cloud platforms.</p>
-                  </div>
-                  <ul className="grid grid-cols-1 gap-2.5 p-4 min-[360px]:grid-cols-2 sm:p-5">
-                    {heroTools.map((tool) => (
-                      <li key={tool.name} className="min-w-0 rounded-xl border border-white/10 bg-white/[0.025] p-3">
-                        <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-white p-2">
-                          <Image src={`/icons/tools/${tool.icon}.svg`} alt="" width={24} height={24} className="h-6 w-6 object-contain" />
-                        </span>
-                        <p className="mt-2 text-sm font-semibold text-white">{tool.name}</p>
-                        <p className="mt-1 text-xs leading-5 text-zinc-400">{tool.expertise}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            <aside className="hero-services-panel relative z-10" aria-labelledby="hero-services-title" data-flow-reveal>
+              <div className="p-5 sm:p-6">
+                <p className="text-sm font-semibold uppercase tracking-wider text-amber-400">How I can help</p>
+                <h2 id="hero-services-title" className="mt-2 text-2xl font-bold text-white">DevOps services for your team</h2>
+                <ul className="mt-4 divide-y divide-white/10">
+                  {services.map((service) => (
+                    <li key={service.title}>
+                      <a className="hero-service-link block py-3 text-base font-medium text-zinc-300" href="#services">{service.title}</a>
+                    </li>
+                  ))}
+                </ul>
+                <a className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-amber-400 underline underline-offset-4" href="#services">Explore services and deliverables</a>
               </div>
+              <a className="hero-whatsapp flex items-center gap-4 p-5 sm:p-6" href={profile.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp about your DevOps project">
+                <svg className="h-12 w-12 shrink-0" viewBox="0 0 32 32" aria-hidden="true">
+                  <circle cx="16" cy="16" r="16" fill="#25D366" />
+                  <path fill="#fff" d="M16 5a10.8 10.8 0 0 0-9.3 16.3L5.2 27l5.8-1.5A10.8 10.8 0 1 0 16 5Zm0 19.7a8.8 8.8 0 0 1-4.5-1.2l-.3-.2-3.4.9.9-3.3-.2-.3A8.8 8.8 0 1 1 16 24.7Zm4.8-6.6c-.3-.1-1.6-.8-1.8-.9-.3-.1-.4-.1-.6.2-.2.3-.7.9-.8 1-.2.2-.3.2-.6.1a7.2 7.2 0 0 1-2.2-1.4 8.2 8.2 0 0 1-1.5-1.9c-.2-.3 0-.4.1-.5l.4-.5.3-.4c.1-.2 0-.3 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6a12 12 0 0 0 4.6 4.1c.7.3 1.2.5 1.5.6.7.2 1.3.2 1.8.1.6-.1 1.6-.7 1.8-1.3.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.6-.3Z" />
+                </svg>
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold uppercase tracking-wider text-emerald-400">Let’s discuss in WhatsApp</span>
+                  <span className="mt-2 block text-sm leading-6 text-zinc-300">Click to chat about your project.</span>
+                </span>
+              </a>
+            </aside>
+          </div>
+        </section>
+
+        {/* ============ SERVICES ============ */}
+        <section id="services" className="responsibilities-section px-5 py-16" aria-labelledby="services-title">
+          <span id="responsibilities" className="sr-only" />
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-3xl" data-flow-reveal>
+              <p className="text-sm font-semibold uppercase tracking-wider text-amber-400">How I can help</p>
+              <h2 id="services-title" className="section-title mt-3">DevOps services for your team</h2>
+              <p className="mt-4 text-base leading-7 text-zinc-400">Focused freelance projects or ongoing technical support, with deliverables and working hours agreed for your needs.</p>
+            </div>
+            <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+              {services.map((service) => (
+                <article key={service.title} className="responsibility-card" data-flow-reveal>
+                  <h3 className="text-xl font-semibold">{service.title}</h3>
+                  <p className="mt-3 text-base leading-7 text-zinc-400">{service.description}</p>
+                  <p className="mt-4 text-base leading-7 text-zinc-300"><strong className="text-white">Typical deliverables: </strong>{service.deliverables}</p>
+                  <p className="mt-4 flex-1 text-sm leading-6 text-zinc-400">{service.evidence}</p>
+                  <a className="mt-6 inline-flex min-h-11 items-center self-start font-semibold text-amber-400 underline underline-offset-4" href="#contact">Discuss this service<span className="sr-only">: {service.title}</span></a>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* ============ RESPONSIBILITIES ============ */}
-        <section id="responsibilities" className="responsibilities-section px-5 py-16" aria-labelledby="responsibilities-title">
+        {/* ============ PROJECTS ============ */}
+        <section id="projects" className="projects-section px-5 py-20">
           <div className="mx-auto max-w-7xl">
-            <div className="max-w-3xl" data-flow-reveal>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-400">Engineering ownership</p>
-              <h2 id="responsibilities-title" className="section-title mt-3">What I’m responsible for</h2>
-              <p className="mt-4 text-base leading-7 text-zinc-400">From cloud foundations to application delivery and production operations.</p>
+            <div className="section-watermark text-center" data-watermark="Projects" data-flow-reveal>
+              <h2 className="section-title">Selected work</h2>
+              <div className="section-divider" />
             </div>
-            <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
-              {responsibilities.map((responsibility) => (
-                <article key={responsibility.title} className="responsibility-card" data-flow-reveal>
-                  <span className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-amber-400/30 text-amber-400">
-                    <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d={responsibility.icon} />
-                    </svg>
-                  </span>
-                  <h3 className="text-xl font-semibold">{responsibility.title}</h3>
-                  <p className="mt-3 flex-1 text-sm leading-7 text-zinc-400">{responsibility.description}</p>
-                  <p className="mt-6 border-t border-amber-400/15 pt-4 text-xs font-medium text-amber-400">{responsibility.focus}</p>
-                </article>
-              ))}
+            <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-7 text-zinc-400" data-flow-reveal>
+              Explore case studies covering my freelance DevSecOps work, cloud infrastructure,
+              automation, and application delivery experience.
+            </p>
+
+            <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+              {projects.map((project) => {
+                return (
+                  <a
+                    className="project-card flex min-w-0 flex-col"
+                    data-flow-reveal
+                    href={project.href}
+                    aria-label={`Read case study: ${project.title}`}
+                    key={project.title}
+                  >
+                    <Image
+                      alt={project.imageAlt}
+                      className="project-card-image"
+                      height={360}
+                      src={project.image}
+                      sizes="(min-width: 1104px) 520px, (min-width: 768px) calc(50vw - 56px), calc(100vw - 64px)"
+                      width={640}
+                    />
+                    <div className="project-card-body">
+                      <span className="project-category">{project.category}</span>
+                      <h3 className="project-card-title">{project.title}</h3>
+                      <p className="project-card-desc">{project.description}</p>
+                      <p className="mb-4 text-sm font-semibold text-amber-400">Read case study</p>
+                      <div className="project-card-tags">
+                        {project.tags.map((tag) => (
+                          <span className="project-card-tag" key={tag}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </a>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -362,7 +355,7 @@ export default function Home() {
                 </div>
 
                 <p className="mt-6 text-base leading-8 text-zinc-300">
-                  I’m an AWS DevOps Engineer with <strong className="font-semibold text-amber-400">7+ years of experience across cloud infrastructure, delivery automation, and technical operations.</strong> My work spans infrastructure as code, containerized applications, CI/CD pipelines, and production monitoring.
+                  I’m an AWS DevOps Engineer with <strong className="font-bold">7+ years of experience</strong> across cloud infrastructure, delivery automation, and technical operations. My work spans infrastructure as code, containerized applications, CI/CD pipelines, and production monitoring.
                 </p>
                 <p className="mt-4 text-base leading-8 text-zinc-300">
                   I build repeatable cloud infrastructure with <strong className="font-semibold text-white">AWS and Terraform</strong>, automate releases, and support reliable production platforms. My freelance DevSecOps work also includes <strong className="font-semibold text-white">centralized SonarQube scanning across GitHub Enterprise repositories</strong>, with inventory automation, scan tracking, and exception handling.
@@ -377,10 +370,6 @@ export default function Home() {
                   ))}
                 </div>
 
-                <a href="#projects" className="mt-6 inline-flex min-h-11 items-center gap-1 rounded text-sm text-zinc-400 underline-offset-4 hover:text-amber-400 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
-                  <span className="text-amber-400 font-bold text-xl">4</span>{" "}
-                  Featured Projects
-                </a>
 
 
               </div>
@@ -405,143 +394,57 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ============ PROJECTS ============ */}
-        <section id="projects" className="projects-section px-5 py-20">
-          <div className="mx-auto max-w-7xl">
-            <div className="section-watermark text-center" data-watermark="Projects" data-flow-reveal>
-              <h2 className="section-title">Projects</h2>
-              <div className="section-divider" />
-            </div>
-            <p className="mx-auto mt-6 max-w-2xl text-center text-base leading-7 text-zinc-400" data-flow-reveal>
-              Featured work across DevSecOps, cloud architecture, infrastructure as code,
-              and automated application delivery.
-            </p>
-
-            <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
-              {projects.map((project) => {
-                const Card = project.href ? "a" : "article";
-                return (
-                  <Card
-                    className="project-card flex min-w-0 flex-col"
-                    data-flow-reveal
-                    href={project.href}
-                    key={project.title}
-                  >
-                    <Image
-                      alt={project.imageAlt}
-                      className="project-card-image"
-                      height={400}
-                      src={project.image}
-                      sizes="(min-width: 1320px) 624px, (min-width: 768px) calc(50vw - 36px), calc(100vw - 40px)"
-                      width={640}
-                    />
-                    <div className="project-card-body">
-                      <span className="project-category">{project.category}</span>
-                      <h3 className="project-card-title">{project.title}</h3>
-                      <p className="project-card-desc">{project.description}</p>
-                      {project.href?.startsWith("/case-studies/") && (
-                        <p className="mb-4 text-sm font-semibold text-amber-400">Read case study →</p>
-                      )}
-                      <div className="project-card-tags">
-                        {project.tags.map((tag) => (
-                          <span className="project-card-tag" key={tag}>
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* ============ STATS ============ */}
-        <section className="stats-section px-5 py-16">
-          <div className="mx-auto grid max-w-5xl grid-cols-2 gap-5 md:grid-cols-4">
-            {stats.map((stat) => (
-              <AnimatedCounter
-                key={stat.label}
-                label={stat.label}
-                suffix={stat.suffix}
-                target={stat.target}
-              />
-            ))}
-          </div>
-        </section>
-
-        {/* ============ GITHUB CTA ============ */}
-        <section className="github-cta px-5 py-20">
-          <div className="relative z-10 mx-auto max-w-3xl text-center" data-flow-reveal>
-            <h2 className="text-3xl font-extrabold text-white md:text-4xl">
-              More projects on{" "}
-              <span className="text-amber-400">GitHub</span>
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-zinc-300">
-              More DevOps Projects on GitHub. I love optimizing workflows,
-              automating deployments, and building scalable infrastructures to
-              streamline operations.
-            </p>
-            <a
-              className="hero-cta-btn is-filled mt-8 inline-block"
-              href={profile.github}
-              rel="noreferrer"
-              target="_blank"
-            >
-              GitHub
-            </a>
-          </div>
-        </section>
-
         {/* ============ CONTACT ============ */}
         <section id="contact" className="contact-section px-5 py-20">
           <div className="mx-auto max-w-7xl">
             <div className="section-watermark text-center" data-watermark="Contact" data-flow-reveal>
-              <h2 className="section-title">Contact Me</h2>
+              <h2 className="section-title">Discuss your project</h2>
               <div className="section-divider" />
             </div>
             <div className="contact-hiring mt-12" data-flow-reveal>
               <h3 className="contact-hiring-title">
-                Hiring someone to build <span>reliable cloud platforms?</span>
+                Need help with <span>AWS, deployments, or DevOps automation?</span>
               </h3>
-              <div className="mt-8 grid min-w-0 gap-8 lg:mt-10 lg:grid-cols-2 lg:gap-12">
+              <div className="mt-8 grid min-w-0 items-start gap-6 lg:grid-cols-2 lg:gap-10">
                 <div>
                   <p className="max-w-xl text-base leading-8 text-zinc-400 sm:text-lg">
-                    Let’s talk about AWS DevOps, cloud infrastructure, and delivery automation
-                    for your team. Email is the easiest way to reach me.
+                    Tell me what you’re building, the problem you need to solve, your current
+                    stack, and your target timeline. Include your timezone and whether you need
+                    a focused project or ongoing technical support.
                   </p>
                   <p className="mt-6 flex items-center gap-3 text-sm text-zinc-400">
                     <span className="shrink-0 text-amber-400 [&>svg]:h-10 [&>svg]:w-10" aria-hidden="true"><ContactIcon type="location" /></span>
                     <span>
                       <span className="block">{profile.location}</span>
-                      <span className="mt-1 block">Bangalore, Karnataka, India</span>
+                      <span className="mt-1 block">India Standard Time (UTC+5:30)</span>
                     </span>
                   </p>
                 </div>
                 <div className="min-w-0">
-                  <a className="contact-hiring-email" href={`mailto:${profile.email}`}>
+                  <a className="hero-cta-btn is-filled mb-6 inline-flex items-center" href={projectInquiryHref}>Email your project brief</a>
+                  <a className="contact-hiring-email" href={projectInquiryHref}>
                     {profile.email}
                   </a>
-                  <div className="mt-6 flex flex-wrap gap-x-7 gap-y-4 text-sm font-semibold sm:text-base">
-                    <a className="contact-hiring-link" href={profile.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    <ResumeDownloadLink className="contact-hiring-link" href={profile.resume}>Download Resume (PDF)</ResumeDownloadLink>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <a className="contact-icon-link" href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="Visit my LinkedIn profile" title="LinkedIn">
+                      <SocialIcon type="linkedin" className="h-7 w-7" />
+                    </a>
+                    <ResumeDownloadLink className="contact-icon-link contact-resume-link" href={profile.resume} aria-label="Download résumé (PDF)" title="Download résumé (PDF)">
+                      <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z M14 2v6h6 M12 11v7 M9 15l3 3 3-3" />
+                      </svg>
+                      <span>Resume</span>
+                    </ResumeDownloadLink>
                   </div>
-                  <a href={profile.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp chat with a prefilled greeting" className="mt-8 inline-flex max-w-full items-center gap-4 rounded-lg">
-                    <Image
-                      src="/images/whatsapp-chat-qr.png"
-                      alt="WhatsApp QR code"
-                      width={140}
-                      height={140}
-                      unoptimized
-                      className="h-auto w-[140px] shrink-0 rounded-lg ring-1 ring-amber-400/30"
-                    />
-                    <span className="min-w-0">
-                      <span className="block text-sm font-semibold text-amber-400">WhatsApp</span>
-                      <span className="mt-1 block text-sm leading-6 text-zinc-400">Scan or tap to chat</span>
-                    </span>
-                  </a>
                 </div>
+              </div>
+              <div className="mt-8 rounded-xl border border-white/10 p-5">
+                <h4 className="font-semibold text-white">How we start</h4>
+                <ol className="mt-3 grid list-decimal gap-4 pl-5 text-base leading-7 text-zinc-400 lg:grid-cols-3 lg:gap-10">
+                  <li>Send a short brief with the problem and relevant context.</li>
+                  <li>We clarify requirements, access needs, and deliverables.</li>
+                  <li>We agree scope, fees, availability, and timezone overlap before work begins.</li>
+                </ol>
               </div>
             </div>
           </div>
@@ -551,7 +454,7 @@ export default function Home() {
       {/* ============ FOOTER ============ */}
       <footer className="footer px-5 py-8">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
-          <VisitorCounter />
+          <p className="text-sm text-zinc-400">AWS · Terraform · CI/CD · DevSecOps</p>
           <div className="flex items-center gap-4">
             <a
               aria-label="LinkedIn"

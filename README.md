@@ -18,7 +18,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses Tailwind CSS and a local system font stack so it can build without fetching font files during compilation.
+This project uses Tailwind CSS and locally hosted Archivo fonts so it can build without fetching font files during compilation.
 
 ## Contact links
 
@@ -47,3 +47,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Typography
+
+The homepage and case studies use Archivo (variable weights 100–900), matching
+https://www.chinmaisiddhartha.in/. The Latin font is hosted locally at
+`public/fonts/archivo-latin.woff2` and loaded through `public/fonts/archivo.css`.
+The official Google Fonts source is
+https://fonts.googleapis.com/css2?family=Archivo:wght@100..900&display=swap.
+The SIL Open Font License is included at `public/fonts/OFL-Archivo.txt`.
+
+The Equicom logo in the career timeline is sourced from the company’s official
+website: https://equicomtech.com/assets/equicom_logo-CMUweSDj.svg.
+
+The full Sambav logo in the career timeline includes the name and “It’s possible”
+tagline, matching the supplied reference. The asset is sourced from its public
+company listing: https://www.ceoinsightsindia.com/uploaded_images/company_logos/fmy7xlogo4.jpg
+(the source file is GIF despite the URL extension).
+The displayed version is `public/icons/sambav-full-logo-transparent.png`, edited
+with the built-in image tool to remove the white background. Edit prompt: remove
+only the white background to transparency; preserve the flower, name, tagline,
+colors, layout, and proportions.

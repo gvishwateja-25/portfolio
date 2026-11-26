@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <title>VG DevOps logo</title>
+  <defs>
+    <clipPath id="badge"><path d="M12.5.5H43.5Q47.5.5 47.5 4.5V35.5Q47.5 47.5 35.5 47.5H4.5Q.5 47.5.5 43.5V12.5Q.5.5 12.5.5Z"/></clipPath>
+  </defs>
+  <style>
+    .signal { stroke-dasharray:3 9; animation:signal 2s linear infinite; }
+    @keyframes signal { from { stroke-dashoffset:12; } to { stroke-dashoffset:0; } }
+    @media (prefers-reduced-motion:reduce) { .signal { animation:none; opacity:0; } }
+  </style>
+  <g clip-path="url(#badge)">
+    <path fill="#0b1726" d="M0 0h48v48H0z"/>
+    <path d="M12 0v48M24 0v48M36 0v48M0 12h48M0 24h48M0 36h48" fill="none" stroke="#73b8df" stroke-opacity=".18" stroke-width=".5"/>
+    <g fill="none" stroke="#d4a843" stroke-opacity=".65" stroke-width="1">
+      <path d="M7 10h12l4-4h16M9 38h15l5 4h10"/>
+      <circle cx="7" cy="10" r="2"/><circle cx="39" cy="6" r="2"/>
+      <circle cx="9" cy="38" r="2"/><circle cx="39" cy="42" r="2"/>
+    </g>
+    <path class="signal" d="M7 10h12l4-4h16M9 38h15l5 4h10" fill="none" stroke="#fff1bb" stroke-width="1.5"/>
+    <text x="23" y="30" text-anchor="middle" fill="#e8b945" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="800" letter-spacing="-1.5">VG</text>
+  </g>
+  <path d="M12.5.5H43.5Q47.5.5 47.5 4.5V35.5Q47.5 47.5 35.5 47.5H4.5Q.5 47.5.5 43.5V12.5Q.5.5 12.5.5Z" fill="none" stroke="#d4a843"/>
+</svg>

@@ -1,0 +1,63 @@
+/* Palette matched to https://www.chinmaisiddhartha.in/ */
+:root {
+  color-scheme: dark;
+  --paper: #0d1626;
+  --surface: #13203a;
+  --ink: #e7edf6;
+  --ink-2: #a3b1c7;
+  --rule: #2a3954;
+  --positive: #3fc98f;
+  --negative: #ff6b7a;
+  --warning: #f2a93b;
+  --focus: #7fa2ff;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --accent-gold: var(--ink);
+  --accent-gold-light: var(--ink);
+  --accent-gold-dim: var(--ink-2);
+  --card-bg: var(--surface);
+  --card-border: var(--rule);
+  --section-line: var(--rule);
+  --on-accent: var(--paper);
+  --nav-bg: var(--paper);
+  --bg: var(--paper);
+  --panel: var(--surface);
+  --panel2: var(--paper);
+  --text: var(--ink);
+  --muted: var(--ink-2);
+  --line: var(--rule);
+  --accent: var(--ink);
+  --accent2: var(--ink);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --paper: #f2f4f6;
+  --surface: #ffffff;
+  --ink: #13233f;
+  --ink-2: #44526b;
+  --rule: #cbd3de;
+  --positive: #0b7a50;
+  --negative: #c2122d;
+  --warning: #9a5b00;
+  --focus: #2f5bea;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --accent-gold: var(--ink);
+  --accent-gold-light: var(--ink);
+  --accent-gold-dim: var(--ink-2);
+  --card-bg: var(--surface);
+  --card-border: var(--rule);
+  --section-line: var(--rule);
+  --on-accent: var(--paper);
+  --nav-bg: var(--paper);
+  --bg: var(--paper);
+  --panel: var(--surface);
+  --panel2: var(--paper);
+  --text: var(--ink);
+  --muted: var(--ink-2);
+  --line: var(--rule);
+  --accent: var(--ink);
+  --accent2: var(--ink);
+}

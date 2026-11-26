@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 
 interface Milestone {
@@ -16,10 +17,15 @@ interface Milestone {
   tags: string[];
   status: string;
   orgInitials: string;
+  logo?: string;
+  logoWidth?: number;
+  logoHeight?: number;
   orgBadgeText: string;
   cloudFocus: string;
   tierTag: string;
   caseStudyHref?: string;
+  project?: string;
+  domainLabel?: string;
 }
 
 const milestones: Milestone[] = [
@@ -31,6 +37,8 @@ const milestones: Milestone[] = [
     period: "Sep 2025 - Present",
     title: "AWS DevOps Engineer",
     company: "Equicom Technologies",
+    project: "Crpko",
+    domainLabel: "Current company · Crypto domain",
     location: "Bengaluru, India",
     summary:
       "Leading core AWS cloud infrastructure provisioning and continuous delivery pipelines across mission-critical production environments.",
@@ -43,6 +51,7 @@ const milestones: Milestone[] = [
     tags: ["AWS", "Terraform", "GitHub Actions", "ECS", "ECR", "CloudWatch", "WAFv2", "Datadog"],
     status: "Active Production Lead",
     orgInitials: "EQ",
+    logo: "/icons/equicom-logo.svg",
     orgBadgeText: "EQUICOM TECH",
     cloudFocus: "AWS ECS • Terraform • GitHub Actions",
     tierTag: "PRODUCTION TIER 1",
@@ -103,17 +112,21 @@ const milestones: Milestone[] = [
     period: "Mar 2021 - Jan 2025",
     title: "Jr. AWS DevOps Engineer",
     company: "Sambav EHR Private Limited",
+    domainLabel: "Previous company · Healthcare domain",
     location: "Hyderabad, India",
     summary:
       "Spearheaded cloud migration and automated delivery pipelines for healthcare electronic health record (EHR) platforms.",
     highlights: [
-      "Developed Terraform and CloudFormation automation that reduced deployment cycles by 60%.",
-      "Containerized legacy enterprise applications with Docker, eliminating 70% of environment-specific deployment defects.",
-      "Built resilient asynchronous SNS and SQS notification pipelines for guaranteed distributed event delivery.",
+      "Developed Terraform and CloudFormation automation for repeatable infrastructure deployments.",
+      "Containerized legacy enterprise applications with Docker for consistent deployment environments.",
+      "Built asynchronous SNS and SQS notification pipelines for distributed applications.",
     ],
     tags: ["AWS", "Jenkins", "Terraform", "Docker", "CloudFormation", "SNS", "SQS"],
     status: "Production Milestone",
     orgInitials: "SB",
+    logo: "/icons/sambav-full-logo-transparent.png",
+    logoWidth: 222,
+    logoHeight: 74,
     orgBadgeText: "Sambav EHR Private Limited",
     cloudFocus: "Docker • Jenkins • CloudFormation",
     tierTag: "HEALTHCARE PLATFORM",
@@ -131,7 +144,7 @@ const milestones: Milestone[] = [
       "Managed 24x7 network operations center support, incident response, and active enterprise infrastructure monitoring.",
     highlights: [
       "Provided round-the-clock infrastructure support, incident remediation, and RBAC user access control.",
-      "Automated routine Active Directory administration tasks, improving operational response efficiency by 40%.",
+      "Automated routine Active Directory administration tasks.",
       "Maintained Windows Server, Apache Tomcat clusters, and CloudWatch performance alarm thresholds.",
     ],
     tags: ["AWS S3", "EC2", "CloudWatch", "Active Directory", "Windows Server", "Tomcat"],
@@ -249,9 +262,9 @@ export function TerminalJourney() {
   return (
     <div className="mx-auto w-full max-w-5xl">
       {/* Terminal Window Container */}
-      <div className="overflow-hidden rounded-2xl border border-amber-400/30 bg-[#08090c] shadow-[0_0_60px_rgba(212,168,67,0.12)]">
+      <div className="terminal-window overflow-hidden rounded-2xl border border-amber-400/30 bg-[#08090c] shadow-[0_0_60px_rgba(212,168,67,0.12)]">
         {/* Terminal Header Bar */}
-        <div className="flex flex-wrap items-center justify-between border-b border-white/10 bg-[#0e1117] px-4 py-3 sm:px-6">
+        <div className="terminal-header flex flex-wrap items-center justify-between border-b border-white/10 bg-[#0e1117] px-4 py-3 sm:px-6">
           {/* Traffic Light Dots */}
           <div className="flex items-center gap-2">
             <span className="h-3 w-3 rounded-full bg-[#ff5f56] shadow-sm shadow-[#ff5f56]/40" />
@@ -443,6 +456,24 @@ export function TerminalJourney() {
                       </span>
                     </h4>
                     <p className="text-xs text-zinc-500">{milestone.location}</p>
+                    {milestone.domainLabel && (
+                      <p className="mt-2 flex items-center gap-2 text-sm font-medium text-zinc-300">
+                        {milestone.id === "sambav" && (
+                          <span className="domain-symbol is-healthcare" aria-hidden="true">
+                            <svg className="h-4 w-4" viewBox="0 0 16 16" fill="currentColor">
+                              <path d="M6 1h4v5h5v4h-5v5H6v-5H1V6h5Z" />
+                            </svg>
+                          </span>
+                        )}
+                        <span>{milestone.domainLabel}</span>
+                      </p>
+                    )}
+                    {milestone.project && (
+                      <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-zinc-300">
+                        <span className="domain-symbol is-bitcoin" aria-hidden="true">₿</span>
+                        <span>Current project: {milestone.project}</span>
+                      </p>
+                    )}
 
                     <details className="terminal-experience mt-4">
                       <summary className="w-fit cursor-pointer rounded-md border border-amber-400/30 bg-amber-400/5 px-3 py-2.5 text-xs font-semibold text-amber-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
@@ -493,8 +524,10 @@ export function TerminalJourney() {
                   <div className="lg:col-span-4 flex flex-col items-center justify-center">
                     <div className="w-full rounded-xl border border-white/10 bg-gradient-to-br from-zinc-900/90 to-zinc-950 p-4 text-center shadow-lg shadow-black/40 transition-transform duration-300 group-hover:border-amber-400/30">
                       {/* Logo Icon Badge */}
-                      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl border border-amber-400/40 bg-zinc-950 font-mono text-lg font-bold text-amber-400 shadow-md shadow-amber-400/10">
-                        {milestone.orgInitials}
+                      <div className={`mx-auto flex items-center justify-center rounded-xl border border-amber-400/40 bg-zinc-950 font-mono text-lg font-bold text-amber-400 shadow-md shadow-amber-400/10 ${milestone.logo ? "min-h-14 w-fit px-3 py-2" : "h-14 w-14"}`}>
+                        {milestone.logo ? (
+                          <Image src={milestone.logo} alt={`${milestone.company} logo`} width={milestone.logoWidth ?? 125} height={milestone.logoHeight ?? 37} unoptimized className="h-auto max-w-full" />
+                        ) : milestone.orgInitials}
                       </div>
 
                       {/* Org Name */}

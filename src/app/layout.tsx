@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Script from "next/script";
+import "../../public/fonts/archivo.css";
+import "../../public/theme-palette.css";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
-
 export const metadata: Metadata = {
-  title: "Vishwateja Gorumanthula | AWS DevOps Engineer",
+  title: "Vishwateja Gorumanthula | Remote AWS DevOps Freelancer",
   description:
-    "AWS DevOps engineer portfolio covering cloud infrastructure, CI/CD, Terraform, monitoring, disaster recovery, and production support experience.",
+    "Remote freelance AWS DevOps services: Terraform infrastructure, CI/CD automation, production troubleshooting, and SonarQube assessments. Explore my work and discuss your project.",
 };
 
 export default function RootLayout({
@@ -21,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark antialiased ${inter.variable}`} data-theme="dark" suppressHydrationWarning>
+    <html lang="en" className="dark antialiased" data-theme="dark" suppressHydrationWarning>
       <body className="min-h-screen">
         <Script src="/theme-init.js" strategy="beforeInteractive" />
         {children}

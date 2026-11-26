@@ -3,65 +3,35 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/fonts/archivo.css" />
 <title>Centralized Repository Security Assessment | Case Study</title>
+<meta name="description" content="A freelance DevSecOps case study covering GitHub Enterprise inventory, SonarQube scan automation, execution tracking, and repository exceptions." />
 <script src="/theme-init.js"></script>
-<style>
-  :root { color-scheme: dark; --bg:#050505; --panel:#111118; --panel2:#191811; --text:#f0f0f0; --muted:#a1a1aa; --line:#2f2b20; --accent:#d4a843; --accent2:#e8b945; }
-  :root[data-theme="light"] { color-scheme:light; --bg:#faf9f6; --panel:#ffffff; --panel2:#f2f0eb; --text:#202124; --muted:#545964; --line:#ddd9cf; --accent:#896008; --accent2:#785200; }
-  * { box-sizing:border-box; }
-  body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:radial-gradient(ellipse at 15% 0%,rgba(212,168,67,.12) 0,transparent 42%),var(--bg); color:var(--text); line-height:1.6; }
-  .wrap { max-width:1120px; margin:auto; padding:32px 22px 80px; }
-  .top { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:64px; color:var(--muted); font-size:.9rem; }
-  a { color:var(--accent2); }
-  a:focus-visible { outline:2px solid var(--accent2); outline-offset:4px; }
-  .top { flex-wrap:wrap; }
-  .pill { border:1px solid var(--line); border-radius:999px; padding:7px 12px; white-space:nowrap; }
-  .hero { max-width:850px; margin-bottom:52px; }
-  .eyebrow { color:var(--accent2); text-transform:uppercase; letter-spacing:.16em; font-size:.78rem; font-weight:700; }
-  h1 { font-size:clamp(2.2rem,6vw,4.6rem); line-height:1.05; letter-spacing:-.04em; margin:14px 0 20px; }
-  .lead { font-size:1.2rem; color:#d4d4d8; max-width:760px; }
-  .meta { display:flex; flex-wrap:wrap; gap:9px; margin-top:26px; }
-  .meta span { background:#131310; border:1px solid var(--line); padding:7px 11px; border-radius:8px; font-size:.86rem; color:#d4d4d8; }
-  .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:38px 0 64px; }
-  .metric,.card { background:linear-gradient(180deg,var(--panel),#0b0b0d); border:1px solid var(--line); border-radius:16px; padding:22px; }
-  .metric strong { color:var(--accent); display:block; font-size:2.3rem; letter-spacing:-.04em; }
-  .metric span { color:var(--muted); font-size:.92rem; }
-  section { margin:58px 0; }
-  h2 { font-size:1.75rem; letter-spacing:-.025em; margin:0 0 14px; }
-  h3 { font-size:1.08rem; margin:0 0 8px; }
-  p { color:#d4d4d8; margin:0 0 14px; }
-  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-  .card p:last-child { margin-bottom:0; }
-  .flow { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; align-items:stretch; margin-top:22px; }
-  .step { background:var(--panel2); border:1px solid var(--line); border-radius:12px; padding:16px; min-height:125px; position:relative; }
-  .step:not(:last-child):after { content:"→"; position:absolute; right:-15px; top:45%; color:var(--accent); font-size:1.2rem; z-index:2; }
-  .step small { color:var(--accent2); display:block; margin-bottom:7px; text-transform:uppercase; letter-spacing:.08em; font-size:.72rem; }
-  .step b { display:block; margin-bottom:6px; }
-  .step span { font-size:.84rem; color:var(--muted); }
-  ul { color:#d4d4d8; padding-left:20px; margin:10px 0 0; }
-  li { margin:7px 0; }
-  .result { border-left:3px solid var(--accent2); padding:2px 0 2px 18px; }
-  .tech { display:flex; flex-wrap:wrap; gap:9px; margin-top:16px; }
-  .tech span { background:#131310; border:1px solid var(--line); border-radius:8px; padding:8px 12px; font-size:.9rem; }
-  .note { font-size:.86rem; color:#a1a1aa; border-top:1px solid var(--line); padding-top:16px; }
-  footer { margin-top:70px; padding-top:22px; border-top:1px solid var(--line); color:var(--muted); font-size:.88rem; }
-  @media(max-width:800px){ .metrics{grid-template-columns:repeat(2,1fr)} .grid2,.grid3{grid-template-columns:1fr} .flow{grid-template-columns:1fr} .step:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-18px} .top{margin-bottom:40px} }
-  @media(max-width:460px){ .wrap{padding:24px 15px 60px} .metrics{grid-template-columns:1fr 1fr;gap:9px} .metric{padding:16px} .metric strong{font-size:1.8rem} }
-  [data-theme="light"] :is(.lead,p,ul,.meta span) { color:var(--text); }
-  [data-theme="light"] :is(.meta span,.tech span) { background:var(--panel); }
-  [data-theme="light"] :is(.metric,.card) { background:var(--panel); }
-</style>
+<link rel="stylesheet" href="/theme-palette.css" />
+<link rel="stylesheet" href="/case-studies/project-case-study.css" />
 </head>
 <body>
 <main class="wrap">
-  <div class="top"><a href="/#projects">← Back to portfolio</a><span>ENGINEERING CASE STUDY</span><span class="pill">Sep – Nov 2026</span></div>
+  <div class="top"><a class="portfolio-brand" href="/#home" aria-label="Vishwateja Gorumanthula home"><img class="portfolio-logo" src="/icons/vg-logo.svg" alt="" width="48" height="48" /></a><a href="/case-studies/index.html">All case studies</a><span>ENGINEERING CASE STUDY</span><span class="pill">Sep – Nov 2026</span></div>
+<nav class="case-nav" aria-label="Project case studies"><strong>Explore project case studies</strong><ul><li><a href="/case-studies/centralized-security-assessment.html" aria-current="page">SonarQube Security Assessment</a></li><li><a href="/case-studies/multi-region-aws-platform.html">Multi-Region AWS Platform</a></li><li><a href="/case-studies/reusable-infrastructure-automation.html">Reusable Infrastructure Automation</a></li><li><a href="/case-studies/containerized-application-delivery.html">Containerized Application Delivery</a></li></ul></nav>
   <header class="hero">
     <div class="eyebrow">DevSecOps · Security Automation · Repository Scale</div>
     <h1>Centralized Source-Code Security Assessment</h1>
     <p class="lead">Building a repeatable SonarQube scanning workflow across hundreds of GitHub Enterprise repositories—automating discovery, inventory, cloning, scanning, and result tracking.</p>
     <div class="meta"><span>Confidential client · Freelance engagement</span><span>Role: DevOps / Security Automation</span><span>SonarQube</span><span>GitHub Enterprise</span><span>Python · Bash · Linux</span></div>
   </header>
+
+  <section aria-labelledby="engagement-summary-title">
+    <div class="card engagement-summary">
+      <div class="eyebrow">Featured freelance engagement</div>
+      <h2 id="engagement-summary-title">SonarQube scanning at repository scale</h2>
+      <p>A centralized assessment workflow for a confidential client: GitHub Enterprise discovery, repository inventory, scan automation, and exception tracking.</p>
+      <p><strong>My contribution:</strong> Python and Bash automation for discovery, cloning, standardized scan setup, and outcome logging.</p>
+      <p><strong>Reported execution:</strong> 445 repositories in scope, with 444 successful scans. One repository remained an exception for investigation.</p>
+      <p class="note">These figures describe scanner execution, not vulnerability clearance or remediation.</p>
+    </div>
+  </section>
 
   <div class="metrics">
     <div class="metric"><strong>445</strong><span>Repositories in reported scan scope</span></div>
@@ -81,13 +51,13 @@
   </section>
   <section>
     <h2>Workflow architecture</h2>
-    <p>A centralized workflow was built around repository inventory and controlled scan execution.</p>
+    <p>Repositories were cloned onto the scan server. A command run on that server started the Sonar scan, and the scan results were then visible in the SonarQube dashboard.</p>
     <div class="flow">
-      <div class="step"><small>01 · Source</small><b>GitHub Enterprise</b><span>Repository discovery and source access</span></div>
-      <div class="step"><small>02 · Scope</small><b>Inventory & filtering</b><span>Activity, archive status, language, metadata</span></div>
-      <div class="step"><small>03 · Prepare</small><b>Linux scan host</b><span>Clone, validate, organize, and log</span></div>
-      <div class="step"><small>04 · Analyze</small><b>SonarQube scans</b><span>Standardized project identification and source analysis</span></div>
-      <div class="step"><small>05 · Report</small><b>Results & follow-up</b><span>Success, failure, pending, and rerun tracking</span></div>
+      <div class="step"><small>01 · Server</small><b>Scan server</b><span>Linux host used for the assessment</span></div>
+      <div class="step"><small>02 · Clone</small><b>Repositories on server</b><span>Clone GitHub Enterprise repositories onto the scan host</span></div>
+      <div class="step"><small>03 · Execute</small><b>Run scan command</b><span>Start scanning from the server</span></div>
+      <div class="step"><small>04 · Analyze</small><b>Sonar scan</b><span>Execute source-code analysis</span></div>
+      <div class="step"><small>05 · View</small><b>SonarQube dashboard</b><span>View the scan results in SonarQube</span></div>
     </div>
   </section>
   <section>
@@ -128,6 +98,13 @@
   <section>
     <h2>Technology stack</h2>
     <div class="tech"><span>SonarQube</span><span>GitHub Enterprise</span><span>Python</span><span>Bash</span><span>Linux / RHEL</span><span>Git</span><span>SSH</span><span>CSV</span><span>Repository automation</span><span>SAST</span></div>
+  </section>
+  <section aria-labelledby="project-inquiry-title">
+    <div class="card">
+      <h2 id="project-inquiry-title">Need a repeatable repository assessment workflow?</h2>
+      <p>I can help with repository inventory, SonarQube scan automation, execution tracking, and exception handling. Share your repository landscape, current tooling, and target timeline so we can discuss an appropriate scope.</p>
+      <p><a href="/#contact">Discuss your DevSecOps project</a> · <a href="/#services">Explore my DevOps services</a></p>
+    </div>
   </section>
   <section>
     <h2>What this demonstrates</h2>
