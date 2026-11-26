@@ -5,7 +5,6 @@ import { ThemeToggle } from "./theme-toggle";
 export function SiteHeader({ certificates = false }: { certificates?: boolean }) {
   const home = certificates ? "/" : "";
   const links = [
-    { label: "Home", href: `${home}#home` },
     { label: "Case studies", href: "/case-studies/index.html" },
     { label: "Services", href: `${home}#services` },
     { label: "Work", href: `${home}#projects` },
@@ -20,7 +19,8 @@ export function SiteHeader({ certificates = false }: { certificates?: boolean })
         {/* Native navigation keeps homepage fragments intact when returning from another page. */}
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
         <a className="portfolio-brand" href="/#home" aria-label="Vishwateja Gorumanthula home">
-          <Image className="portfolio-logo" src="/icons/vg-logo.svg" alt="" width={48} height={48} unoptimized />
+          <Image className="portfolio-avatar" src="/images/profile-hero-blazer.jpg" alt="" width={44} height={44} />
+          <span className="portfolio-brand-name"><span>Vishwateja</span><span>Gorumanthula</span></span>
         </a>
         <nav className="ml-auto hidden items-center gap-6 lg:flex" aria-label="Main navigation">
           {links.map((link) => (

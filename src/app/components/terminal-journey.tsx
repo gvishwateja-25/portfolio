@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ToolIcon, USFlag } from "./tool-icon";
 import { useState, useRef, useEffect } from "react";
 
 interface Milestone {
@@ -24,7 +25,6 @@ interface Milestone {
   cloudFocus: string;
   tierTag: string;
   caseStudyHref?: string;
-  project?: string;
   domainLabel?: string;
 }
 
@@ -37,8 +37,7 @@ const milestones: Milestone[] = [
     period: "Sep 2025 - Present",
     title: "AWS DevOps Engineer",
     company: "Equicom Technologies",
-    project: "Crpko",
-    domainLabel: "Current company · Crypto domain",
+    domainLabel: "Current company · FinTech Domain",
     location: "Bengaluru, India",
     summary:
       "Leading core AWS cloud infrastructure provisioning and continuous delivery pipelines across mission-critical production environments.",
@@ -468,12 +467,6 @@ export function TerminalJourney() {
                         <span>{milestone.domainLabel}</span>
                       </p>
                     )}
-                    {milestone.project && (
-                      <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-zinc-300">
-                        <span className="domain-symbol is-bitcoin" aria-hidden="true">₿</span>
-                        <span>Current project: {milestone.project}</span>
-                      </p>
-                    )}
 
                     <details className="terminal-experience mt-4">
                       <summary className="w-fit cursor-pointer rounded-md border border-amber-400/30 bg-amber-400/5 px-3 py-2.5 text-xs font-semibold text-amber-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-400">
@@ -527,7 +520,7 @@ export function TerminalJourney() {
                       <div className={`mx-auto flex items-center justify-center rounded-xl border border-amber-400/40 bg-zinc-950 font-mono text-lg font-bold text-amber-400 shadow-md shadow-amber-400/10 ${milestone.logo ? "min-h-14 w-fit px-3 py-2" : "h-14 w-14"}`}>
                         {milestone.logo ? (
                           <Image src={milestone.logo} alt={`${milestone.company} logo`} width={milestone.logoWidth ?? 125} height={milestone.logoHeight ?? 37} unoptimized className="h-auto max-w-full" />
-                        ) : milestone.orgInitials}
+                        ) : milestone.id === "freelance" ? <USFlag /> : milestone.orgInitials}
                       </div>
 
                       {/* Org Name */}
@@ -536,8 +529,12 @@ export function TerminalJourney() {
                       </div>
 
                       {/* Cloud Focus */}
-                      <div className="mt-1 text-[11px] font-mono text-amber-400/90">
-                        {milestone.cloudFocus}
+                      <div className="mt-3 flex flex-wrap justify-center gap-2">
+                        {milestone.cloudFocus.split(" • ").map((tool) => (
+                          <span key={tool} className="tool-icon-surface" title={tool} role="img" aria-label={tool}>
+                            <ToolIcon name={tool} />
+                          </span>
+                        ))}
                       </div>
 
                       {/* Tier Tag */}

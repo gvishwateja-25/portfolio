@@ -3,6 +3,7 @@ import { ResumeDownloadLink } from "./components/portfolio-interactions";
 import { TerminalJourney } from "./components/terminal-journey";
 import { FlowMotion } from "./components/flow-motion";
 import { SiteHeader } from "./components/site-header";
+import { ToolIcon } from "./components/tool-icon";
 
 /* ============================================
    DATA
@@ -16,7 +17,7 @@ const profile = {
   email: "gvishwateja25@gmail.com",
   linkedin: "https://www.linkedin.com/in/vishwateja-g-212b091b5/",
   github: "https://github.com/gvishwateja-25",
-  whatsapp: "https://wa.me/917661889542?text=Hi%20Vishwateja%2C%20I%27d%20like%20to%20discuss%20a%20DevOps%20opportunity%20with%20you.",
+  whatsapp: `https://wa.me/917661889542?text=${encodeURIComponent("Hi Vishwateja, I'd like to discuss a DevOps automation project with you.")}`,
   resume: "/resume/vishwateja-gorumanthula-resume.pdf",
   summary:
     "AWS DevOps Engineer with 7+ years of experience across cloud infrastructure, IaC, CI/CD automation, production monitoring, and technical operations. Passionate about building reliable, automated, and observable cloud platforms.",
@@ -43,6 +44,15 @@ const toolGroups = [
   { category: "Containers & orchestration", tools: ["Docker", "Kubernetes", "ECS"] },
   { category: "Monitoring & observability", tools: ["CloudWatch", "Datadog", "BetterStack"] },
   { category: "Scripting & security", tools: ["Python", "Bash", "PowerShell", "SonarQube"] },
+];
+
+const deploymentFlow = [
+  { title: "Plan & version", detail: "Define changes and commit code to Git.", icon: "Git" },
+  { title: "Provision infrastructure", detail: "Prepare cloud resources with infrastructure as code.", icon: "Terraform" },
+  { title: "Build containers", detail: "CI runs the build and creates a Docker image.", icon: "Docker" },
+  { title: "Run checks", detail: "Run tests and code scans before release.", icon: "SonarQube" },
+  { title: "Publish & deploy", detail: "Push the image to a registry, then deploy to QA, UAT, or production.", icon: "Deploy" },
+  { title: "Monitor & improve", detail: "Track health, investigate alerts, and feed changes back into Git.", icon: "CloudWatch" },
 ];
 
 const services = [
@@ -204,37 +214,34 @@ export default function Home() {
             <div data-flow-reveal>
               <p className="hero-greeting">Remote freelance · AWS DevOps</p>
               <h1 className="hero-name mt-4">
-                Reliable cloud infrastructure. <span className="hero-name-accent">Repeatable deployments.</span>
+                DevOps automation for <span className="hero-name-accent">cloud infrastructure and deployments.</span>
               </h1>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-zinc-300">
-                I help engineering teams automate AWS infrastructure, build CI/CD pipelines,
-                and troubleshoot production delivery problems.
-              </p>
-              <p className="mt-4 text-base leading-7 text-zinc-400">
+              <p className="mt-6 text-base leading-7 text-zinc-400">
                 I’m {profile.name}, an AWS DevOps Engineer with{" "}
                 <strong className="font-bold">7+ years of experience</strong>{" "}
                 across cloud infrastructure, automation, and technical operations.
               </p>
+              <p className="mt-4 max-w-xl text-lg leading-8 text-zinc-300">
+                I help engineering teams automate AWS infrastructure, build CI/CD pipelines,
+                and troubleshoot production delivery problems.
+              </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a className="hero-cta-btn is-filled inline-flex items-center" href="#contact">Discuss your project</a>
+                <a className="hero-cta-btn is-filled inline-flex items-center" href={profile.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
                 <a className="hero-cta-btn inline-flex items-center" href="/case-studies/centralized-security-assessment.html">View case study</a>
               </div>
-              <p className="mt-5 text-sm leading-6 text-zinc-400">
-                Remote project and technical support inquiries welcome.
-                Scope, working hours, and availability agreed before starting.
-              </p>
             </div>
             <aside className="hero-services-panel relative z-10" aria-labelledby="hero-services-title" data-flow-reveal>
               <div className="p-5 sm:p-6">
-                <p className="text-sm font-semibold uppercase tracking-wider text-amber-400">How I can help</p>
-                <h2 id="hero-services-title" className="mt-2 text-2xl font-bold text-white">DevOps services for your team</h2>
-                <ul className="mt-4 divide-y divide-white/10">
-                  {services.map((service) => (
-                    <li key={service.title}>
-                      <a className="hero-service-link block py-3 text-base font-medium text-zinc-300" href="#services">{service.title}</a>
+                <p className="text-sm font-semibold uppercase tracking-wider text-amber-400">The deployment workflow</p>
+                <h2 id="hero-services-title" className="mt-2 text-2xl font-bold text-white">From source code to production</h2>
+                <ol className="deployment-flow mt-5">
+                  {deploymentFlow.map((step, index) => (
+                    <li key={step.title}>
+                      <span className="deployment-step-icon" aria-hidden="true"><ToolIcon name={step.icon} /></span>
+                      <div><h3 className="font-semibold text-white"><span className="sr-only">Step {index + 1}: </span>{step.title}</h3><p className="mt-1 text-sm leading-5 text-zinc-400">{step.detail}</p></div>
                     </li>
                   ))}
-                </ul>
+                </ol>
                 <a className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-amber-400 underline underline-offset-4" href="#services">Explore services and deliverables</a>
               </div>
               <a className="hero-whatsapp flex items-center gap-4 p-5 sm:p-6" href={profile.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp about your DevOps project">
@@ -339,7 +346,7 @@ export default function Home() {
                         <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-amber-400">{group.category}</h4>
                         <ul className="flex flex-wrap gap-2">
                           {group.tools.map((tool) => (
-                            <li className="rounded-md border border-white/10 bg-zinc-950/70 px-3 py-1.5 text-sm text-zinc-300" key={tool}>{tool}</li>
+                            <li className="tool-chip rounded-md border border-white/10 bg-zinc-950/70 px-3 py-1.5 text-sm text-zinc-300" key={tool}><span className="tool-icon-surface" aria-hidden="true"><ToolIcon name={tool} /></span>{tool}</li>
                           ))}
                         </ul>
                       </div>
@@ -403,7 +410,7 @@ export default function Home() {
             </div>
             <div className="contact-hiring mt-12" data-flow-reveal>
               <h3 className="contact-hiring-title">
-                Need help with <span>AWS, deployments, or DevOps automation?</span>
+                Let’s discuss your <span>cloud and DevOps automation requirements.</span>
               </h3>
               <div className="mt-8 grid min-w-0 items-start gap-6 lg:grid-cols-2 lg:gap-10">
                 <div>
