@@ -377,7 +377,7 @@ export function TerminalJourney() {
         {/* Terminal Body Screen */}
         <div
           ref={terminalContentRef}
-          className="max-h-[760px] overflow-y-auto p-4 font-mono text-sm leading-relaxed sm:p-7"
+          className="max-h-[760px] overflow-y-auto p-4 font-mono text-sm leading-relaxed [overflow-wrap:anywhere] sm:p-7"
         >
           {/* Welcome Screen MOTD */}
           <div className="mb-8 rounded-xl border border-amber-400/20 bg-amber-400/[0.03] p-4 sm:p-5">
@@ -552,22 +552,23 @@ export function TerminalJourney() {
           {/* Terminal Command Input Prompt (Interactive) */}
           <form
             onSubmit={handleCommandSubmit}
-            className="mt-8 flex items-center gap-2 rounded-lg border border-white/10 bg-[#101e35] px-3 py-2.5"
+            className="mt-8 grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 rounded-lg border border-white/10 bg-[#101e35] px-3 py-2.5 sm:flex"
           >
-            <span className="text-emerald-400 font-semibold text-xs sm:text-sm">
+            <span className="col-span-3 text-emerald-400 font-semibold text-xs sm:text-sm">
               vishwateja@aws-prod:~/journey$
             </span>
             <input
               type="text"
+              aria-label="Terminal command"
               value={typedInput}
               onChange={(e) => setTypedInput(e.target.value)}
               placeholder="type 'play', 'skills', 'whoami', 'help', or 'clear'..."
-              className="flex-1 bg-transparent font-mono text-xs text-white placeholder-zinc-600 focus:outline-none sm:text-sm"
+              className="min-h-11 min-w-0 w-full flex-1 bg-transparent font-mono text-base text-white placeholder-zinc-600 focus:outline-none sm:text-sm"
             />
             <span className="inline-block h-4 w-2 animate-pulse bg-amber-400" />
             <button
               type="submit"
-              className="rounded bg-amber-400/20 px-2.5 py-1 text-xs text-amber-300 hover:bg-amber-400/30"
+              className="min-h-11 min-w-11 shrink-0 rounded bg-amber-400/20 px-2.5 py-1 text-xs text-amber-300 hover:bg-amber-400/30"
             >
               Run
             </button>

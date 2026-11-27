@@ -11,5 +11,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/case-studies/containerized-application-delivery.html` },
     { url: `${siteUrl}/case-studies/multi-region-aws-platform.html` },
     { url: `${siteUrl}/case-studies/reusable-infrastructure-automation.html` },
-  ];
+  ].map((entry) => ({
+    ...entry,
+    changeFrequency: "monthly" as const,
+    priority: entry.url === `${siteUrl}/` ? 1 : 0.7,
+  }));
 }

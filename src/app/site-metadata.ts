@@ -13,13 +13,13 @@ export function pageMetadata(title: string, description: string, path: string): 
       title,
       description,
       url: path,
-      images: [{ url: "/images/profile-hero-blazer.jpg", alt: "Vishwateja Gorumanthula" }],
+      images: [{ url: "/images/og.png", width: 1200, height: 630, alt: "Vishwateja Gorumanthula | Remote AWS DevOps Freelancer" }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/images/profile-hero-blazer.jpg"],
+      images: ["/images/og.png"],
     },
   };
 }

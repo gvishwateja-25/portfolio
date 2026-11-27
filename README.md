@@ -1,24 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# vishwateja.in
 
-## Getting Started
+Personal portfolio and freelance DevOps site, built with Next.js (App Router), TypeScript and Tailwind CSS 4.
 
-First, run the development server:
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm ci
+npm run dev      # http://localhost:3000
+npm run lint
+npx tsc --noEmit
+npm run build && npm run start
+# After building:
+node --test tests/production-metadata.test.mjs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
+- `src/app/page.tsx` - home page; profile, services, projects and tools are data objects at the top of the file.
+- `src/app/layout.tsx` - metadata base URL and service JSON-LD.
+- `src/app/site-metadata.ts` - shared page metadata and Open Graph/Twitter cards.
+- `src/app/robots.ts`, `src/app/sitemap.ts` - crawler files, generated at build time.
+- `public/case-studies/*.html` - static case-study pages (planned: move into the app router).
+- `next.config.ts` - security headers (CSP is Report-Only until tightened).
+- `scripts/prune-unused-assets.sh` - reports image cleanup candidates; dry run by default. Review references before using `--delete`.
 
-This project uses Tailwind CSS and locally hosted Archivo fonts so it can build without fetching font files during compilation.
+## Quality gates
+
+`.github/workflows/ci.yml` runs on every pull request and push to `main`:
+
+1. Lint, type-check, production build, and metadata/header regression checks.
+2. `npm audit` (fails on high severity).
+3. Lighthouse CI with local reports and budgets for performance, accessibility, best practices and SEO (`lighthouserc.json`).
+
+Dependabot opens weekly update PRs (`.github/dependabot.yml`).
+
+## Deployment
+
+The production origin is `https://www.vishwateja.in`, hosted on Vercel project `gorumanthula25/vishwateja`, connected to `gvishwateja-25/portfolio` on GitHub. Publish reviewed changes to `main`, wait for the commit's Vercel deployment status, then verify the public domain. DNS configuration and rollback procedures are not recorded in this repository. Run `npm run build` followed by `npm run start` for a local production Node.js server.
+
+Security headers apply to application routes and public files. CSP is Report-Only; no violation-report endpoint is configured. HSTS uses a two-year max age for this host only; subdomain coverage and preload require a separate deployment decision.
+
+Lighthouse reports stay local to CI (no public report upload). Scores must be confirmed in CI; the configured thresholds are targets, not measured results. Asset cleanup is heuristic and cannot prove that an image is unused by external clients or dynamic paths.
 
 ## Contact links
 
@@ -32,21 +54,6 @@ run this command from the repository root on macOS:
 ```bash
 swift -module-cache-path /tmp/portfolio-swift-cache scripts/generate-whatsapp-qr.swift
 ```
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## Typography
 
