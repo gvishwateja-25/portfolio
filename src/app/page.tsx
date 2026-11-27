@@ -201,7 +201,7 @@ export default function Home() {
       <main>
         {/* ============ HERO ============ */}
         <section id="home" className="hero-section px-5 py-10 lg:py-12">
-          <div className="hero-content mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:items-start">
+          <div className="hero-content mx-auto grid w-full max-w-7xl gap-8 lg:items-start">
             <div data-flow-reveal>
               <p className="hero-greeting">AWS DevOps Engineer · Remote Freelance</p>
               <h1 className="hero-name mt-4">
@@ -223,18 +223,68 @@ export default function Home() {
             <aside className="hero-services-panel relative z-10" aria-labelledby="hero-services-title" data-flow-reveal>
               <div className="px-3 py-5 sm:px-4 sm:py-6">
                 <h2 id="hero-services-title" className="text-sm font-semibold uppercase tracking-wider text-amber-400">DevOps workflow</h2>
-                <p className="mt-2 text-base font-semibold text-zinc-300">From Dev to Deployment &amp; Monitoring</p>
-                <div className="workflow-neon relative mx-auto mt-4 max-w-[580px]">
-                <Image
-                  src="/images/devops-ci-cd-flow-fixed.gif"
-                  alt="DevOps CI/CD flow from change request through Terraform, GitHub Actions or Jenkins, SonarQube, Docker, AWS IAM, Amazon ECR, Amazon EC2, and CloudWatch."
-                  width={700}
-                  height={408}
-                  unoptimized
-                  className="block h-auto w-full rounded-lg border border-white/10"
-                />
-                  <svg className="workflow-neon-overlay" viewBox="0 0 700 408" aria-hidden="true">
-                    <path d="M55 76 V132 H105 M161 132 H232 M288 132 H359 M415 132 H486 M542 132 H613 M641 160 V216 M641 272 V328 M613 356 H509" />
+                <div className="workflow-grid relative mt-4 w-full">
+                  <svg className="workflow-grid-svg" viewBox="0 0 600 630" role="img" aria-label="DevOps workflow: Change request, Terraform, GitHub Actions or Jenkins, SonarQube, Docker, AWS IAM, Amazon ECR, Amazon EC2, CloudWatch, and User.">
+                    <defs>
+                      <marker id="workflow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#608ba1" /></marker>
+                    </defs>
+                    <g fill="none" stroke="#608ba1" strokeWidth="3" markerEnd="url(#workflow-arrow)">
+                      <path d="M123 72H267" /><path d="M333 72H477" />
+                      <path d="M510 105V222" />
+                      <path d="M477 255H333" /><path d="M267 255H123" />
+                      <path d="M90 288V405" />
+                      <path d="M123 438H267" /><path d="M333 438H477" />
+                      <path d="M510 489V527" />
+                    </g>
+                    <g className="workflow-arrow-highlights" fill="none" strokeWidth="3" aria-hidden="true">
+                      <path pathLength="1" d="M123 72H267" /><path pathLength="1" d="M333 72H477" />
+                      <path pathLength="1" d="M510 105V222" />
+                      <path pathLength="1" d="M477 255H333" /><path pathLength="1" d="M267 255H123" />
+                      <path pathLength="1" d="M90 288V405" />
+                      <path pathLength="1" d="M123 438H267" /><path pathLength="1" d="M333 438H477" />
+                      <path pathLength="1" d="M510 489V527" />
+                    </g>
+                    {[
+                      { label: "Change request", x: 90, y: 72, cx: 55, cy: 48 },
+                      { label: "Terraform", x: 300, y: 72, cx: 133, cy: 132 },
+                      { label: "GitHub Actions / Jenkins", x: 510, y: 72, cx: 260, cy: 132 },
+                      { label: "SonarQube", x: 510, y: 255, cx: 387, cy: 132 },
+                      { label: "Docker", x: 300, y: 255, cx: 514, cy: 132 },
+                      { label: "AWS IAM", x: 90, y: 255, cx: 641, cy: 132 },
+                      { label: "Amazon ECR", x: 90, y: 438, cx: 641, cy: 244 },
+                      { label: "Amazon EC2", x: 300, y: 438, cx: 641, cy: 356 },
+                      { label: "CloudWatch", x: 510, y: 438, cx: 481, cy: 356 },
+                    ].map((step, index) => (
+                      <g key={step.label}>
+                        <circle className={`workflow-node-highlight workflow-node-${index}`} cx={step.x} cy={step.y} r="33" fill="none" stroke="#00bfa5" strokeWidth="3" aria-hidden="true" />
+                        <svg x={step.x - 28} y={step.y - 28} width="56" height="56" viewBox={`${step.cx - 28} ${step.cy - 28} 56 56`}>
+                          <defs>
+                            <clipPath id={`workflow-icon-clip-${index}`} clipPathUnits="userSpaceOnUse">
+                              <circle cx={step.cx} cy={step.cy} r="26" />
+                            </clipPath>
+                          </defs>
+                          <image href="/images/devops-ci-cd-flow-fixed.gif" width="700" height="408" clipPath={`url(#workflow-icon-clip-${index})`} />
+                        </svg>
+                        <g className={`workflow-node-tick workflow-node-${index}`} transform={`translate(${step.x + 23} ${step.y + 23})`} aria-hidden="true">
+                          <circle r="9" fill="#07973d" stroke="white" strokeWidth="2" />
+                          <path d="M-4 0L-1 3L4 -3" fill="none" stroke="white" strokeWidth="2" />
+                        </g>
+                        <text x={step.x} y={step.y + 49} textAnchor="middle" className="workflow-step-label">{step.label}</text>
+                      </g>
+                    ))}
+                    <g>
+                      <circle cx="510" cy="559" r="28" fill="var(--card-bg)" stroke="#608ba1" strokeWidth="2" />
+                      <g fill="none" stroke="var(--ink)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <circle cx="510" cy="551" r="7" />
+                        <path d="M496 573v-3a14 11 0 0 1 28 0v3" />
+                      </g>
+                      <circle className="workflow-node-highlight workflow-node-9" cx="510" cy="559" r="33" fill="none" stroke="#00bfa5" strokeWidth="3" aria-hidden="true" />
+                      <g className="workflow-node-tick workflow-node-9" transform="translate(533 582)" aria-hidden="true">
+                        <circle r="9" fill="#07973d" stroke="white" strokeWidth="2" />
+                        <path d="M-4 0L-1 3L4 -3" fill="none" stroke="white" strokeWidth="2" />
+                      </g>
+                      <text x="510" y="608" textAnchor="middle" className="workflow-step-label">User</text>
+                    </g>
                   </svg>
                 </div>
               </div>

@@ -33,3 +33,110 @@
 @media (prefers-reduced-motion: reduce) {
   .workflow-neon-overlay { display: none; }
 }
+
+/* Follow each arrow's direction in the three-row workflow. */
+.workflow-arrow-highlights {
+  stroke: #00d9ff;
+  stroke-linecap: round;
+  stroke-dasharray: 12 96;
+  filter: drop-shadow(0 0 2px #00d9ff);
+  pointer-events: none;
+}
+[data-theme="light"] .workflow-arrow-highlights {
+  stroke: #ff163c;
+  filter: drop-shadow(0 0 2px #ff163c);
+}
+@media (prefers-reduced-motion: reduce) {
+  .workflow-arrow-highlights { display: none; }
+}
+
+.workflow-arrow-highlights path {
+  stroke-dasharray: 0.18 1;
+  stroke-dashoffset: 0.18;
+  opacity: 0;
+  animation: workflow-sequential-arrow 16.5s linear infinite;
+}
+.workflow-arrow-highlights path:nth-child(1) { animation-delay: 0s; }
+.workflow-arrow-highlights path:nth-child(2) { animation-delay: 1.5s; }
+.workflow-arrow-highlights path:nth-child(3) { animation-delay: 3s; }
+.workflow-arrow-highlights path:nth-child(4) { animation-delay: 4.5s; }
+.workflow-arrow-highlights path:nth-child(5) { animation-delay: 6s; }
+.workflow-arrow-highlights path:nth-child(6) { animation-delay: 7.5s; }
+.workflow-arrow-highlights path:nth-child(7) { animation-delay: 9s; }
+.workflow-arrow-highlights path:nth-child(8) { animation-delay: 10.5s; }
+.workflow-arrow-highlights path:nth-child(9) { animation-delay: 12s; }
+@keyframes workflow-sequential-arrow {
+  0% { opacity: 1; stroke-dashoffset: 0.18; }
+  8.9% { opacity: 1; stroke-dashoffset: -1; }
+  9.09%, 100% { opacity: 0; stroke-dashoffset: -1; }
+}
+
+.workflow-node-highlight, .workflow-node-tick { opacity: 0; pointer-events: none; }
+.workflow-node-highlight { filter: drop-shadow(0 0 4px #00bfa5); }
+
+.workflow-node-highlight.workflow-node-0 { animation: workflow-node-active-0 16.5s linear infinite; }
+.workflow-node-tick.workflow-node-0 { animation: workflow-node-done-0 16.5s linear infinite; }
+@keyframes workflow-node-active-0 { 0%, 100% { opacity: 0; } 0.000% { opacity: 0; } 0.010%, 3.636% { opacity: 1; } 3.646% { opacity: 0; } }
+@keyframes workflow-node-done-0 { 0%, 3.636% { opacity: 0; } 3.646%, 99.99% { opacity: 1; } 100% { opacity: 0; } }
+
+.workflow-node-highlight.workflow-node-1 { animation: workflow-node-active-1 16.5s linear infinite; }
+.workflow-node-tick.workflow-node-1 { animation: workflow-node-done-1 16.5s linear infinite; }
+@keyframes workflow-node-active-1 { 0%, 100% { opacity: 0; } 9.081% { opacity: 0; } 9.101%, 12.727% { opacity: 1; } 12.737% { opacity: 0; } }
+@keyframes workflow-node-done-1 { 0%, 12.727% { opacity: 0; } 12.737%, 99.99% { opacity: 1; } 100% { opacity: 0; } }
+
+.workflow-node-highlight.workflow-node-2 { animation: workflow-node-active-2 16.5s linear infinite; }
+.workflow-node-tick.workflow-node-2 { animation: workflow-node-done-2 16.5s linear infinite; }
+@keyframes workflow-node-active-2 { 0%, 100% { opacity: 0; } 18.172% { opacity: 0; } 18.192%, 21.818% { opacity: 1; } 21.828% { opacity: 0; } }
+@keyframes workflow-node-done-2 { 0%, 21.818% { opacity: 0; } 21.828%, 99.99% { opacity: 1; } 100% { opacity: 0; } }
+
+.workflow-node-highlight.workflow-node-3 { animation: workflow-node-active-3 16.5s linear infinite; }
+.workflow-node-tick.workflow-node-3 { animation: workflow-node-done-3 16.5s linear infinite; }
+@keyframes workflow-node-active-3 { 0%, 100% { opacity: 0; } 27.263% { opacity: 0; } 27.283%, 30.909% { opacity: 1; } 30.919% { opacity: 0; } }
+@keyframes workflow-node-done-3 { 0%, 30.909% { opacity: 0; } 30.919%, 99.99% { opacity: 1; } 100% { opacity: 0; } }
+
+.workflow-node-highlight.workflow-node-4 { animation: workflow-node-active-4 16.5s linear infinite; }
+.workflow-node-tick.workflow-node-4 { animation: workflow-node-done-4 16.5s linear infinite; }
+@keyframes workflow-node-active-4 { 0%, 100% { opacity: 0; } 36.354% { opacity: 0; } 36.374%, 40.000% { opacity: 1; } 40.010% { opacity: 0; } }
+@keyframes workflow-node-done-4 { 0%, 40.000% { opacity: 0; } 40.010%, 99.99% { opacity: 1; } 100% { opacity: 0; } }
+
+.workflow-node-highlight.workflow-node-5 { animation: workflow-node-active-5 16.5s linear infinite; }
+.workflow-node-tick.workflow-node-5 { animation: workflow-node-done-5 16.5s linear infinite; }
+@keyframes workflow-node-active-5 { 0%, 100% { opacity: 0; } 45.445% { opacity: 0; } 45.465%, 49.091% { opacity: 1; } 49.101% { opacity: 0; } }
+@keyframes workflow-node-done-5 { 0%, 49.091% { opacity: 0; } 49.101%, 99.99% { opacity: 1; } 100% { opacity: 0; } }
+
+.workflow-node-highlight.workflow-node-6 { animation: workflow-node-active-6 16.5s linear infinite; }
+.workflow-node-tick.workflow-node-6 { animation: workflow-node-done-6 16.5s linear infinite; }
+@keyframes workflow-node-active-6 { 0%, 100% { opacity: 0; } 54.535% { opacity: 0; } 54.555%, 58.182% { opacity: 1; } 58.192% { opacity: 0; } }
+@keyframes workflow-node-done-6 { 0%, 58.182% { opacity: 0; } 58.192%, 99.99% { opacity: 1; } 100% { opacity: 0; } }
+
+.workflow-node-highlight.workflow-node-7 { animation: workflow-node-active-7 16.5s linear infinite; }
+.workflow-node-tick.workflow-node-7 { animation: workflow-node-done-7 16.5s linear infinite; }
+@keyframes workflow-node-active-7 { 0%, 100% { opacity: 0; } 63.626% { opacity: 0; } 63.646%, 67.273% { opacity: 1; } 67.283% { opacity: 0; } }
+@keyframes workflow-node-done-7 { 0%, 67.273% { opacity: 0; } 67.283%, 99.99% { opacity: 1; } 100% { opacity: 0; } }
+
+.workflow-node-highlight.workflow-node-8 { animation: workflow-node-active-8 16.5s linear infinite; }
+.workflow-node-tick.workflow-node-8 { animation: workflow-node-done-8 16.5s linear infinite; }
+@keyframes workflow-node-active-8 { 0%, 100% { opacity: 0; } 72.717% { opacity: 0; } 72.737%, 76.364% { opacity: 1; } 76.374% { opacity: 0; } }
+@keyframes workflow-node-done-8 { 0%, 76.364% { opacity: 0; } 76.374%, 99.99% { opacity: 1; } 100% { opacity: 0; } }
+
+.workflow-node-highlight.workflow-node-9 { animation: workflow-node-active-9 16.5s linear infinite; }
+.workflow-node-tick.workflow-node-9 { animation: workflow-node-done-9 16.5s linear infinite; }
+@keyframes workflow-node-active-9 { 0%, 100% { opacity: 0; } 81.808% { opacity: 0; } 81.828%, 85.455% { opacity: 1; } 85.465% { opacity: 0; } }
+@keyframes workflow-node-done-9 { 0%, 85.455% { opacity: 0; } 85.465%, 99.99% { opacity: 1; } 100% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) { .workflow-node-highlight, .workflow-node-tick { animation: none; } .workflow-node-tick { opacity: 1; } }
+
+#hero-services-title {
+  align-self: center;
+  text-align: center;
+  width: fit-content;
+  margin-inline: auto;
+  padding: 8px 20px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: #608ba11a;
+  color: var(--ink);
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  box-shadow: 0 2px 10px #608ba125;
+}

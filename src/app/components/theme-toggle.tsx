@@ -62,7 +62,6 @@ export function ThemeToggle() {
       title={`Switch to ${isDark ? "light" : "dark"} theme`}
       type="button"
     >
-      <span className="theme-mode-label" aria-hidden="true">{isDark ? "Dark mode" : "Light mode"}</span>
       <span className="theme-mode-thumb" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
           {isDark ? (

@@ -1,0 +1,10 @@
+.architecture-section { width:calc(100vw - 48px); max-width:1672px; position:relative; left:50%; transform:translateX(-50%); }
+.architecture-figure { margin:24px 0; }
+.architecture-figure img { display:block; width:100%; height:auto; background:white; border:1px solid var(--line); border-radius:12px; cursor:zoom-in; }
+.architecture-zoom { border:1px solid var(--line); border-radius:12px; padding:16px; background:var(--surface); }
+.architecture-zoom summary { cursor:pointer; font-weight:600; }
+.architecture-zoom[open] summary { margin-bottom:16px; }
+.architecture-scroll { overflow:auto; max-height:80vh; background:white; }
+.architecture-scroll img { display:block; width:1672px; max-width:none; height:auto; }
+.architecture-scroll:focus-visible, .architecture-zoom summary:focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
+@media(max-width:460px) { .architecture-section { width:calc(100vw - 30px); } }

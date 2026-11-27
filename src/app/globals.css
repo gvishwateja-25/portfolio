@@ -1023,14 +1023,6 @@ input::placeholder { color: var(--ink-2); opacity: 0.8; }
   box-shadow: inset 0 2px 5px #0008;
 }
 
-.theme-mode-label {
-  padding-inline: 4px;
-  font-size: 10px;
-  font-weight: 750;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
 .theme-mode-thumb {
   display: grid;
   width: 34px;
@@ -1042,6 +1034,33 @@ input::placeholder { color: var(--ink-2); opacity: 0.8; }
   box-shadow: 0 1px 4px #0004;
 }
 
-@media (max-width: 420px) {
-  .theme-mode-label { display: none; }
+
+/* Keep the enlarged workflow in the right-hand hero column. */
+@media (width >= 64rem) {
+  #home .hero-content {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: stretch;
+  }
 }
+
+@media (width >= 64rem) {
+  #home .hero-services-panel { align-self: stretch; }
+  #home .hero-services-panel > div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  #home .workflow-neon { flex: 1; min-height: 0; }
+  #home .workflow-neon > img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    min-height: 100%;
+    object-fit: contain;
+  }
+  #home .workflow-neon-overlay { height: 100%; }
+}
+
+.workflow-grid { flex: 1; min-height: 0; }
+.workflow-grid-svg { display: block; width: 100%; height: 100%; min-height: 400px; }
+.workflow-step-label { fill: var(--ink); font-size: 13px; font-weight: 600; }
