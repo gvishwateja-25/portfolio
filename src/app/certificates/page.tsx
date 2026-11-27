@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../site-metadata";
 import { SiteHeader } from "../components/site-header";
 
-export const metadata: Metadata = {
-  title: "Certificates | Vishwateja Gorumanthula",
-  description: "Licenses and certifications earned by Vishwateja Gorumanthula.",
-};
+export const metadata = pageMetadata(
+  "Certificates | Vishwateja Gorumanthula",
+  "Licenses and certifications earned by Vishwateja Gorumanthula.",
+  "/certificates",
+);
 
 export default function Certificates() {
   return (

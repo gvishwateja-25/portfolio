@@ -1,3 +1,11 @@
+import { pageMetadata } from "./site-metadata";
+
+export const metadata = pageMetadata(
+  "Vishwateja Gorumanthula | Remote AWS DevOps Freelancer",
+  "Remote freelance AWS DevOps services: Terraform infrastructure, CI/CD automation, production troubleshooting, and SonarQube assessments. Explore my work and discuss your project.",
+  "/",
+);
+
 import Image from "next/image";
 import { ResumeDownloadLink } from "./components/portfolio-interactions";
 import { TerminalJourney } from "./components/terminal-journey";
@@ -74,6 +82,15 @@ const services = [
 ];
 
 const projects = [
+  {
+    category: "Cloud Architecture",
+    title: "AWS ECS Platform",
+    description: "Terraform-managed ECS on EC2 with GitHub Actions, CodeDeploy blue/green orchestration, and Better Stack observability.",
+    tags: ["AWS", "ECS", "Terraform", "CI/CD", "Observability"],
+    image: "/images/aws-architecture-preview.png",
+    imageAlt: "Detailed AWS development, deployment, orchestration, and monitoring architecture.",
+    href: "/case-studies/aws-architecture.html",
+  },
   {
     category: "DevSecOps",
     title: "Centralized SAST Assessment",
@@ -199,6 +216,14 @@ export default function Home() {
       <SiteHeader />
 
       <main>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Vishwateja Gorumanthula",
+          url: "https://www.vishwateja.in/",
+          jobTitle: "AWS DevOps Engineer",
+          sameAs: [profile.linkedin, profile.github],
+        }).replace(/</g, "\\u003c") }} />
         {/* ============ HERO ============ */}
         <section id="home" className="hero-section px-5 py-10 lg:py-12">
           <div className="hero-content mx-auto grid w-full max-w-7xl gap-8 lg:items-start">
@@ -465,8 +490,7 @@ export default function Home() {
                   <p className="mt-6 flex items-center gap-3 text-sm text-zinc-400">
                     <span className="shrink-0 text-amber-400 [&>svg]:h-10 [&>svg]:w-10" aria-hidden="true"><ContactIcon type="location" /></span>
                     <span>
-                      <span className="block">{profile.location}</span>
-                      <span className="mt-1 block">Bengaluru, Karnataka, India</span>
+                      <span className="block">India · Remote collaboration</span>
                       <span className="mt-1 block">India Standard Time (UTC+5:30)</span>
                     </span>
                   </p>
@@ -488,6 +512,15 @@ export default function Home() {
                     </ResumeDownloadLink>
                   </div>
                 </div>
+              </div>
+              <div className="mt-8 rounded-xl border border-white/10 p-5">
+                <h4 className="font-semibold text-white">Availability &amp; engagement</h4>
+                <p className="mt-3 text-base leading-7 text-zinc-400">Remote collaboration from India (IST / UTC+5:30), by prior scheduling and project agreement. Timezone overlap with international teams is agreed for each engagement. Communication through email, Slack, Microsoft Teams, and scheduled video calls.</p>
+                <ul className="mt-4 grid gap-4 text-base leading-7 text-zinc-400 lg:grid-cols-3">
+                  <li><strong className="text-white">Fixed-scope projects</strong><br />Terraform implementation, CI/CD setup, and infrastructure automation, with agreed deliverables and fees.</li>
+                  <li><strong className="text-white">Monthly retainers</strong><br />Ongoing DevOps support, monitoring, optimization, and maintenance within an agreed scope.</li>
+                  <li><strong className="text-white">Hourly consulting</strong><br />Troubleshooting, AWS reviews, and DevOps guidance, with scope and rates agreed before work.</li>
+                </ul>
               </div>
               <div className="mt-8 rounded-xl border border-white/10 p-5">
                 <h4 className="font-semibold text-white">How we start</h4>

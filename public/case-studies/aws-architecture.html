@@ -5,18 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="preload" href="/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="stylesheet" href="/fonts/archivo.css" />
-<title>AWS Architecture | Vishwateja Gorumanthula</title>
-<meta name="description" content="AWS development, deployment, orchestration, and monitoring architecture." />
+<title>AWS ECS Platform | Vishwateja Gorumanthula</title>
+<meta name="description" content="Terraform-managed AWS ECS development platform with GitHub Actions, CodeDeploy blue/green orchestration, and centralized observability." />
 <link rel="stylesheet" href="/theme-palette.css" />
 <link rel="stylesheet" href="/case-studies/project-case-study.css" />
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/case-studies/architecture-diagram.css" />
+<link rel="canonical" href="https://www.vishwateja.in/case-studies/aws-architecture.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="AWS ECS Platform | Vishwateja Gorumanthula" />
+<meta property="og:description" content="Terraform-managed AWS ECS development platform with GitHub Actions, CodeDeploy blue/green orchestration, and centralized observability." />
+<meta property="og:url" content="https://www.vishwateja.in/case-studies/aws-architecture.html" />
+<meta property="og:image" content="https://www.vishwateja.in/images/aws-architecture-preview.png" />
+<meta property="og:site_name" content="Vishwateja Gorumanthula" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AWS ECS Platform | Vishwateja Gorumanthula" />
+<meta name="twitter:description" content="Terraform-managed AWS ECS development platform with GitHub Actions, CodeDeploy blue/green orchestration, and centralized observability." />
+<meta name="twitter:image" content="https://www.vishwateja.in/images/aws-architecture-preview.png" />
 </head>
 <body>
 <main class="wrap">
   <nav class="top" aria-label="Case study navigation"><a class="portfolio-brand" href="/#home" aria-label="Vishwateja Gorumanthula home"><img class="portfolio-avatar" src="/images/profile-hero-blazer.jpg" alt="" width="44" height="44" /><span class="portfolio-brand-name"><span>Vishwateja</span><span>Gorumanthula</span></span></a><a href="/case-studies/index.html">All case studies</a><a href="/#contact">Discuss your project</a></nav>
 <nav class="case-nav" aria-label="Project case studies"><strong>Explore project case studies</strong><ul><li><a href="/case-studies/centralized-security-assessment.html">SonarQube Security Assessment</a></li><li><a href="/case-studies/multi-region-aws-platform.html">Multi-Region AWS Platform</a></li><li><a href="/case-studies/reusable-infrastructure-automation.html">Reusable Infrastructure Automation</a></li><li><a href="/case-studies/containerized-application-delivery.html">Containerized Application Delivery</a></li><li><a href="/case-studies/aws-architecture.html" aria-current="page">AWS Architecture</a></li></ul></nav>
-  <header class="hero"><p class="eyebrow">Cloud architecture · Case study</p><h1>AWS Architecture</h1><p class="lead">From development and CI/CD to container orchestration, application services, and observability on AWS.</p></header>
+  <header class="hero"><p class="eyebrow">Cloud architecture · Case study</p><h1>AWS ECS Platform</h1><p class="lead">Infrastructure automation and CI/CD for a Terraform-managed AWS development platform, with ECS on EC2, CodeDeploy blue/green orchestration, and centralized observability.</p></header>
   <section class="architecture-section" aria-labelledby="architecture-title">
     <h2 id="architecture-title">Architecture overview</h2>
     <p>Development, deployment, orchestration, and monitoring architecture.</p>
@@ -27,7 +38,46 @@
       <figcaption>Development, deployment, orchestration, and monitoring on AWS. Select the diagram to open the original image.</figcaption>
     </figure>
   </section>
-  <section aria-labelledby="delivery-title"><h2 id="delivery-title">Delivery workflow</h2><p>The diagram connects development and change requests with GitHub Actions, SonarQube, security scans, Terraform, Docker, Amazon ECR, and ECS deployment.</p></section>
-  <section aria-labelledby="platform-title"><h2 id="platform-title">Platform and operations</h2><p>The architecture overview includes networking, load balancing, compute, databases, messaging, application configuration, and an observability pipeline connecting CloudWatch to Better Stack.</p></section>
-  <footer><a href="/case-studies/index.html">All case studies</a> · <a href="/#projects">Back to selected work</a></footer>
+  <section aria-labelledby="delivery-title">
+    <h2 id="delivery-title">Project overview</h2>
+    <p>Designed and worked with a Terraform-managed AWS development platform supporting containerized applications, automated infrastructure provisioning, deployment orchestration, and centralized observability.</p>
+    <p>The engineering focus is repeatable infrastructure, secure deployment workflows, controlled releases, and observable cloud platforms.</p>
+  </section>
+  <section aria-labelledby="stack-title">
+    <h2 id="stack-title">Technology stack</h2>
+    <div class="tech"><span>AWS</span><span>Terraform</span><span>GitHub Actions</span><span>GitHub OIDC / IAM</span><span>Docker</span><span>Amazon ECR / GHCR</span><span>ECS on EC2</span><span>CodeDeploy</span><span>ALB / NLB</span><span>Aurora PostgreSQL / RDS Proxy</span><span>FoundationDB / EBS</span><span>CloudWatch</span><span>OpenTelemetry / Kinesis</span><span>Better Stack</span></div>
+  </section>
+  <section aria-labelledby="workflow-title">
+    <h2 id="workflow-title">Deployment workflow</h2>
+    <ol>
+      <li><strong>Source change:</strong> Application changes enter GitHub through commits and pull requests.</li>
+      <li><strong>CI:</strong> GitHub Actions coordinates build, tests, SonarQube analysis, and security checks.</li>
+      <li><strong>AWS authentication:</strong> GitHub OIDC federation assumes an authorized IAM role.</li>
+      <li><strong>Infrastructure provisioning:</strong> Terraform plan and apply manage infrastructure changes using reusable modules.</li>
+      <li><strong>Container build:</strong> Docker builds application images and publishes them to the appropriate registry.</li>
+      <li><strong>Image management:</strong> Amazon ECR stores per-service container images.</li>
+      <li><strong>Application release:</strong> Updated ECS task definitions and services use CodeDeploy blue/green orchestration for eligible public services on EC2-backed capacity.</li>
+      <li><strong>Post-deployment validation:</strong> The validation workflow covers application health, database connectivity, logs, and operational metrics.</li>
+    </ol>
+  </section>
+  <section aria-labelledby="engineering-title">
+    <h2 id="engineering-title">Operational engineering</h2>
+    <div class="grid3">
+      <article class="card"><h3>Infrastructure and access</h3><p>Reusable Terraform modules, network segmentation, IAM access control, encryption, secrets management, service discovery, and load balancing support the platform.</p></article>
+      <article class="card"><h3>Application data</h3><p>Aurora PostgreSQL connects through RDS Proxy. FoundationDB runs on EC2 with EBS storage.</p></article>
+      <article class="card"><h3>Observability</h3><p>CloudWatch, OpenTelemetry, Kinesis, and Better Stack provide the architecture for centralized logs, metrics, and traces.</p></article>
+    </div>
+  </section>
+  <section aria-labelledby="controls-title">
+    <h2 id="controls-title">Release controls and rollback considerations</h2>
+    <p>The platform uses CodeDeploy blue/green orchestration. In this deployment pattern, a replacement environment is validated before traffic moves from the existing version. Returning traffic to the previous version depends on the configured deployment and rollback settings.</p>
+    <p>Application rollback does not reverse a database schema change. Backward-compatible migrations must be considered separately.</p>
+    <p class="note">Proposed controls to verify: pull-request review, build and test success, SonarQube quality gates, dependency and image scanning, Terraform plan review, authorized production approval, and post-deployment smoke tests. These are recommendations, not a claim that every gate or automatic rollback rule is configured.</p>
+  </section>
+  <section aria-labelledby="resilience-title">
+    <h2 id="resilience-title">Resilience and recovery scope</h2>
+    <p>The infrastructure inventory describes a three-AZ VPC. This does not establish automatic failover for every application or data service. The development environment has Aurora writer instances only, with readers and reader autoscaling disabled.</p>
+    <p>ECS recovery and placement, database replication, self-managed service recovery, backup retention, and CodeDeploy automatic rollback require configuration-specific verification. No RTO, RPO, uptime, or recovery-time results are claimed.</p>
+  </section>
+  <footer><p>Sanitized development-platform case study. Client identifiers, internal endpoints, source code, and configuration are omitted. The diagram illustrates architecture; it is not evidence of production failover, measured performance, or support commitments.</p><p><a href="/case-studies/index.html">All case studies</a> · <a href="/#projects">Back to selected work</a></p></footer>
 </main></body></html>

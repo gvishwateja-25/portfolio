@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { siteUrl } from "./site-metadata";
 import "../../public/fonts/archivo.css";
 import "../../public/theme-palette.css";
 import "./globals.css";
 import "../../public/workflow-neon.css";
 
 export const metadata: Metadata = {
-  title: "Vishwateja Gorumanthula | Remote AWS DevOps Freelancer",
-  description:
-    "Remote freelance AWS DevOps services: Terraform infrastructure, CI/CD automation, production troubleshooting, and SonarQube assessments. Explore my work and discuss your project.",
+  metadataBase: new URL(siteUrl),
 };
 
 export default function RootLayout({

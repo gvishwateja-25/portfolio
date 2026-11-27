@@ -10,6 +10,17 @@
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme-palette.css" />
 <link rel="stylesheet" href="/case-studies/project-case-study.css" />
+<link rel="canonical" href="https://www.vishwateja.in/case-studies/centralized-security-assessment.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Centralized Repository Security Assessment | Case Study" />
+<meta property="og:description" content="A freelance DevSecOps case study covering GitHub Enterprise inventory, SonarQube scan automation, execution tracking, and repository exceptions." />
+<meta property="og:url" content="https://www.vishwateja.in/case-studies/centralized-security-assessment.html" />
+<meta property="og:image" content="https://www.vishwateja.in/images/profile-hero-blazer.jpg" />
+<meta property="og:site_name" content="Vishwateja Gorumanthula" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Centralized Repository Security Assessment | Case Study" />
+<meta name="twitter:description" content="A freelance DevSecOps case study covering GitHub Enterprise inventory, SonarQube scan automation, execution tracking, and repository exceptions." />
+<meta name="twitter:image" content="https://www.vishwateja.in/images/profile-hero-blazer.jpg" />
 </head>
 <body>
 <main class="wrap">
@@ -28,7 +39,7 @@
       <h2 id="engagement-summary-title">SonarQube scanning at repository scale</h2>
       <p>A centralized assessment workflow for a confidential client: GitHub Enterprise discovery, repository inventory, scan automation, and exception tracking.</p>
       <p><strong>My contribution:</strong> Python and Bash automation for discovery, cloning, standardized scan setup, and outcome logging.</p>
-      <p><strong>Reported execution:</strong> 445 repositories in scope, with 444 successful scans. One repository remained an exception for investigation.</p>
+      <p><strong>Reported execution:</strong> 445 repositories in scope, with 444 successful scans. One repository remained pending retry.</p>
       <p class="note">These figures describe scanner execution, not vulnerability clearance or remediation.</p>
     </div>
   </section>
@@ -89,7 +100,8 @@
     <h2>Reported results</h2>
     <div class="card result">
       <p><strong>445 repositories</strong> were included in the reported combined scanning scope.</p>
-      <p><strong>444 scans succeeded</strong>, with one repository remaining as the reported exception.</p>
+      <p>The initial inventory identified 620 repositories in one GitHub Enterprise organization, of which 427 were classified as active. The reported combined scan scope of 445 also included existing pilot repositories from a second organization. The difference of 18 has not yet been fully reconciled against the scan inventory; uniqueness and repeat scans have not been confirmed.</p>
+      <p><strong>444 scans succeeded</strong>, with one repository pending retry.</p>
       <p><strong>427 active repositories</strong> were identified from the 620 repositories in organizations and cloned for the assessment.</p>
       <p>The resulting workflow provided a repeatable process for repository discovery, scanning, status tracking, and failure follow-up.</p>
     </div>
@@ -116,7 +128,7 @@
   </section>
   <footer>
     <p>Sanitized case study. Organization names, repository names, internal endpoints, credentials, source code, and confidential scan findings are intentionally omitted.</p>
-    <p>Metrics represent the project status reported during the stated period and should be updated if final dashboard results differ.</p>
+    <p>Metrics reflect the reported assessment period, not a continuously updated dashboard.</p>
   </footer>
 </main>
 </body>
